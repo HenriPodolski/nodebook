@@ -1,0 +1,50 @@
+{
+  "name": "electron-quick-start-typescript",
+  "version": "1.0.0",
+  "description": "A minimal Electron application written with Typescript",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "lint": "tslint -c tslint.json -p tsconfig.json",
+    "start": "npm run build && cross-env NODE_ENV=development UPGRADE_EXTENSIONS=1 electron ./dist/main.js"
+  },
+  "repository": "https://github.com/electron/electron-quick-start-typescript",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo",
+    "typescript"
+  ],
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "@types/electron-devtools-installer": "^2.0.3",
+    "@types/history": "^4.6.2",
+    "@types/react": "^16.4.1",
+    "@types/react-dom": "^16.0.6",
+    "@types/react-redux": "^6.0.2",
+    "@types/redux": "^3.6.0",
+    "@types/redux-logger": "^3.0.6",
+    "brace": "^0.11.1",
+    "electron": "^2.0.2",
+    "electron-devtools-installer": "^2.2.4",
+    "redux-logger": "^3.0.6",
+    "tslint": "^5.10.0",
+    "typescript": "^2.8.3"
+  },
+  "dependencies": {
+    "cross-env": "^5.2.0",
+    "electron-debug": "^2.0.0",
+    "history": "^4.7.2",
+    "react": "^16.4.1",
+    "react-ace": "^6.1.1",
+    "react-dom": "^16.4.1",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "redux-devtools-extension": "^2.13.5",
+    "redux-observable": "^1.0.0",
+    "rxjs": "^6.2.1"
+  }
+}
