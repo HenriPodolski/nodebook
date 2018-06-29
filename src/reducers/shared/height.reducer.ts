@@ -1,9 +1,10 @@
 import { EDITOR_HEIGHT_CHANGE } from '../../actions/editor/editor.actions';
 import { actionWithPayload } from '../../actions/index';
 import { rootState } from '../../store/state';
+import { environment } from '../../environments/environment';
 
 export function editorHeightReducer(
-    state: string = rootState.editor.height,
+    state: string = rootState.editors[0].height,
     action: actionWithPayload
 ) {
     switch (action.type) {

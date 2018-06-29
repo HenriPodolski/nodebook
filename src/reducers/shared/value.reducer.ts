@@ -3,7 +3,7 @@ import { actionWithPayload } from '../../actions/index';
 import { rootState } from '../../store/state';
 
 export function editorValueReducer(
-    state: string = rootState.editor.value,
+    state: string = rootState.editors[0].value,
     action: actionWithPayload
 ) {
     switch (action.type) {

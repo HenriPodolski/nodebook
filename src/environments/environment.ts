@@ -1,11 +1,39 @@
 export const environment = {
     config: {
         editor: {
+            editableConfig: {
+                mode: 'markdown',
+                theme: 'github',
+                height: '100%',
+                width: '100%',
+                value: '',
+                readOnly: false,
+                editor: {
+                    maxLines: Infinity,
+                    autoScrollEditorIntoView: true,
+                    wrap: true,
+                    minLines: 1
+                }
+            },
+            displayConfig: {
+                mode: 'markdown',
+                theme: 'github',
+                height: '100%',
+                width: '100%',
+                value: '',
+                readOnly: true,
+                editor: {
+                    maxLines: Infinity,
+                    autoScrollEditorIntoView: true,
+                    wrap: true,
+                    minLines: 1
+                }
+            },
             mode: 'markdown',
             modes: [
                 {
                     value: 'markdown',
-                    title: 'markdown'
+                    title: 'Markdown'
                 },
                 {
                     value: 'javascript',

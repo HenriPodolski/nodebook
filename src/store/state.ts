@@ -1,9 +1,12 @@
+import { environment } from '../environments/environment';
+
 export interface IEditorState {
     mode: string;
     theme: string;
     height: string;
     width: string;
     value: string;
+    readOnly?: boolean;
     editor: IEditorEditorState;
 }
 
@@ -15,23 +18,18 @@ export interface IEditorEditorState {
 }
 
 export interface IRootState {
-    editor: IEditorState
+    editors: IEditorState[]
+    debug: {
+        components: boolean
+    }
 }
 
 
 export const rootState: IRootState = {
-    editor: {
-        mode: 'markdown',
-        theme: 'github',
-        height: '100%',
-        width: '100%',
-        value: '',
-        editor: {
-            maxLines: Infinity,
-            autoScrollEditorIntoView: true,
-            wrap: true,
-            minLines: 1
-        }
-    }
-
+    debug: {
+        components: true
+    },
+    editors: [
+        {...environment.config.editor.editableConfig}
+    ]
 };
