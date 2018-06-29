@@ -1,4 +1,4 @@
-import * as exportModeActions from './mode.actions';
+import * as exportEditorActions from './editor/editor.actions';
 
 export type action = {
     type: string
@@ -9,4 +9,4 @@ export type actionWithPayload = {
     payload: any
 };
 
-export const modeActions = exportModeActions;
+export const editorActions = exportEditorActions;

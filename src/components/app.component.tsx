@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { CodeInputComponent } from './code-input.component';
-import { ModeInputComponent } from './mode-input.component';
+import { CodeInputContainer } from '../containers/code-input.container';
+import { ModeInputContainer } from '../containers/mode-input.container';
 
 export class AppComponent extends React.Component {
 
@@ -8,8 +8,8 @@ export class AppComponent extends React.Component {
         return (
             <div>
                 <h1>Title</h1>
-                <ModeInputComponent />
-                <CodeInputComponent />
+                <ModeInputContainer />
+                <CodeInputContainer />
             </div>
         );
     }

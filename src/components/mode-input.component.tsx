@@ -1,15 +1,37 @@
 import * as React from 'react';
+import { environment } from '../environments/environment';
 
-export class ModeInputComponent extends React.Component {
+interface IComponentProps {
+    mode?: string;
+    changeMode?: (payload: string) => {type: string, payload: string};
+}
 
-    constructor(props) {
+interface IComponentState {
+    mode?: string;
+    modes: {value: string, title: string}[];
+    changeMode?: (payload: string) => {type: string, payload: string};
+}
+
+export class ModeInputComponent extends React.Component<IComponentProps, IComponentState> {
+
+    statics = {
+        modes: [...environment.config.editor.modes]
+    };
+
+    constructor(props: IComponentProps) {
         super(props);
 
         this.handleChange = this.handleChange.bind(this);
+        this.changeMode('markdown');
     }
 
     handleChange(evt) {
-        console.log(evt.target.value);
+        this.changeMode(evt.target.value);
+    }
+
+    changeMode(newMode: string) {
+        console.log(newMode);
+        this.props.changeMode(newMode);
     }
 
     componentDidMount() {
@@ -20,10 +42,13 @@ export class ModeInputComponent extends React.Component {
         return (
             <div>
                 <select ref="select" onChange={this.handleChange}>
-                    <option value="markdown">Markdown</option>
-                    <option value="html">HTML</option>
-                    <option value="css">CSS</option>
-                    <option value="javascript">JavaScript</option>
+                    {this.statics.modes.map((modeObj, i) => {
+                        return (
+                            <option key={i} value={modeObj.value}>
+                                {modeObj.title}
+                            </option>
+                        )
+                    })}
                 </select>
             </div>
         );

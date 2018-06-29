@@ -4,7 +4,7 @@ import { createHashHistory } from 'history';
 import { createLogger } from 'redux-logger';
 import { rootReducer } from '../reducers';
 import { rootEpic } from '../epics';
-import { modeActions } from '../actions';
+import { editorActions } from '../actions';
 
 const history = createHashHistory();
 
@@ -22,7 +22,7 @@ const configureStore = (initialState?: any) => {
     });
 
     const actionCreators = {
-        modeActions
+        modeActions: editorActions
     } as any;
 
     const middleware = [

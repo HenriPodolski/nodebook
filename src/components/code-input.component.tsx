@@ -1,5 +1,4 @@
 import AceEditor from 'react-ace';
-import * as brace from 'brace';
 import * as React from 'react';
 
 import 'brace/mode/typescript';
@@ -7,45 +6,37 @@ import 'brace/mode/javascript';
 import 'brace/mode/json';
 import 'brace/mode/css';
 import 'brace/mode/html';
-import 'brace/mode/plain_text';
 import 'brace/mode/markdown';
 
 import 'brace/theme/monokai';
 import 'brace/theme/github';
 
-interface ICodeInputComponentProps {}
-interface ICodeInputComponentState {
-    mode: string;
-    theme: string;
-    height: string;
-    width: string;
-    editor: any;
+interface IComponentProps {
+    mode?: string;
+    theme?: string;
+    height?: string;
+    width?: string;
+    editor?: any;
+    value?: string;
+    changeValue?: (payload: string) => {type: string, payload: string};
+    changeHeight?: (payload: string) => {type: string, payload: string};
+    changeTheme?: (payload: string) => {type: string, payload: string};
 }
+interface IComponentState {}
 
-export class CodeInputComponent extends React.Component<ICodeInputComponentProps, ICodeInputComponentState> {
+export class CodeInputComponent extends React.Component<IComponentProps, IComponentState> {
 
-    constructor(props: ICodeInputComponentProps) {
+    constructor(props: IComponentProps) {
         super(props);
 
-        this.handleChange = this.handleChange.bind(this);
+        console.log('CodeInputComponent', props);
 
-        this.state = {
-            mode: 'plain_text',
-            theme: 'github',
-            height: '100%',
-            width: '100%',
-            editor: {
-                maxLines: Infinity,
-                autoScrollEditorIntoView: true,
-                wrap: true,
-                minLines: 1
-            }
-        };
+        this.handleChange = this.handleChange.bind(this);
     }
 
     getHeight() {
         const editor = this.refs.editor && this.refs.editor['editor'];
-        let height = this.state.height;
+        let height = this.props.height;
 
         if(editor){
             let newHeight = editor.getSession().getScreenLength() *
@@ -58,18 +49,15 @@ export class CodeInputComponent extends React.Component<ICodeInputComponentProps
     }
 
     handleChange(newValue, evt) {
-        console.log(newValue, evt);
+        console.log(newValue, evt, this.refs.editor['editor']);
+        this.props.changeValue(newValue);
         this.refs.editor['editor'].container.style.height = this.getHeight();
         this.refs.editor['editor'].resize();
     }
 
     componentDidMount() {
-        this.setState({
-            mode: 'javascript',
-            theme: 'github',
-        });
-
-        this.setState({ height: this.getHeight() });
+        this.props.changeTheme('github');
+        this.props.changeHeight(this.getHeight());
         this.refs.editor['editor'].resize();
     }
 
@@ -81,12 +69,13 @@ export class CodeInputComponent extends React.Component<ICodeInputComponentProps
         return (
             <AceEditor
                 ref="editor"
+                value={this.props.value}
                 onChange={(newValue, evt) => this.handleChange(newValue, evt)}
-                theme={this.state.theme}
-                mode={this.state.mode}
-                height={this.state.height}
-                width={this.state.width}
-                editorProps={this.state.editor}
+                theme={this.props.theme}
+                mode={this.props.mode}
+                height={this.props.height}
+                width={this.props.width}
+                editorProps={this.props.editor}
             />
         );
     }
