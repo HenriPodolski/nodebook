@@ -10,6 +10,16 @@ export class AppComponent extends React.Component {
         return (
             <div>
                 <h1>Title</h1>
+                <ol>
+                    <li>Use iframe for output</li>
+                    <li>TS Node for ts output</li>
+                    <li>Implement nodebook dependency config</li>
+                    <li>Difference between browser and node code</li>
+                    <li>Implement editors list logic</li>
+                    <li>Make title editable</li>
+                    <li>Save nodebook as file</li>
+                    <li>nodebook as file loading/execution logic</li>
+                </ol>
                 <EditorsContainer />
             </div>
         );
