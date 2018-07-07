@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 
 import { CodeInputComponent } from '../../components/editor/code-input.component';
 import {
-    heightChangeAction, themeChangeAction,
+    executeFlagChangeAction,
+    heightChangeAction, readonlyChangeAction, themeChangeAction,
     valueChangeAction
 } from '../../actions/editor/editor.actions';
 
@@ -27,6 +28,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         changeTheme: (state) => {
             return dispatch(themeChangeAction(state));
+        },
+        changeReadonly: (state) => {
+            return dispatch(readonlyChangeAction(state));
+        },
+        changeExecuteFlag: (state) => {
+            return dispatch(executeFlagChangeAction(state));
         },
     });
 };

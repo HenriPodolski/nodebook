@@ -5,6 +5,7 @@ import { createLogger } from 'redux-logger';
 import { rootReducer } from '../reducers';
 import { rootEpic } from '../epics';
 import { editorActions } from '../actions';
+import { IRootState, rootState } from './state';
 
 const history = createHashHistory();
 
@@ -17,7 +18,7 @@ const configureStore = (initialState?: any) => {
     const epicMiddleware = createEpicMiddleware();
     // Logging Middleware
     const logger = createLogger({
-        level: 'info',
+        level: rootState.debug.store,
         collapsed: true
     });
 
@@ -25,10 +26,13 @@ const configureStore = (initialState?: any) => {
         modeActions: editorActions
     } as any;
 
-    const middleware = [
-        epicMiddleware,
-        logger
-    ];
+    let middleware = [];
+
+    if (rootState.debug.store) {
+        middleware = [epicMiddleware, logger];
+    } else {
+        middleware = [epicMiddleware];
+    }
 
     const composeEnhancers: typeof compose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
         window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({

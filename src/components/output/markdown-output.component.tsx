@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as ReactMarkdown from 'react-markdown';
 
 interface IComponentProps {
     value: string;
@@ -12,9 +13,7 @@ export class MarkdownOutputComponent extends React.Component<IComponentProps> {
 
     render() {
         return (
-            <div>
-                {this.props.value}
-            </div>
+            <ReactMarkdown source={this.props.value} />
         );
     }
 }

@@ -4,9 +4,9 @@ export type action = {
     type: string
 };
 
-export type actionWithPayload = {
+export type actionWithPayload<T> = {
     type: string,
-    payload: any
+    payload: T
 };
 
 export const editorActions = exportEditorActions;

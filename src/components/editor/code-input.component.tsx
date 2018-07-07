@@ -14,6 +14,8 @@ interface IComponentProps {
     changeValue: (payload: string) => {type: string, payload: string};
     changeHeight: (payload: string) => {type: string, payload: string};
     changeTheme: (payload: string) => {type: string, payload: string};
+    changeReadonly: (payload: boolean) => {type: string, payload: boolean};
+    changeExecuteFlag: (payload: string) => {type: string, payload: string};
 }
 
 export class CodeInputComponent extends React.Component<IComponentProps> {
@@ -44,6 +46,18 @@ export class CodeInputComponent extends React.Component<IComponentProps> {
         this.refs.editor['editor'].resize();
     }
 
+    handleKeyDown(evt) {
+        if (evt.key === 'Enter' && evt.altKey) {
+            this.props.changeExecuteFlag('processing');
+            this.props.changeReadonly(true);
+        }
+    }
+
+    handleDoubleClick(evt) {
+        this.props.changeReadonly(false);
+        this.props.changeExecuteFlag('idle');
+    }
+
     componentDidMount() {
         this.props.changeTheme('github');
         this.props.changeHeight(this.getHeight());
@@ -56,6 +70,8 @@ export class CodeInputComponent extends React.Component<IComponentProps> {
 
     render() {
         return (
+            <div onDoubleClick={(evt) => this.handleDoubleClick(evt)}
+                 onKeyDown={(evt) => this.handleKeyDown(evt)}>
             <AceEditor
                 ref="editor"
                 value={this.props.value}
@@ -67,6 +83,7 @@ export class CodeInputComponent extends React.Component<IComponentProps> {
                 editorProps={this.props.editor}
                 readOnly={this.props.readOnly}
             />
+            </div>
         );
     }
 }

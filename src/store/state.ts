@@ -6,6 +6,7 @@ export interface IEditorState {
     height: string;
     width: string;
     value: string;
+    executeFlag: string;
     readOnly?: boolean;
     editor: IEditorEditorState;
 }
@@ -20,14 +21,25 @@ export interface IEditorEditorState {
 export interface IRootState {
     editors: IEditorState[]
     debug: {
-        components: boolean
+        components: string,
+        store: string
     }
+}
+
+enum LogLevel {
+    debug = 'debug',
+    info = 'info',
+    log = 'log',
+    warn = 'warn',
+    error = 'error',
+    off = ''
 }
 
 
 export const rootState: IRootState = {
     debug: {
-        components: true
+        components: LogLevel.debug,
+        store: LogLevel.debug
     },
     editors: [
         {...environment.config.editor.editableConfig}

@@ -4,6 +4,7 @@ A data science and rapid prototyping tool based on electron, TypeScript, Front-E
 
 ## Status
 Version: 0.0.0
+Work in progress
 
 ## License
 

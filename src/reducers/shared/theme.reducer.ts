@@ -4,7 +4,7 @@ import { rootState } from '../../store/state';
 
 export function editorThemeReducer(
     state: string = rootState.editors[0].theme,
-    action: actionWithPayload
+    action: actionWithPayload<string>
 ) {
     switch (action.type) {
         case EDITOR_THEME_CHANGE:

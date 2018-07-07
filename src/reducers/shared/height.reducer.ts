@@ -5,7 +5,7 @@ import { environment } from '../../environments/environment';
 
 export function editorHeightReducer(
     state: string = rootState.editors[0].height,
-    action: actionWithPayload
+    action: actionWithPayload<string>
 ) {
     switch (action.type) {
         case EDITOR_HEIGHT_CHANGE:

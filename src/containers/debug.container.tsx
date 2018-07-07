@@ -15,7 +15,7 @@ const DebugComponent = (props) => {
                 <pre>
                     {JSON.stringify(data, null, 4)}
                 </pre>
-            )};
+            )}
         </>
     );
 };

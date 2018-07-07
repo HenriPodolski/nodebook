@@ -8,6 +8,7 @@ export const environment = {
                 width: '100%',
                 value: '',
                 readOnly: false,
+                executeFlag: 'idle',
                 editor: {
                     maxLines: Infinity,
                     autoScrollEditorIntoView: true,
@@ -22,6 +23,7 @@ export const environment = {
                 width: '100%',
                 value: '',
                 readOnly: true,
+                executeFlag: 'idle',
                 editor: {
                     maxLines: Infinity,
                     autoScrollEditorIntoView: true,
