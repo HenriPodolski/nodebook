@@ -1,17 +1,42 @@
 {
   "compilerOptions": {
+    "target": "es5",
+    "moduleResolution": "node",
     "module": "commonjs",
+    "jsx": "react",
+    "lib": [
+      "dom",
+      "es6",
+      "dom.iterable",
+      "scripthost"
+    ],
+    "types": [],
+
+    "alwaysStrict": true,
+    "strictNullChecks": true,
     "noImplicitAny": false,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
     "sourceMap": true,
-    "outDir": "dist",
-    "baseUrl": ".",
-    "lib": ["es5", "es2015", "dom"],
-    "paths": {
-      "*": ["node_modules/*"]
-    },
-    "jsx": "react"
+
+    "outDir": "dist"
   },
+  "files": [
+    "app/index.tsx"
+  ],
   "include": [
-    "src/**/*"
+    "app/**/*.ts",
+    "app/**/*.tsx",
+    "test/**/*.ts",
+    "test/**/*.tsx",
+    "node_modules/@types/**/*.d.ts"
+  ],
+  "exclude": [
+    "dist"
   ]
 }
