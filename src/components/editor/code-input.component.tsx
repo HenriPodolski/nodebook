@@ -48,7 +48,7 @@ export class CodeInputComponent extends React.Component<IComponentProps> {
 
     handleKeyDown(evt) {
         if (evt.key === 'Enter' && evt.altKey) {
-            this.props.changeExecuteFlag('processing');
+            this.props.changeExecuteFlag('processed');
             this.props.changeReadonly(true);
         }
     }

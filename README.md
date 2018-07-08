@@ -4,7 +4,11 @@ A data science and rapid prototyping tool based on electron, TypeScript, Front-E
 
 ## Status
 Version: 0.0.0
-Project setup is work in progress. You won't be able to use this!
+Project setup is work in progress. Do not use!
+
+## Libraries
+React &lt;Frame /&gt; component
+https://github.com/ryanseddon/react-frame-component
 
 ## License
 
