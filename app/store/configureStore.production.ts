@@ -13,7 +13,7 @@ const enhancer = applyMiddleware(epicMiddleware, router);
 export = {
   history,
   configureStore(initialState: Object | void) {
-    const store = createStore(rootReducer, initialState, enhancer);
+    const store = createStore(rootReducer, initialState as Object, enhancer);
     epicMiddleware.run(rootEpic);
     return store;
   }

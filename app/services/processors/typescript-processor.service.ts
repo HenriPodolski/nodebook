@@ -1,10 +1,13 @@
 
 export class TypescriptProcessorService {
     static process(value: string): string {
-        return (new Function(`return ((function() {
-            ${value}
-         })())`))();
-
-
+        try {
+            return (new Function(`return ((function() {
+                ${value}
+            })())`))();
+        } catch(e) {
+            console.error(e);
+            return e.toString();
+        }
     }
 }

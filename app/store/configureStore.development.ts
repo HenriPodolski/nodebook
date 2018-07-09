@@ -48,7 +48,7 @@ const enhancer = composeEnhancers(
 export = {
   history,
   configureStore(initialState: Object | void) {
-    const store = createStore(rootReducer, initialState, enhancer);
+    const store = createStore(rootReducer, initialState as Object, enhancer);
 
     if (module.hot) {
       module.hot.accept('../reducers', () =>

@@ -125,6 +125,7 @@
     "@types/react-router-redux": "^5.0.2",
     "@types/redux-logger": "^3.0.0",
     "@types/sinon": "^4.0.0",
+    "ajv": "^6.5.2",
     "asar": "^0.14.0",
     "boiler-room-custodian": "^0.6.2",
     "concurrently": "^3.1.0",
@@ -146,6 +147,7 @@
     "jest": "^22.0.4",
     "json-loader": "^0.5.4",
     "node-sass": "^4.1.1",
+    "postcss": "^6.0.23",
     "react-hot-loader": "^3.0.0-beta.6",
     "react-test-renderer": "^16.0.0",
     "redux-logger": "^3.0.6",
@@ -177,13 +179,13 @@
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
     "react-router-redux": "^5.0.0-alpha.6",
-    "redux": "^3.6.0",
+    "redux": "^4.0.0",
     "redux-observable": "^1.0.0",
     "rxjs": "^6.2.1",
     "source-map-support": "^0.5.0"
   },
   "devEngines": {
-    "node": ">=6.x",
-    "npm": ">=3.x"
+    "node": ">=8.x",
+    "npm": ">=6.x"
   }
 }

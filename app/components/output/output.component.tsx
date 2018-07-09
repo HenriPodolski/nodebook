@@ -21,7 +21,7 @@ export class OutputComponent extends React.Component<IComponentProps> {
 
     switchOutput(mode: string, executeFlag?: string) {
         switch(true) {
-            case mode === 'markdown': {
+            case mode === 'markdown' && executeFlag === 'processed': {
                 return (
                     <Frame className={styles.OutputFrame}>
                         <MarkdownOutputContainer index={this.props.index} />
@@ -37,7 +37,7 @@ export class OutputComponent extends React.Component<IComponentProps> {
             }
             default: {
                 return (
-                    <Frame className={styles.OutputFrame}>
+                    <Frame className={styles.OutputFrameHidden}>
                         <MarkdownOutputContainer index={this.props.index} />
                     </Frame>
                 )
