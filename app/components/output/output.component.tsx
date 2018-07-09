@@ -3,6 +3,8 @@ import { MarkdownOutputContainer } from '../../containers/output/markdown-output
 import { TypescriptOutputContainer } from '../../containers/output/typescript-output.container';
 import Frame from 'react-frame-component';
 
+let styles = require('./output.component.scss');
+
 interface IComponentProps {
     mode: string;
     value: string;
@@ -21,21 +23,21 @@ export class OutputComponent extends React.Component<IComponentProps> {
         switch(true) {
             case mode === 'markdown': {
                 return (
-                    <Frame>
+                    <Frame className={styles.OutputFrame}>
                         <MarkdownOutputContainer index={this.props.index} />
                     </Frame>
                 )
             }
             case mode === 'typescript' && executeFlag === 'processed': {
                 return (
-                    <Frame>
+                    <Frame className={styles.OutputFrame}>
                         <TypescriptOutputContainer index={this.props.index} />
                     </Frame>
                 )
             }
             default: {
                 return (
-                    <Frame>
+                    <Frame className={styles.OutputFrame}>
                         <MarkdownOutputContainer index={this.props.index} />
                     </Frame>
                 )
