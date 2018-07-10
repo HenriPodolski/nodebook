@@ -2,27 +2,13 @@ export const environment = {
     config: {
         editor: {
             editableConfig: {
+                id: 0,
                 mode: 'markdown',
                 theme: 'github',
                 height: '100%',
                 width: '100%',
                 value: '',
                 readOnly: false,
-                executeFlag: 'idle',
-                editor: {
-                    maxLines: Infinity,
-                    autoScrollEditorIntoView: true,
-                    wrap: true,
-                    minLines: 1
-                }
-            },
-            displayConfig: {
-                mode: 'markdown',
-                theme: 'github',
-                height: '100%',
-                width: '100%',
-                value: '',
-                readOnly: true,
                 executeFlag: 'idle',
                 editor: {
                     maxLines: Infinity,

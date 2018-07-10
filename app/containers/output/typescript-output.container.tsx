@@ -3,7 +3,7 @@ import { TypescriptOutputComponent } from '../../components/output/typescript-ou
 import { TypescriptProcessorService } from '../../services/processors/typescript-processor.service';
 import {
     executeFlagChangeAction
-} from '../../actions/editor/editor.actions';
+} from '../../actions/editor/editors.actions';
 
 
 const mapStateToProps = (state, ownProps) => ({
@@ -15,7 +15,7 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch, ownProps) => {
     return ({
         changeExecuteFlag: (state) => {
-            return dispatch(executeFlagChangeAction(state));
+            return dispatch(executeFlagChangeAction(state, ownProps.index));
         },
     });
 };

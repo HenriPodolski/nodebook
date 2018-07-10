@@ -3,7 +3,7 @@ import { environment } from '../../environments/environment';
 
 interface IComponentProps {
     mode: string;
-    changeMode: (payload: string) => {type: string, payload: string};
+    changeMode: (payload: string) => {type: string, payload: string, id: number};
 }
 
 export class ModeInputComponent extends React.Component<IComponentProps> {

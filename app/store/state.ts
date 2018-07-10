@@ -1,6 +1,7 @@
 import { environment } from '../environments/environment';
 
 export interface IEditorState {
+    id: number;
     mode: string;
     theme: string;
     height: string;

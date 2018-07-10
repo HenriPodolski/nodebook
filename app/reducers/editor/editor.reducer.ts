@@ -9,12 +9,14 @@ import { editorExecuteFlagReducer } from '../shared/execute-flag.reducer';
 
 export function editorReducer(
     state: IEditorState = { ...rootState.editors[0] },
-    action: actionWithPayload<string | boolean>
+    action: actionWithPayload<string | boolean>,
+    id: number
 ) {
     switch (action.type) {
         default:
             return {
                 ...state,
+                id,
                 mode: editorModeReducer(state.mode, action as actionWithPayload<string>),
                 height: editorHeightReducer(state.height, action as actionWithPayload<string>),
                 theme: editorThemeReducer(state.theme, action as actionWithPayload<string>),

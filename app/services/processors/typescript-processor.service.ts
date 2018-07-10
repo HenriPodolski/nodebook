@@ -59,7 +59,6 @@ const compilerOptions = {
     "experimentalDecorators": true,        /* Enables experimental support for ES7 decorators. */
     "emitDecoratorMetadata": true        /* Enables experimental support for emitting type metadata for decorators. */
 };
-/* tslint:enable */
 
 export class TypescriptProcessorService {
     static process(value: string): string {
@@ -72,17 +71,14 @@ export class TypescriptProcessorService {
                 
                 tsNode.register({
                     project: false,
-                    transpileOnly: false,
-                    skipProject: true,
                     compilerOptions: ${JSON.stringify(compilerOptions)},
-                    noCache: true,
+                    cache: false,
                     typeCheck: true,
                     ignoreWarnings: false
                 });
                 
-                require('./nodebook/typescript/index.ts');   
-                delete require.cache[require.resolve('./nodebook/typescript/index.ts')];
-                                                        
+                require('./nodebook/index.ts');   
+                delete require.cache[require.resolve('./nodebook/index.ts')];                                       
                 `))();
         } catch(e) {
             console.error(e);
@@ -90,3 +86,4 @@ export class TypescriptProcessorService {
         }
     }
 }
+/* tslint:enable */

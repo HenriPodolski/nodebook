@@ -3,9 +3,13 @@
 body {
   position: relative;
   color: black;
-  height: 100vh;
   font-family: Arial, Helvetica, Helvetica Neue, serif;
-  overflow-y: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  max-height: 100%;
 }
 
 h2 {

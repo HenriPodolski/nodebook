@@ -5,7 +5,7 @@ import {
     executeFlagChangeAction,
     heightChangeAction, readonlyChangeAction, themeChangeAction,
     valueChangeAction
-} from '../../actions/editor/editor.actions';
+} from '../../actions/editor/editors.actions';
 
 const mapStateToProps = (state, ownProps) => ({
     mode: state.editors[ownProps.index].mode,
@@ -20,19 +20,19 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch, ownProps) => {
     return ({
         changeValue: (state) => {
-            return dispatch(valueChangeAction(state));
+            return dispatch(valueChangeAction(state, ownProps.index));
         },
         changeHeight: (state) => {
-            return dispatch(heightChangeAction(state));
+            return dispatch(heightChangeAction(state, ownProps.index));
         },
         changeTheme: (state) => {
-            return dispatch(themeChangeAction(state));
+            return dispatch(themeChangeAction(state, ownProps.index));
         },
         changeReadonly: (state) => {
-            return dispatch(readonlyChangeAction(state));
+            return dispatch(readonlyChangeAction(state, ownProps.index));
         },
         changeExecuteFlag: (state) => {
-            return dispatch(executeFlagChangeAction(state));
+            return dispatch(executeFlagChangeAction(state, ownProps.index));
         },
     });
 };
