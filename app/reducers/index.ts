@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import { editorsReducer } from './editor';
+import { inputsReducer } from './input';
 import { rootState } from '../store/state';
 
 export const rootReducer = combineReducers({
-    editors: editorsReducer,
+    inputs: inputsReducer,
     debug: (state = rootState.debug) => state
 });

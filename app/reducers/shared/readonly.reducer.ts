@@ -1,13 +1,15 @@
-import { EDITOR_READONLY_CHANGE } from '../../actions/editor/editor.actions';
+import { INPUT_READONLY_CHANGE } from '../../actions/input/input.actions';
 import { actionWithPayload } from '../../actions/index';
 import { rootState } from '../../store/state';
+import { INPUTS_READONLY_CHANGE } from '../../actions/input/inputs.actions';
 
-export function editorReadonlyReducer(
-    state: boolean = rootState.editors[0].readOnly as boolean,
+export function inputReadonlyReducer(
+    state: boolean = rootState.inputs[0].readOnly as boolean,
     action: actionWithPayload<boolean>
 ) {
     switch (action.type) {
-        case EDITOR_READONLY_CHANGE:
+        case INPUT_READONLY_CHANGE:
+        case INPUTS_READONLY_CHANGE:
             return action.payload;
         default:
             return state;

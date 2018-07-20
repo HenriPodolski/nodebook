@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { EditorsContainer } from '../containers/editors.container';
+import { InputsContainer } from '../containers/inputs.container';
 
 let styles = require('./app.component.scss');
 
@@ -27,7 +27,7 @@ export class AppComponent extends React.Component {
                     <li>nodebook as file loading/execution logic</li>
                     <li>Delete editor item functionality</li>
                 </ol>
-                <EditorsContainer />
+                <InputsContainer />
             </div>
         );
     }

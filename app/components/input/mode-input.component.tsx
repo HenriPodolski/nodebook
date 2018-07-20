@@ -9,7 +9,7 @@ interface IComponentProps {
 export class ModeInputComponent extends React.Component<IComponentProps> {
 
     statics = {
-        modes: [...environment.config.editor.modes]
+        modes: [...environment.config.input.modes]
     };
 
     constructor(props: IComponentProps) {

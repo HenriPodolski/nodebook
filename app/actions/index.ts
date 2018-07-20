@@ -1,5 +1,5 @@
-import * as exportEditorActions from './editor/editor.actions';
-import * as exportEditorsActions from './editor/editors.actions';
+import * as exportInputActions from './input/input.actions';
+import * as exportInputsActions from './input/inputs.actions';
 
 
 export type action = {
@@ -12,5 +12,5 @@ export type actionWithPayload<T> = {
     payload: T
 };
 
-export const editorActions = exportEditorActions;
-export const editorsActions = exportEditorsActions;
+export const inputActions = exportInputActions;
+export const inputsActions = exportInputsActions;

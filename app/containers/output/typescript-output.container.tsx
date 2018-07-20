@@ -3,12 +3,12 @@ import { TypescriptOutputComponent } from '../../components/output/typescript-ou
 import { TypescriptProcessorService } from '../../services/processors/typescript-processor.service';
 import {
     executeFlagChangeAction
-} from '../../actions/editor/editors.actions';
+} from '../../actions/input/inputs.actions';
 
 
 const mapStateToProps = (state, ownProps) => ({
     value: TypescriptProcessorService.process(
-        state.editors[ownProps.index].value
+        state.inputs[ownProps.index].value
     )
 });
 

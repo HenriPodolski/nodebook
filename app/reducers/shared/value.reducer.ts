@@ -1,13 +1,15 @@
-import { EDITOR_VALUE_CHANGE } from '../../actions/editor/editor.actions';
+import { INPUT_VALUE_CHANGE } from '../../actions/input/input.actions';
 import { actionWithPayload } from '../../actions/index';
 import { rootState } from '../../store/state';
+import { INPUTS_VALUE_CHANGE } from '../../actions/input/inputs.actions';
 
-export function editorValueReducer(
-    state: string = rootState.editors[0].value,
+export function inputValueReducer(
+    state: string = rootState.inputs[0].value,
     action: actionWithPayload<string>
 ) {
     switch (action.type) {
-        case EDITOR_VALUE_CHANGE:
+        case INPUT_VALUE_CHANGE:
+        case INPUTS_VALUE_CHANGE:
             return action.payload;
         default:
             return state;

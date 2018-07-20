@@ -1,0 +1,1 @@
+export { inputsReducer } from './inputs.reducer';

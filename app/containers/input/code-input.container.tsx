@@ -1,20 +1,20 @@
 import { connect } from 'react-redux';
 
-import { CodeInputComponent } from '../../components/editor/code-input.component';
+import { CodeInputComponent } from '../../components/input/code-input.component';
 import {
     executeFlagChangeAction,
     heightChangeAction, readonlyChangeAction, themeChangeAction,
     valueChangeAction
-} from '../../actions/editor/editors.actions';
+} from '../../actions/input/inputs.actions';
 
 const mapStateToProps = (state, ownProps) => ({
-    mode: state.editors[ownProps.index].mode,
-    theme: state.editors[ownProps.index].theme,
-    height: state.editors[ownProps.index].height,
-    width: state.editors[ownProps.index].width,
-    editor: state.editors[ownProps.index].editor,
-    value: state.editors[ownProps.index].value,
-    readOnly: state.editors[ownProps.index].readOnly
+    mode: state.inputs[ownProps.index].mode,
+    theme: state.inputs[ownProps.index].theme,
+    height: state.inputs[ownProps.index].height,
+    width: state.inputs[ownProps.index].width,
+    editor: state.inputs[ownProps.index].editor,
+    value: state.inputs[ownProps.index].value,
+    readOnly: state.inputs[ownProps.index].readOnly
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => {

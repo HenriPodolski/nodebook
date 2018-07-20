@@ -1,6 +1,6 @@
 export const environment = {
     config: {
-        editor: {
+        input: {
             editableConfig: {
                 id: 0,
                 mode: 'markdown',

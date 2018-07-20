@@ -2,12 +2,12 @@ import { connect } from 'react-redux';
 import { OutputComponent } from '../../components/output/output.component';
 import {
     executeFlagChangeAction
-} from '../../actions/editor/editors.actions';
+} from '../../actions/input/inputs.actions';
 
 const mapStateToProps = (state, ownProps) => ({
-    value: state.editors[ownProps.index].value,
-    mode: state.editors[ownProps.index].mode,
-    executeFlag: state.editors[ownProps.index].executeFlag,
+    value: state.inputs[ownProps.index].value,
+    mode: state.inputs[ownProps.index].mode,
+    executeFlag: state.inputs[ownProps.index].executeFlag,
     index: ownProps.index
 });
 

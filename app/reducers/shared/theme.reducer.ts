@@ -1,13 +1,15 @@
-import { EDITOR_THEME_CHANGE } from '../../actions/editor/editor.actions';
+import { INPUT_THEME_CHANGE } from '../../actions/input/input.actions';
 import { actionWithPayload } from '../../actions/index';
 import { rootState } from '../../store/state';
+import { INPUTS_THEME_CHANGE } from '../../actions/input/inputs.actions';
 
-export function editorThemeReducer(
-    state: string = rootState.editors[0].theme,
+export function inputThemeReducer(
+    state: string = rootState.inputs[0].theme,
     action: actionWithPayload<string>
 ) {
     switch (action.type) {
-        case EDITOR_THEME_CHANGE:
+        case INPUT_THEME_CHANGE:
+        case INPUTS_THEME_CHANGE:
             return action.payload;
         default:
             return state;

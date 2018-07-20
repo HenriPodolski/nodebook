@@ -1,15 +1,15 @@
 import * as React from 'react';
-import { CodeInputContainer } from '../containers/editor/code-input.container';
-import { ModeInputContainer } from '../containers/editor/mode-input.container';
+import { CodeInputContainer } from '../containers/input/code-input.container';
+import { ModeInputContainer } from '../containers/input/mode-input.container';
 import { OutputContainer } from '../containers/output/output.container';
 import { DebugContainer } from '../containers/debug.container';
 
 interface IComponentProps {
-    editors: any[];
+    inputs: any[];
     debug: boolean;
 }
 
-export class EditorsComponent extends React.Component<IComponentProps> {
+export class InputsComponent extends React.Component<IComponentProps> {
 
     constructor(props: IComponentProps) {
         super(props);
@@ -18,9 +18,9 @@ export class EditorsComponent extends React.Component<IComponentProps> {
     render() {
         return (
             <div>
-                <DebugContainer editors={this.props.editors} />
+                <DebugContainer inputs={this.props.inputs} />
 
-                {this.props.editors.map((dataset, i) => {
+                {this.props.inputs.map((dataset, i) => {
                     return (
                         <React.Fragment key={i}>
                             {!dataset.readOnly && <ModeInputContainer index={i} />}

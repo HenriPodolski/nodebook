@@ -27,7 +27,7 @@ export class CodeInputComponent extends React.Component<IComponentProps> {
     }
 
     getHeight() {
-        const editor = this.refs.editor && this.refs.editor['editor'];
+        const editor = this.refs.input && this.refs.input['editor'];
         let height = this.props.height;
 
         if(editor){
@@ -42,8 +42,8 @@ export class CodeInputComponent extends React.Component<IComponentProps> {
 
     handleChange(newValue, evt) {
         this.props.changeValue(newValue);
-        this.refs.editor['editor'].container.style.height = this.getHeight();
-        this.refs.editor['editor'].resize();
+        this.refs.input['editor'].container.style.height = this.getHeight();
+        this.refs.input['editor'].resize();
     }
 
     handleKeyDown(evt) {
@@ -61,7 +61,7 @@ export class CodeInputComponent extends React.Component<IComponentProps> {
     componentDidMount() {
         this.props.changeTheme('github');
         this.props.changeHeight(this.getHeight());
-        this.refs.editor['editor'].resize();
+        this.refs.input['editor'].resize();
     }
 
     componentWillUnmount() {
@@ -73,7 +73,7 @@ export class CodeInputComponent extends React.Component<IComponentProps> {
             <div onDoubleClick={(evt) => this.handleDoubleClick(evt)}
                  onKeyDown={(evt) => this.handleKeyDown(evt)}>
             <AceEditor
-                ref="editor"
+                ref="input"
                 value={this.props.value}
                 onChange={(newValue, evt) => this.handleChange(newValue, evt)}
                 theme={this.props.theme}

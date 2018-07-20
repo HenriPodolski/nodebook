@@ -1,6 +1,6 @@
 import { combineEpics } from 'redux-observable';
-import { newEditorEpic } from './editors.epic';
+import { newInputEpic } from './inputs.epic';
 
 export const rootEpic = combineEpics(
-    newEditorEpic
+    newInputEpic
 );

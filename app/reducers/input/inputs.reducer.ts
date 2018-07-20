@@ -1,32 +1,33 @@
-import { IEditorState, rootState } from '../../store/state';
+import { IInputState, rootState } from '../../store/state';
 import { actionWithPayload } from '../../actions';
-import { editorReducer } from './editor.reducer';
 import {
-    EDITORS_NEW
-} from '../../actions/editor/editors.actions';
+    INPUTS_NEW
+} from '../../actions/input/inputs.actions';
+import { inputReducer } from './input.reducer';
 
-export function editorsReducer(
-    state: IEditorState[] = rootState.editors,
+export function inputsReducer(
+    state: IInputState[] = rootState.inputs,
     action: actionWithPayload<any>
-): IEditorState[] {
+): IInputState[] {
     switch (action.type) {
-        case EDITORS_NEW: {
+        case INPUTS_NEW: {
             const newItem = action.payload;
             const currentState = [...state, newItem];
             return currentState.map((current, index) =>
-                editorReducer(current, action, index)
+                inputReducer(current, action, index)
             )
         }
         default:
-            // apply action to all editors
+            // apply action to all inputs
             return state.reduce((previous, next, index) => {
+                console.log(index, action);
                 if (index === action.id) {
-                    previous = [...previous, editorReducer(next, action, index)];
+                    previous = [...previous, inputReducer(next, action, index)];
                 } else {
                     previous = [...previous, next];
                 }
 
                 return previous;
-            }, [] as IEditorState[]);
+            }, [] as IInputState[]);
     }
 }

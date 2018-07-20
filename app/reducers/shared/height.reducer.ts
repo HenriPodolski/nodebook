@@ -1,13 +1,15 @@
-import { EDITOR_HEIGHT_CHANGE } from '../../actions/editor/editor.actions';
+import { INPUT_HEIGHT_CHANGE } from '../../actions/input/input.actions';
 import { actionWithPayload } from '../../actions/index';
 import { rootState } from '../../store/state';
+import { INPUTS_HEIGHT_CHANGE } from '../../actions/input/inputs.actions';
 
-export function editorHeightReducer(
-    state: string = rootState.editors[0].height,
+export function inputHeightReducer(
+    state: string = rootState.inputs[0].height,
     action: actionWithPayload<string>
 ) {
     switch (action.type) {
-        case EDITOR_HEIGHT_CHANGE:
+        case INPUT_HEIGHT_CHANGE:
+        case INPUTS_HEIGHT_CHANGE:
             return action.payload;
         default:
             return state;

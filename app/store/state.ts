@@ -1,6 +1,6 @@
 import { environment } from '../environments/environment';
 
-export interface IEditorState {
+export interface IInputState {
     id: number;
     mode: string;
     theme: string;
@@ -9,10 +9,10 @@ export interface IEditorState {
     value: string;
     executeFlag: string;
     readOnly?: boolean;
-    editor: IEditorEditorState;
+    editor: IInputEditorState;
 }
 
-export interface IEditorEditorState {
+export interface IInputEditorState {
     maxLines: number;
     autoScrollEditorIntoView: boolean;
     wrap: boolean;
@@ -20,7 +20,7 @@ export interface IEditorEditorState {
 }
 
 export interface IRootState {
-    editors: IEditorState[]
+    inputs: IInputState[]
     debug: {
         components: string,
         store: string
@@ -42,7 +42,7 @@ export const rootState: IRootState = {
         components: LogLevel.debug,
         store: LogLevel.debug
     },
-    editors: [
-        {...environment.config.editor.editableConfig}
+    inputs: [
+        {...environment.config.input.editableConfig}
     ]
 };
