@@ -2,19 +2,17 @@
 import * as fs from 'fs';
 
 export class JavascriptProcessorService {
-    static process(value: string): string {
+    static process(value: string, id: number | string, name?: string): string {
         console.log('JavascriptProcessorService.process() ', value);
-        console.group('JavascriptProcessorService.process() todo');
-        console.log(process.cwd());
-        console.log('Write value to file before execution');
-        console.groupEnd();
 
-        fs.writeFileSync(process.cwd() + '/app/nodebook/index.js', value, {encoding: 'utf-8'});
+        const filename: string = name ? name : id.toString();
+
+        fs.writeFileSync(process.cwd() + '/app/nodebook/' + filename + '.js', value, {encoding: 'utf-8'});
 
         try {
             return (new Function(`
-                require('./nodebook/index.js');   
-                delete require.cache[require.resolve('./nodebook/index.js')];                                   
+                require('./nodebook/${filename}.js');   
+                delete require.cache[require.resolve('./nodebook/${filename}.js')];                                   
                 `))();
         } catch(e) {
             console.error(e);

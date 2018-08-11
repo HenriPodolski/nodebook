@@ -14,7 +14,7 @@ export function inputsReducer(
             const newItem = action.payload;
             const currentState = [...state, newItem];
             return currentState.map((current, index) =>
-                inputReducer(current, action, index)
+                inputReducer(current, action, index + 1)
             )
         }
         default:
@@ -22,7 +22,7 @@ export function inputsReducer(
             return state.reduce((previous, next, index) => {
                 // console.log(index, action);
                 if (index === action.id) {
-                    previous = [...previous, inputReducer(next, action, index)];
+                    previous = [...previous, inputReducer(next, action, index + 1)];
                 } else {
                     previous = [...previous, next];
                 }

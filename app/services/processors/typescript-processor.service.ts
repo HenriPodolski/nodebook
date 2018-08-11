@@ -1,4 +1,6 @@
 /* tslint:disable */
+import * as fs from "fs";
+
 const compilerOptions = {
 /* Basic Options */
     "target": "es5",                          /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018' or 'ESNEXT'. */
@@ -61,12 +63,13 @@ const compilerOptions = {
 };
 
 export class TypescriptProcessorService {
-    static process(value: string): string {
+    static process(value: string, id: number, name?: string): string {
 
         console.log('TypescriptProcessorService.process() ', value);
-        console.group('TypescriptProcessorService.process() todo');
-        console.log('Write value to file before execution');
-        console.groupEnd();
+
+        const filename: string = name ? name : id.toString();
+
+        fs.writeFileSync(process.cwd() + '/app/nodebook/' + filename + '.ts', value, {encoding: 'utf-8'});
 
         try {
             return (new Function(`    
@@ -80,8 +83,8 @@ export class TypescriptProcessorService {
                     ignoreWarnings: false
                 });
                 
-                require('./nodebook/index.ts');   
-                delete require.cache[require.resolve('./nodebook/index.ts')];                                       
+                require('./nodebook/${filename}.ts');   
+                delete require.cache[require.resolve('./nodebook/${filename}.ts')];                                       
                 `))();
         } catch(e) {
             console.error(e);

@@ -8,7 +8,7 @@ import { JavascriptOutputComponent } from '../../components/output/javascript-ou
 
 const mapStateToProps = (state, ownProps) => ({
     value: state.inputs[ownProps.index].value && JavascriptProcessorService.process(
-        state.inputs[ownProps.index].value
+        state.inputs[ownProps.index].value, state.inputs[ownProps.index].id
     )
 });
 
