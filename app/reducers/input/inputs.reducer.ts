@@ -20,7 +20,7 @@ export function inputsReducer(
         default:
             // apply action to all inputs
             return state.reduce((previous, next, index) => {
-                console.log(index, action);
+                // console.log(index, action);
                 if (index === action.id) {
                     previous = [...previous, inputReducer(next, action, index)];
                 } else {

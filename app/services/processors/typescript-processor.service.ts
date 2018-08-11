@@ -64,6 +64,9 @@ export class TypescriptProcessorService {
     static process(value: string): string {
 
         console.log('TypescriptProcessorService.process() ', value);
+        console.group('TypescriptProcessorService.process() todo');
+        console.log('Write value to file before execution');
+        console.groupEnd();
 
         try {
             return (new Function(`    

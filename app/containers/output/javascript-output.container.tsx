@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
-import { TypescriptOutputComponent } from '../../components/output/typescript-output.component';
-import { TypescriptProcessorService } from '../../services/processors/typescript-processor.service';
+import { JavascriptProcessorService } from '../../services/processors/javascript-processor.service';
 import {
     executeFlagChangeAction
 } from '../../actions/input/inputs.actions';
+import { JavascriptOutputComponent } from '../../components/output/javascript-output.component';
 
 
 const mapStateToProps = (state, ownProps) => ({
-    value: state.inputs[ownProps.index].value && TypescriptProcessorService.process(
+    value: state.inputs[ownProps.index].value && JavascriptProcessorService.process(
         state.inputs[ownProps.index].value
     )
 });
@@ -20,4 +20,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     });
 };
 
-export const TypescriptOutputContainer = connect(mapStateToProps, mapDispatchToProps)(TypescriptOutputComponent);
+export const JavascriptOutputContainer = connect(mapStateToProps, mapDispatchToProps)(JavascriptOutputComponent);

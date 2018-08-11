@@ -5,9 +5,8 @@ import {
 } from '../../actions/input/inputs.actions';
 
 const mapStateToProps = (state, ownProps) => ({
-    value: state.inputs[ownProps.index].value,
-    mode: state.inputs[ownProps.index].mode,
-    executeFlag: state.inputs[ownProps.index].executeFlag,
+    value: state.outputs[ownProps.index].value,
+    mode: state.outputs[ownProps.index].mode,
     index: ownProps.index
 });
 

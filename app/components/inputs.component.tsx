@@ -6,6 +6,7 @@ import { DebugContainer } from '../containers/debug.container';
 
 interface IComponentProps {
     inputs: any[];
+    outputs: any[];
     debug: boolean;
 }
 
@@ -25,7 +26,11 @@ export class InputsComponent extends React.Component<IComponentProps> {
                         <React.Fragment key={i}>
                             {!dataset.readOnly && <ModeInputContainer index={i} />}
                             <CodeInputContainer index={i}/>
-                            <OutputContainer index={i} />
+                            {this.props.outputs[i] ? (
+                                <OutputContainer index={i} />
+                            ) : (
+                                <></>
+                            )}
                         </React.Fragment>
                     )
                 })}

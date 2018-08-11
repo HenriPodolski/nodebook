@@ -1,7 +1,6 @@
 import * as exportInputActions from './input/input.actions';
 import * as exportInputsActions from './input/inputs.actions';
 
-
 export type action = {
     type: string
 };

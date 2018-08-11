@@ -20,7 +20,8 @@ export interface IInputEditorState {
 }
 
 export interface IRootState {
-    inputs: IInputState[]
+    inputs: IInputState[],
+    outputs: any[],
     debug: {
         components: string,
         store: string
@@ -44,5 +45,6 @@ export const rootState: IRootState = {
     },
     inputs: [
         {...environment.config.input.editableConfig}
-    ]
+    ],
+    outputs: []
 };

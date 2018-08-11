@@ -1,0 +1,1 @@
+export { outputsReducer } from './outputs.reducer';

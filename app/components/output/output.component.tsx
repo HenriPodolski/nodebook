@@ -2,6 +2,7 @@ import * as React from 'react';
 import { MarkdownOutputContainer } from '../../containers/output/markdown-output.container';
 import { TypescriptOutputContainer } from '../../containers/output/typescript-output.container';
 import Frame from 'react-frame-component';
+import { JavascriptOutputContainer } from '../../containers/output/javascript-output.container';
 
 let styles = require('./output.component.scss');
 
@@ -19,16 +20,23 @@ export class OutputComponent extends React.Component<IComponentProps> {
         super(props, context);
     }
 
-    switchOutput(mode: string, executeFlag?: string) {
+    switchOutput(mode: string) {
         switch(true) {
-            case mode === 'markdown' && executeFlag === 'processed': {
+            case mode === 'markdown': {
                 return (
                     <Frame className={styles.OutputFrame}>
                         <MarkdownOutputContainer index={this.props.index} />
                     </Frame>
                 )
             }
-            case mode === 'typescript' && executeFlag === 'processed': {
+            case mode === 'javascript': {
+                return (
+                    <Frame className={styles.OutputFrame}>
+                        <JavascriptOutputContainer index={this.props.index} />
+                    </Frame>
+                )
+            }
+            case mode === 'typescript': {
                 return (
                     <Frame className={styles.OutputFrame}>
                         <TypescriptOutputContainer index={this.props.index} />
@@ -46,7 +54,7 @@ export class OutputComponent extends React.Component<IComponentProps> {
     }
 
     render() {
-        const elements = this.switchOutput(this.props.mode, this.props.executeFlag);
+        const elements = this.switchOutput(this.props.mode);
 
         return (
             <>
