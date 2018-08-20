@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { InputsContainer } from '../containers/inputs.container';
+import { OutputFilenameComponent } from './output/output-filename.component';
 
 let styles = require('./app.component.scss');
 
@@ -16,6 +17,8 @@ export class AppComponent extends React.Component {
                     <li style={{textDecoration: 'line-through'}}>Divide output from editor value</li>
                     <li style={{textDecoration: 'line-through'}}>Rename editor to input</li>
                     <li style={{textDecoration: 'line-through'}}>Fix output list additions for every executed input</li>
+                    <li>Use input field value of OutputFilenameComponent for filenames and give default values</li>
+                    <li>Integrate display/execution order into package.json within key nodebook</li>
                     <li>Write code input values to files before execution</li>
                     <li>Process all kinds of code values for output store</li>
                     <li>Get stdout from executed code and write it to output store</li>

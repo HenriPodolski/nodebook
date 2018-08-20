@@ -3,6 +3,7 @@ import { CodeInputContainer } from '../containers/input/code-input.container';
 import { ModeInputContainer } from '../containers/input/mode-input.container';
 import { OutputContainer } from '../containers/output/output.container';
 import { DebugContainer } from '../containers/debug.container';
+import { OutputFilenameContainer } from '../containers/output/output-filename.container';
 
 interface IComponentProps {
     inputs: any[];
@@ -24,6 +25,7 @@ export class InputsComponent extends React.Component<IComponentProps> {
                 {this.props.inputs.map((dataset, i) => {
                     return (
                         <React.Fragment key={i}>
+                            <OutputFilenameContainer index={i} />
                             {!dataset.readOnly && <ModeInputContainer index={i} />}
                             <CodeInputContainer index={i}/>
                             {this.props.outputs[i] ? (

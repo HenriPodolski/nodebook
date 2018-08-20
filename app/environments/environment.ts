@@ -21,27 +21,33 @@ export const environment = {
             modes: [
                 {
                     value: 'markdown',
-                    title: 'Markdown'
+                    title: 'Markdown',
+                    short: 'md'
                 },
                 {
                     value: 'javascript',
-                    title: 'JavaScript'
+                    title: 'JavaScript',
+                    short: 'js'
                 },
                 {
                     value: 'typescript',
-                    title: 'TypeScript'
+                    title: 'TypeScript',
+                    short: 'ts'
                 },
                 {
                     value: 'html',
-                    title: 'HTML'
+                    title: 'HTML',
+                    short: 'html'
                 },
                 {
                     value: 'css',
-                    title: 'CSS'
+                    title: 'CSS',
+                    short: 'css'
                 },
                 {
                     value: 'json',
-                    title: 'JSON'
+                    title: 'JSON',
+                    short: 'json'
                 },
             ]
         }
