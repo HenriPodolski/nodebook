@@ -2,14 +2,17 @@ import { inputValueReducer } from '../shared/value.reducer';
 import { inputHeightReducer } from '../shared/height.reducer';
 import { inputModeReducer } from '../shared/mode.reducer';
 import { inputThemeReducer } from '../shared/theme.reducer';
-import { IInputState, rootState } from '../../store/state';
+import { rootState } from '../../store/state';
 import { actionWithPayload } from '../../actions';
-import { inputReadonlyReducer } from '../shared/readonly.reducer';
 import { inputsExecuteFlagReducer } from '../shared/execute-flag.reducer';
+import { inputNameReducer } from '../shared/name.reducer';
+import { IInput } from '../../shared/interfaces/input.interface';
+import { IErrorsInterface } from '../../shared/interfaces/errors.interface';
+import { inputErrorsReducer } from '../shared/errors.reducer';
 
 export function inputReducer(
-    state: IInputState = { ...rootState.inputs[0] },
-    action: actionWithPayload<string | boolean>,
+    state: IInput = { ...rootState.inputs[0] },
+    action: actionWithPayload<string | boolean | {[key: string]: IErrorsInterface[]}>,
     id: number
 ) {
     switch (action.type) {
@@ -17,11 +20,14 @@ export function inputReducer(
             return {
                 ...state,
                 id,
+                name: inputNameReducer(state.name, action as actionWithPayload<string>),
+                errors: inputErrorsReducer(
+                    state.errors, action as actionWithPayload<{[key: string]: IErrorsInterface[]}>
+                ),
                 mode: inputModeReducer(state.mode, action as actionWithPayload<string>),
                 height: inputHeightReducer(state.height, action as actionWithPayload<string>),
                 theme: inputThemeReducer(state.theme, action as actionWithPayload<string>),
                 value: inputValueReducer(state.value, action as actionWithPayload<string>),
-                readOnly: inputReadonlyReducer(state.readOnly, action as actionWithPayload<boolean>),
                 executeFlag: inputsExecuteFlagReducer(state.executeFlag, action as actionWithPayload<string>)
             };
     }

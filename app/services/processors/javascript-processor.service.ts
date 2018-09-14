@@ -2,10 +2,8 @@
 import * as fs from 'fs';
 
 export class JavascriptProcessorService {
-    static process(value: string, id: number | string, name?: string): string {
+    static process(value: string, filename: string): string {
         console.log('JavascriptProcessorService.process() ', value);
-
-        const filename: string = name ? name : id.toString();
 
         fs.writeFileSync(process.cwd() + '/app/nodebook/' + filename + '.js', value, {encoding: 'utf-8'});
 

@@ -3,18 +3,21 @@ export const environment = {
         input: {
             editableConfig: {
                 id: 0,
+                name: '',
                 mode: 'markdown',
                 theme: 'github',
                 height: '100%',
                 width: '100%',
                 value: '',
-                readOnly: false,
                 executeFlag: 'idle',
                 editor: {
                     maxLines: Infinity,
                     autoScrollEditorIntoView: true,
                     wrap: true,
                     minLines: 1
+                },
+                errors: {
+                    filename: []
                 }
             },
             mode: 'markdown',

@@ -1,14 +1,15 @@
-import { IInputState, rootState } from '../../store/state';
+import { rootState } from '../../store/state';
 import { actionWithPayload } from '../../actions';
 import {
     INPUTS_NEW
 } from '../../actions/input/inputs.actions';
 import { inputReducer } from './input.reducer';
+import { IInput } from '../../shared/interfaces/input.interface';
 
 export function inputsReducer(
-    state: IInputState[] = rootState.inputs,
+    state: IInput[] = rootState.inputs,
     action: actionWithPayload<any>
-): IInputState[] {
+): IInput[] {
     switch (action.type) {
         case INPUTS_NEW: {
             const newItem = action.payload;
@@ -28,6 +29,6 @@ export function inputsReducer(
                 }
 
                 return previous;
-            }, [] as IInputState[]);
+            }, [] as IInput[]);
     }
 }

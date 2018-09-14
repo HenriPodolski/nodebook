@@ -1,26 +1,8 @@
 import { environment } from '../environments/environment';
-
-export interface IInputState {
-    id: number;
-    mode: string;
-    theme: string;
-    height: string;
-    width: string;
-    value: string;
-    executeFlag: string;
-    readOnly?: boolean;
-    editor: IInputEditorState;
-}
-
-export interface IInputEditorState {
-    maxLines: number;
-    autoScrollEditorIntoView: boolean;
-    wrap: boolean;
-    minLines: number;
-}
+import { IInput } from '../shared/interfaces/input.interface';
 
 export interface IRootState {
-    inputs: IInputState[],
+    inputs: IInput[],
     outputs: any[],
     debug: {
         components: string,

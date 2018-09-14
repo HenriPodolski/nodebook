@@ -2,6 +2,7 @@ import AceEditor from 'react-ace';
 import * as React from 'react';
 
 import '../../shared/imports/brace';
+import { InputEnums } from '../../enums/input.enums';
 
 interface IComponentProps {
     mode: string;
@@ -14,7 +15,6 @@ interface IComponentProps {
     changeValue: (payload: string) => {type: string, payload: string};
     changeHeight: (payload: string) => {type: string, payload: string};
     changeTheme: (payload: string) => {type: string, payload: string};
-    changeReadonly: (payload: boolean) => {type: string, payload: boolean};
     changeExecuteFlag: (payload: string) => {type: string, payload: string};
 }
 
@@ -48,14 +48,12 @@ export class CodeInputComponent extends React.Component<IComponentProps> {
 
     handleKeyDown(evt) {
         if (evt.key === 'Enter' && evt.altKey) {
-            this.props.changeExecuteFlag('processed');
-            this.props.changeReadonly(true);
+            this.props.changeExecuteFlag(InputEnums.executeFlags.processing);
         }
     }
 
     handleDoubleClick(evt) {
-        this.props.changeReadonly(false);
-        this.props.changeExecuteFlag('idle');
+        this.props.changeExecuteFlag(InputEnums.executeFlags.idle);
     }
 
     componentDidMount() {

@@ -1,9 +1,26 @@
+import { IErrorsInterface } from '../../shared/interfaces/errors.interface';
+
+export const INPUT_NAME_CHANGE = 'INPUT_NAME_CHANGE';
+export const INPUT_VALIDATION_ERRORS_CHANGE = 'INPUT_VALIDATION_ERRORS_CHANGE';
 export const INPUT_MODE_CHANGE = 'INPUT_MODE_CHANGE';
 export const INPUT_VALUE_CHANGE = 'INPUT_VALUE_CHANGE';
 export const INPUT_HEIGHT_CHANGE = 'INPUT_HEIGHT_CHANGE';
 export const INPUT_THEME_CHANGE = 'INPUT_THEME_CHANGE';
-export const INPUT_READONLY_CHANGE = 'INPUT_READONLY_CHANGE';
 export const INPUT_EXECUTE_FLAG_CHANGE = 'INPUT_EXECUTE_FLAG_CHANGE';
+
+export function nameChangeAction(payload: string) {
+    return {
+        type: INPUT_NAME_CHANGE,
+        payload
+    };
+}
+
+export function validationErrorsChangeAction(payload: {[key: string]: IErrorsInterface[]}) {
+    return {
+        type: INPUT_VALIDATION_ERRORS_CHANGE,
+        payload
+    };
+}
 
 export function modeChangeAction(payload: string) {
     return {
@@ -29,13 +46,6 @@ export function heightChangeAction(payload: string) {
 export function themeChangeAction(payload: string) {
     return {
         type: INPUT_THEME_CHANGE,
-        payload
-    };
-}
-
-export function readonlyChangeAction(payload: string) {
-    return {
-        type: INPUT_READONLY_CHANGE,
         payload
     };
 }

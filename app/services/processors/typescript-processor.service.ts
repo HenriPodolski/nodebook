@@ -63,11 +63,9 @@ const compilerOptions = {
 };
 
 export class TypescriptProcessorService {
-    static process(value: string, id: number, name?: string): string {
+    static process(value: string, filename: string): string {
 
         console.log('TypescriptProcessorService.process() ', value);
-
-        const filename: string = name ? name : id.toString();
 
         fs.writeFileSync(process.cwd() + '/app/nodebook/' + filename + '.ts', value, {encoding: 'utf-8'});
 

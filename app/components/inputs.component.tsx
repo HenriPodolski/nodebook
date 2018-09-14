@@ -4,6 +4,7 @@ import { ModeInputContainer } from '../containers/input/mode-input.container';
 import { OutputContainer } from '../containers/output/output.container';
 import { DebugContainer } from '../containers/debug.container';
 import { OutputFilenameContainer } from '../containers/output/output-filename.container';
+import { OutputEnums } from '../enums/output.enums';
 
 interface IComponentProps {
     inputs: any[];
@@ -25,14 +26,16 @@ export class InputsComponent extends React.Component<IComponentProps> {
                 {this.props.inputs.map((dataset, i) => {
                     return (
                         <React.Fragment key={i}>
-                            <OutputFilenameContainer index={i} />
-                            {!dataset.readOnly && <ModeInputContainer index={i} />}
+                            {(!this.props.outputs[i] ||
+                             this.props.outputs[i].executeFlag !== OutputEnums.executeFlags.processed) &&
+                                <OutputFilenameContainer index={i} />}
+                            {(!this.props.outputs[i] ||
+                             this.props.outputs[i].executeFlag !== OutputEnums.executeFlags.processed) &&
+                                <ModeInputContainer index={i} />}
                             <CodeInputContainer index={i}/>
-                            {this.props.outputs[i] ? (
-                                <OutputContainer index={i} />
-                            ) : (
-                                <></>
-                            )}
+                            {this.props.outputs[i] &&
+                             this.props.outputs[i].executeFlag === OutputEnums.executeFlags.processed &&
+                                <OutputContainer index={i} />}
                         </React.Fragment>
                     )
                 })}

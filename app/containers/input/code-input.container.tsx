@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import { CodeInputComponent } from '../../components/input/code-input.component';
 import {
     executeFlagChangeAction,
-    heightChangeAction, readonlyChangeAction, themeChangeAction,
+    heightChangeAction, themeChangeAction,
     valueChangeAction
 } from '../../actions/input/inputs.actions';
+import { OutputEnums } from '../../enums/output.enums';
 
 const mapStateToProps = (state, ownProps) => ({
     mode: state.inputs[ownProps.index].mode,
@@ -14,7 +15,8 @@ const mapStateToProps = (state, ownProps) => ({
     width: state.inputs[ownProps.index].width,
     editor: state.inputs[ownProps.index].editor,
     value: state.inputs[ownProps.index].value,
-    readOnly: state.inputs[ownProps.index].readOnly
+    readOnly: state.outputs[ownProps.index] &&
+        state.outputs[ownProps.index].executeFlag === OutputEnums.executeFlags.processed
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -27,9 +29,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         changeTheme: (state) => {
             return dispatch(themeChangeAction(state, ownProps.index));
-        },
-        changeReadonly: (state) => {
-            return dispatch(readonlyChangeAction(state, ownProps.index));
         },
         changeExecuteFlag: (state) => {
             return dispatch(executeFlagChangeAction(state, ownProps.index));
