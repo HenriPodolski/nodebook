@@ -63,7 +63,6 @@ export const newOutputEpic = (action$, state$) => action$.pipe(
             }
 
             if (isFlagged && isValidName) {
-                process(input);
 
                 actions.push(validationErrorsChangeAction({
                     filename: []
@@ -71,7 +70,7 @@ export const newOutputEpic = (action$, state$) => action$.pipe(
 
                 actions.push(executeFlagChangeAction(InputEnums.executeFlags.processed, index));
 
-                // todo const output = process(input) ... and then add output
+                const logs = process(input);
 
                 processed.push({
                     id: input.id,
@@ -79,8 +78,7 @@ export const newOutputEpic = (action$, state$) => action$.pipe(
                     mode: input.mode,
                     value: input.value,
                     executeFlag: OutputEnums.executeFlags.processed,
-                    output: '...',
-                    todo: 'TODO: process these values with mode switch output processor to process value!!!'
+                    logs
                 });
             }
         });

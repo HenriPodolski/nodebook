@@ -2,6 +2,7 @@ import * as React from 'react';
 
 interface IComponentProps {
     value: string;
+    index: number;
     changeExecuteFlag: (payload: string) => {type: string, payload: string};
 }
 

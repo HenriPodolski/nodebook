@@ -6,7 +6,8 @@ import { JavascriptOutputComponent } from '../../components/output/javascript-ou
 
 
 const mapStateToProps = (state, ownProps) => ({
-    value: state.outputs[ownProps.index].value
+    value: state.outputs[ownProps.index].value,
+    index: ownProps.index
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => {

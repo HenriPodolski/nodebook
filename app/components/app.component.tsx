@@ -23,30 +23,49 @@ export class AppComponent extends React.Component {
                     <li style={{textDecoration: 'line-through'}}>MapStateToProps of code outputs should use value of output</li>
                     <li style={{textDecoration: 'line-through'}}>Validate filename on executeFlagChange for valid filename pattern</li>
                     <li style={{textDecoration: 'line-through'}}>Validate filename on executeFlagChange no duplicate filename</li>
-                    <li>Get stdout from executed code and write it to output store</li>
+                    <li style={{textDecoration: 'line-through'}}>Get stdout from executed js code and write it to output store</li>
+                    <li style={{textDecoration: 'line-through'}}>Write code input values to files before execution</li>
+                    <li style={{textDecoration: 'line-through'}}>Get stdout from executed ts code and write it to output store</li>
+                    <li style={{textDecoration: 'line-through'}}>Output logs with log component</li>
+                    <li>Fix edit state after first execution</li>
+                    <li>Difference between browser and node code?</li>
+                    <li>Implement js execution context browser/node</li>
                     <li>Handle filename changes by renaming existing files</li>
+                    <li>Implement multiselect for snippets to use for current context</li>
                     <li>
                         Integrate display/execution order into package.json within key nodebook
                         <pre>
                             {JSON.stringify({"nodebook": [
                                     {
                                         "id": 1,
-                                        "name": "filename.ext"
+                                        "name": "filename.js",
+                                        "context": "client",
+                                        "dependencies": []
+                                    }, {
+                                        "id": 2,
+                                        "name": "filename.ext",
+                                        "dependencies": [1]
                                     }
                                ]}, null, 2)}
                         </pre>
                     </li>
-                    <li>Write code input values to files before execution</li>
-                    <li>Process all kinds of code values for output store</li>
-                    <li>Difference between browser and node code?</li>
-                    <li>
-                        Implement multiselect for snippets to use for current context
-                        <pre>%include 1.html 1.css 2.css 1.js 2.ts</pre>
-                    </li>
+                    <li>Process js code values for output store</li>
+                    <li>Process ts code values for output store</li>
+                    <li>Process html code values for output store</li>
+                    <li>Process md code values for output store</li>
+                    <li>Process css code values for output store</li>
+                    <li>Process scss code values for output store</li>
+                    <li>Parse json data values for output store</li>
+                    <li>Get stdout from executed scss code and write it to output store</li>
+                    <li>Get parse error from json and write it to output store</li>
                     <li>Implement nodebook package.json dependency config</li>
                     <li>Make title editable</li>
                     <li>nodebook as file loading/execution logic</li>
-                    <li>Delete editor item functionality</li>
+                    <li>Implement full featured loggin component</li>
+                    <li>Delete editor item functionality, if readOnly</li>
+                    <li>Create ux design and change views accordingly</li>
+                    <li>Create visual design and apply it</li>
+                    <li>Add dark and bright mode switch</li>
                 </ol>
                 <InputsContainer />
             </div>
