@@ -13,6 +13,32 @@ import { process } from '../services/processors/processor.service';
 import { InputEnums } from '../enums/input.enums';
 import { OutputEnums } from '../enums/output.enums';
 
+export const dirtyExecuteFlagOutputEpic = (action$, state$) => action$.pipe(
+    ofType(INPUT_EXECUTE_FLAG_CHANGE, INPUTS_EXECUTE_FLAG_CHANGE),
+    withLatestFrom(state$),
+    switchMap(([action, state]) => {
+        let processed: any[] = [];
+        let actions: { type: string; payload: any; }[] = [];
+
+        state.inputs.forEach((input, index) => {
+            const isIdle = input.executeFlag === InputEnums.executeFlags.idle;
+
+            if (isIdle && state.outputs[index]) {
+                const newOutputState = Object.assign(
+                    {},
+                    state.outputs[index],
+                    {
+                        executeFlag: OutputEnums.executeFlags.dirty
+                    });
+                processed.push(newOutputState);
+            }
+        });
+
+        actions.push(updateAction(processed));
+
+        return actions;
+    }));
+
 export const newOutputEpic = (action$, state$) => action$.pipe(
     ofType(INPUT_EXECUTE_FLAG_CHANGE, INPUTS_EXECUTE_FLAG_CHANGE),
     withLatestFrom(state$),
@@ -23,7 +49,7 @@ export const newOutputEpic = (action$, state$) => action$.pipe(
 
         state.inputs.forEach((input, index) => {
             let validationErrors: {message: string}[] = [];
-            const isFlagged = input.executeFlag === InputEnums.executeFlags.processing;
+            const isProcessing = input.executeFlag === InputEnums.executeFlags.processing;
             /* tslint:disable */
             const isValidFilename = /^(?!\.)(?!com[0-9]$)(?!con$)(?!lpt[0-9]$)(?!nul$)(?!prn$)[^\|\*\?\\:<>/$"]*[^\.\|\*\?\\:<>/$"]+$/
                 .test(input.name);
@@ -44,12 +70,12 @@ export const newOutputEpic = (action$, state$) => action$.pipe(
             console.log('isUnique ', isUnique);
             console.groupEnd();
 
-            if (!isValidFilename && isFlagged) {
+            if (!isValidFilename && isProcessing) {
                 console.log('filename not valid');
                 validationErrors.push({message: 'filename not valid'});
             }
 
-            if (isValidFilename && !isUnique && isFlagged) {
+            if (isValidFilename && !isUnique && isProcessing) {
                 console.log('filename not unique');
                 validationErrors.push({message: 'filename not unique'});
             }
@@ -62,7 +88,7 @@ export const newOutputEpic = (action$, state$) => action$.pipe(
                 actions.push(executeFlagChangeAction(InputEnums.executeFlags.idle, index));
             }
 
-            if (isFlagged && isValidName) {
+            if (isProcessing && isValidName) {
 
                 actions.push(validationErrorsChangeAction({
                     filename: []
