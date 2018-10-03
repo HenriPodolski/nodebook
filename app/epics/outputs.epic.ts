@@ -21,9 +21,11 @@ export const dirtyExecuteFlagOutputEpic = (action$, state$) => action$.pipe(
         let actions: { type: string; payload: any; }[] = [];
 
         state.inputs.forEach((input, index) => {
+            // if input was set to idle and output is already there
             const isIdle = input.executeFlag === InputEnums.executeFlags.idle;
 
             if (isIdle && state.outputs[index]) {
+                // set output executeFlag to dirty
                 const newOutputState = Object.assign(
                     {},
                     state.outputs[index],
@@ -50,10 +52,12 @@ export const newOutputEpic = (action$, state$) => action$.pipe(
         state.inputs.forEach((input, index) => {
             let validationErrors: {message: string}[] = [];
             const isProcessing = input.executeFlag === InputEnums.executeFlags.processing;
-            /* tslint:disable */
-            const isValidFilename = /^(?!\.)(?!com[0-9]$)(?!con$)(?!lpt[0-9]$)(?!nul$)(?!prn$)[^\|\*\?\\:<>/$"]*[^\.\|\*\?\\:<>/$"]+$/
-                .test(input.name);
-            /* tslint:enable */
+            const isValidFilename = (new RegExp([
+                '^(?!\.)(?!com[0-9]$)(?!con$)(?!lpt[0-9]$)',
+                '(?!nul$)(?!prn$)[^\|\*\?\\:<>/$"]*',
+                '[^\.\|\*\?\\:<>/$"]+$'
+                ].join('')
+            )).test(input.name);
             const isUnique = !(state
                 .inputs
                 .filter(filteredInput => {

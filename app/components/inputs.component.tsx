@@ -5,6 +5,7 @@ import { OutputContainer } from '../containers/output/output.container';
 import { DebugContainer } from '../containers/debug.container';
 import { OutputFilenameContainer } from '../containers/output/output-filename.container';
 import { OutputEnums } from '../enums/output.enums';
+import { ContextInputContainer } from '../containers/input/context-input.container';
 
 interface IComponentProps {
     inputs: any[];
@@ -31,7 +32,11 @@ export class InputsComponent extends React.Component<IComponentProps> {
                                 <OutputFilenameContainer index={i} />}
                             {(!this.props.outputs[i] ||
                              this.props.outputs[i].executeFlag !== OutputEnums.executeFlags.processed) &&
-                                <ModeInputContainer index={i} />}
+                                <>
+                                    <ModeInputContainer index={i} />
+                                    <ContextInputContainer index={i} />
+                                </>
+                            }
                             <CodeInputContainer index={i}/>
                             {this.props.outputs[i] &&
                              this.props.outputs[i].executeFlag === OutputEnums.executeFlags.processed &&

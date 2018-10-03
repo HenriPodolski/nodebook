@@ -9,6 +9,7 @@ import { inputNameReducer } from '../shared/name.reducer';
 import { IInput } from '../../shared/interfaces/input.interface';
 import { IErrorsInterface } from '../../shared/interfaces/errors.interface';
 import { inputErrorsReducer } from '../shared/errors.reducer';
+import { inputContextReducer } from '../shared/context.reducer';
 
 export function inputReducer(
     state: IInput = { ...rootState.inputs[0] },
@@ -25,6 +26,7 @@ export function inputReducer(
                     state.errors, action as actionWithPayload<{[key: string]: IErrorsInterface[]}>
                 ),
                 mode: inputModeReducer(state.mode, action as actionWithPayload<string>),
+                context: inputContextReducer(state.context, action as actionWithPayload<string>),
                 height: inputHeightReducer(state.height, action as actionWithPayload<string>),
                 theme: inputThemeReducer(state.theme, action as actionWithPayload<string>),
                 value: inputValueReducer(state.value, action as actionWithPayload<string>),

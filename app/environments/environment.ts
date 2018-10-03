@@ -5,6 +5,7 @@ export const environment = {
                 id: 0,
                 name: '',
                 mode: 'markdown',
+                context: '',
                 theme: 'github',
                 height: '100%',
                 width: '100%',
@@ -52,6 +53,47 @@ export const environment = {
                     title: 'JSON',
                     short: 'json'
                 },
+            ],
+            contexts: [
+                {
+                    mode: 'javascript',
+                    values: [
+                        {
+                            label: 'Client',
+                            value: 'client'
+                        },
+                        {
+                            label: 'Server',
+                            value: 'server'
+                        }
+                    ]
+                },
+                {
+                    mode: 'typescript',
+                    values: [
+                        {
+                            label: 'Client',
+                            value: 'client'
+                        },
+                        {
+                            label: 'Server',
+                            value: 'server'
+                        }
+                    ]
+                },
+                {
+                    mode: 'css',
+                    values: [
+                        {
+                            label: 'Local',
+                            value: 'local'
+                        },
+                        {
+                            label: 'Global',
+                            value: 'global'
+                        }
+                    ]
+                }
             ]
         }
     }

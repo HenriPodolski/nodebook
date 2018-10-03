@@ -4,6 +4,7 @@ export interface IInput {
     id: number;
     name: string;
     mode: string;
+    context: string;
     theme: string;
     height: string;
     width: string;

@@ -3,6 +3,7 @@ import { IErrorsInterface } from '../../shared/interfaces/errors.interface';
 export const INPUT_NAME_CHANGE = 'INPUT_NAME_CHANGE';
 export const INPUT_VALIDATION_ERRORS_CHANGE = 'INPUT_VALIDATION_ERRORS_CHANGE';
 export const INPUT_MODE_CHANGE = 'INPUT_MODE_CHANGE';
+export const INPUT_CONTEXT_CHANGE = 'INPUT_CONTEXT_CHANGE';
 export const INPUT_VALUE_CHANGE = 'INPUT_VALUE_CHANGE';
 export const INPUT_HEIGHT_CHANGE = 'INPUT_HEIGHT_CHANGE';
 export const INPUT_THEME_CHANGE = 'INPUT_THEME_CHANGE';
@@ -25,6 +26,13 @@ export function validationErrorsChangeAction(payload: {[key: string]: IErrorsInt
 export function modeChangeAction(payload: string) {
     return {
         type: INPUT_MODE_CHANGE,
+        payload
+    };
+}
+
+export function contextChangeAction(payload: string) {
+    return {
+        type: INPUT_CONTEXT_CHANGE,
         payload
     };
 }
