@@ -10,8 +10,8 @@ export class JavascriptProcessorService {
         console.log('JavascriptProcessorService.process() ', value);
 
         const contexts = {
-            'js': 'client',
-            'node': 'server'
+            'client': 'client',
+            'server': 'server'
         };
         const currentContext = contexts[context];
         const rootDirectory = '/nodebook';

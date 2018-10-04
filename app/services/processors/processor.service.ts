@@ -6,7 +6,7 @@ export const process = (inputObject: IInput): string => {
     switch (inputObject.mode) {
         case ('javascript'): {
             return JavascriptProcessorService.process(
-                inputObject.value, inputObject.name
+                inputObject.value, inputObject.name, inputObject.context
             );
         }
 

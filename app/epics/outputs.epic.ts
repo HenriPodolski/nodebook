@@ -52,17 +52,17 @@ export const newOutputEpic = (action$, state$) => action$.pipe(
         state.inputs.forEach((input, index) => {
             let validationErrors: {message: string}[] = [];
             const isProcessing = input.executeFlag === InputEnums.executeFlags.processing;
-            const isValidFilename = (new RegExp([
-                '^(?!\.)(?!com[0-9]$)(?!con$)(?!lpt[0-9]$)',
-                '(?!nul$)(?!prn$)[^\|\*\?\\:<>/$"]*',
-                '[^\.\|\*\?\\:<>/$"]+$'
-                ].join('')
-            )).test(input.name);
+            // tslint:disable
+            const isValidFilename = /^(?!\.)(?!com[0-9]$)(?!con$)(?!lpt[0-9]$)(?!nul$)(?!prn$)[^\|\*\?\\:<>/$"]*[^\.\|\*\?\\:<>/$"]+$/
+                .test(input.name);
+            // tslint:enable
             const isUnique = !(state
                 .inputs
                 .filter(filteredInput => {
                     return filteredInput.id !== input.id &&
-                        filteredInput.name === input.name
+                        filteredInput.name === input.name &&
+                        filteredInput.mode === input.mode &&
+                        (!input.context || filteredInput.context === input.context)
                 })
                 .length);
             const isValidName = isValidFilename && isUnique;
