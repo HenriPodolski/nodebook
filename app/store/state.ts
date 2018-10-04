@@ -22,8 +22,8 @@ enum LogLevel {
 
 export const rootState: IRootState = {
     debug: {
-        components: LogLevel.debug,
-        store: LogLevel.debug
+        components: LogLevel.off,
+        store: LogLevel.off
     },
     inputs: [
         {...environment.config.input.editableConfig}

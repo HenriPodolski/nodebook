@@ -1,10 +1,12 @@
+import { ModeEnums } from '../enums/mode.enums';
+
 export const environment = {
     config: {
         input: {
             editableConfig: {
-                id: 0,
+                id: 1,
                 name: '',
-                mode: 'markdown',
+                mode: ModeEnums.md.value,
                 context: '',
                 theme: 'github',
                 height: '100%',
@@ -21,37 +23,37 @@ export const environment = {
                     filename: []
                 }
             },
-            mode: 'markdown',
+            mode: ModeEnums.md.value,
             modes: [
                 {
-                    value: 'markdown',
+                    value: ModeEnums.md.value,
                     title: 'Markdown',
-                    short: 'md'
+                    short: ModeEnums.md.short
                 },
                 {
-                    value: 'javascript',
+                    value: ModeEnums.js.value,
                     title: 'JavaScript',
-                    short: 'js'
+                    short: ModeEnums.js.short
                 },
                 {
-                    value: 'typescript',
+                    value: ModeEnums.ts.value,
                     title: 'TypeScript',
-                    short: 'ts'
+                    short: ModeEnums.ts.short
                 },
                 {
-                    value: 'html',
+                    value: ModeEnums.html.value,
                     title: 'HTML',
-                    short: 'html'
+                    short: ModeEnums.html.short
                 },
                 {
-                    value: 'css',
+                    value: ModeEnums.css.value,
                     title: 'CSS',
-                    short: 'css'
+                    short: ModeEnums.css.short
                 },
                 {
-                    value: 'json',
+                    value: ModeEnums.json.value,
                     title: 'JSON',
-                    short: 'json'
+                    short: ModeEnums.json.short
                 },
             ],
             contexts: [

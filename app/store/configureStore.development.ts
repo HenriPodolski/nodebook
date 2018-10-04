@@ -24,10 +24,14 @@ const actionCreators = Object.assign({},
   {push}
 );
 
-const logger = (<any>createLogger)({
-  level: rootState.debug.store,
-  collapsed: true
-});
+let logger;
+
+if (rootState.debug.store) {
+	logger = (<any>createLogger)({
+		level: rootState.debug.store,
+		collapsed: true
+	});
+}
 
 const history = createHashHistory();
 const epicMiddleware = createEpicMiddleware();
@@ -43,7 +47,8 @@ const composeEnhancers: typeof compose = window.__REDUX_DEVTOOLS_EXTENSION_COMPO
   compose;
 /* eslint-enable no-underscore-dangle */
 const enhancer = composeEnhancers(
-  applyMiddleware(epicMiddleware, router, logger)
+	logger ? applyMiddleware(epicMiddleware, router, logger) :
+		applyMiddleware(epicMiddleware, router)
 );
 
 export = {

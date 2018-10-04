@@ -100,15 +100,17 @@ export const newOutputEpic = (action$, state$) => action$.pipe(
 
                 actions.push(executeFlagChangeAction(InputEnums.executeFlags.processed, index));
 
-                const logs = process(input);
+                const processResult = process(input);
 
                 processed.push({
                     id: input.id,
                     name: input.name,
                     mode: input.mode,
+                    context: input.context,
                     value: input.value,
                     executeFlag: OutputEnums.executeFlags.processed,
-                    logs
+                    logs: processResult.out,
+                    file: processResult.file
                 });
             }
         });

@@ -1,5 +1,7 @@
 /* tslint:disable */
-import * as fs from "fs";
+import { ISourceFileInfos } from '../../shared/interfaces/source-file.interface';
+import { SourceFilesService } from '../files/source-files.service';
+import { IProcessOutput } from '../../shared/interfaces/output.interface';
 
 const compilerOptions = {
 /* Basic Options */
@@ -62,15 +64,14 @@ const compilerOptions = {
     "emitDecoratorMetadata": true        /* Enables experimental support for emitting type metadata for decorators. */
 };
 
-export class TypescriptProcessorService {
-    static process(value: string, filename: string): string {
-
-        console.log('TypescriptProcessorService.process() ', value);
-
-        fs.writeFileSync(process.cwd() + '/app/nodebook/' + filename + '.ts', value, {encoding: 'utf-8'});
+export class TypescriptServerProcessorService {
+	static process({value, filename, mode, context}): IProcessOutput {
+		const sourceFileInfos: ISourceFileInfos = SourceFilesService
+			.createIfNotExists(value, filename, mode, context);
+		let out;
 
         try {
-            return (new Function(`    
+            out = (new Function(`    
                 const tsNode = require('ts-node')
                 
                 tsNode.register({
@@ -81,13 +82,15 @@ export class TypescriptProcessorService {
                     ignoreWarnings: false
                 });
                 
-                require('./nodebook/${filename}.ts');   
-                delete require.cache[require.resolve('./nodebook/${filename}.ts')];                                       
+                require('${sourceFileInfos.relativeFilePath}');   
+                delete require.cache[require.resolve('${sourceFileInfos.relativeFilePath}')];                                       
                 `))();
         } catch(e) {
             console.error(e);
             return e.toString();
         }
+
+		return {out, file: sourceFileInfos.relativeFilePath};
     }
 }
 /* tslint:enable */

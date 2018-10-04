@@ -29,7 +29,7 @@ export class AppComponent extends React.Component {
                     <li style={{textDecoration: 'line-through'}}>Output logs with log component</li>
                     <li style={{textDecoration: 'line-through'}}>Fix edit state after first execution</li>
                     <li style={{textDecoration: 'line-through'}}>Integrate toggle between browser and node code</li>
-                    <li>Implement js execution context for client aka browser</li>
+                    <li style={{textDecoration: 'line-through'}}>Implement js execution context for client aka browser</li>
                     <li>Handle filename changes by renaming existing files</li>
                     <li>Implement multiselect for snippets to use for current context</li>
                     <li>

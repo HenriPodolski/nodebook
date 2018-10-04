@@ -7,6 +7,7 @@ import {
 const mapStateToProps = (state, ownProps) => ({
     value: state.outputs[ownProps.index].value,
     mode: state.outputs[ownProps.index].mode,
+    context: state.outputs[ownProps.index].context,
     index: ownProps.index
 });
 

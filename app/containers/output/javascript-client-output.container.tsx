@@ -2,11 +2,12 @@ import { connect } from 'react-redux';
 import {
     executeFlagChangeAction
 } from '../../actions/input/inputs.actions';
-import { JavascriptOutputComponent } from '../../components/output/javascript-output.component';
+import { JavascriptClientOutputComponent } from '../../components/output/javascript-client-output.component';
 
 
 const mapStateToProps = (state, ownProps) => ({
     value: state.outputs[ownProps.index].value,
+    file: state.outputs[ownProps.index].file,
     index: ownProps.index
 });
 
@@ -18,4 +19,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     });
 };
 
-export const JavascriptOutputContainer = connect(mapStateToProps, mapDispatchToProps)(JavascriptOutputComponent);
+export const JavascriptClientOutputContainer = connect(
+    mapStateToProps, mapDispatchToProps
+)(JavascriptClientOutputComponent);
