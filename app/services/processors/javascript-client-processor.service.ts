@@ -9,7 +9,7 @@ export class JavascriptClientProcessorService {
 		const sourceFileInfos: ISourceFileInfos = SourceFilesService
 			.createIfNotExists(value, filename, mode, context);
 
-		return {out: [], file: sourceFileInfos.relativeFilePath};
+		return {out: [], file: sourceFileInfos.relativeFilePath, infos: sourceFileInfos};
 	}
 }
 /* tslint:enable */

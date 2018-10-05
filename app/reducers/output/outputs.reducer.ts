@@ -5,7 +5,6 @@ export function outputsReducer(
     state: any[] = [],
     action: actionWithPayload<any>
 ): any[] {
-    console.log('outputsReducer', action);
     switch (action.type) {
         case OUTPUTS_UPDATE: {
             // new?

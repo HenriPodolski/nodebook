@@ -1,19 +1,16 @@
 import { ofType } from 'redux-observable';
 import { map, withLatestFrom } from 'rxjs/internal/operators';
 import {
-    INPUT_EXECUTE_FLAG_CHANGE, INPUT_MODE_CHANGE
-} from '../actions/input/input.actions';
-import {
-    contextChangeAction,
-    INPUTS_EXECUTE_FLAG_CHANGE, INPUTS_MODE_CHANGE, newAction,
-    stateAction
+	contextChangeAction,
+	INPUTS_EXECUTE_FLAG_CHANGE, INPUTS_MODE_CHANGE, newAction,
+	stateAction
 } from '../actions/input/inputs.actions';
 import { environment } from '../environments/environment';
 import { actionWithPayload } from '../actions';
 import { InputEnums } from '../enums/input.enums';
 
 export const newInputEpic = (action$, state$) => action$.pipe(
-    ofType(INPUT_EXECUTE_FLAG_CHANGE, INPUTS_EXECUTE_FLAG_CHANGE),
+    ofType(INPUTS_EXECUTE_FLAG_CHANGE),
     withLatestFrom(state$),
     map((action: actionWithPayload<string>) => {
 
@@ -32,7 +29,7 @@ export const newInputEpic = (action$, state$) => action$.pipe(
 );
 
 export const contextInputEpic = (action$, state$) => action$.pipe(
-    ofType(INPUT_MODE_CHANGE, INPUTS_MODE_CHANGE),
+    ofType(INPUTS_MODE_CHANGE),
     withLatestFrom(state$),
     map(([action, state]) => {
         // get possible contexts for a mode and use the first one as default

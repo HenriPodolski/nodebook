@@ -2,7 +2,6 @@ import { environment } from '../../environments/environment';
 import { IErrorsInterface } from '../../shared/interfaces/errors.interface';
 
 export const INPUTS_NEW = 'INPUTS_NEW';
-
 export const INPUTS_VALIDATION_ERRORS_CHANGE = 'INPUTS_VALIDATION_ERRORS_CHANGE';
 export const INPUTS_NAME_CHANGE = 'INPUTS_NAME_CHANGE';
 export const INPUTS_MODE_CHANGE = 'INPUTS_MODE_CHANGE';

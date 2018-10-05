@@ -1,20 +1,18 @@
 import { ofType } from 'redux-observable';
 import { switchMap, withLatestFrom } from 'rxjs/internal/operators';
-import {
-    INPUT_EXECUTE_FLAG_CHANGE
-} from '../actions/input/input.actions';
 import { updateAction } from '../actions/output/outputs.actions';
 import {
-    executeFlagChangeAction,
-    INPUTS_EXECUTE_FLAG_CHANGE,
-    validationErrorsChangeAction
+	executeFlagChangeAction,
+	INPUTS_EXECUTE_FLAG_CHANGE,
+	validationErrorsChangeAction
 } from '../actions/input/inputs.actions';
-import { process } from '../services/processors/processor.service';
+import { ProcessorService } from '../services/processors/processor.service';
 import { InputEnums } from '../enums/input.enums';
 import { OutputEnums } from '../enums/output.enums';
+import * as fs from 'fs';
 
 export const dirtyExecuteFlagOutputEpic = (action$, state$) => action$.pipe(
-    ofType(INPUT_EXECUTE_FLAG_CHANGE, INPUTS_EXECUTE_FLAG_CHANGE),
+    ofType(INPUTS_EXECUTE_FLAG_CHANGE),
     withLatestFrom(state$),
     switchMap(([action, state]) => {
         let processed: any[] = [];
@@ -42,7 +40,7 @@ export const dirtyExecuteFlagOutputEpic = (action$, state$) => action$.pipe(
     }));
 
 export const newOutputEpic = (action$, state$) => action$.pipe(
-    ofType(INPUT_EXECUTE_FLAG_CHANGE, INPUTS_EXECUTE_FLAG_CHANGE),
+    ofType(INPUTS_EXECUTE_FLAG_CHANGE),
     withLatestFrom(state$),
     switchMap(([action, state]) => {
 
@@ -67,12 +65,12 @@ export const newOutputEpic = (action$, state$) => action$.pipe(
                 .length);
             const isValidName = isValidFilename && isUnique;
 
-            console.group('newOutputEpic ' + input.id + ': ' + input.name);
-            console.log(action);
-            console.log(state);
-            console.log('isValidFilename ', isValidFilename);
-            console.log('isUnique ', isUnique);
-            console.groupEnd();
+            // console.group('newOutputEpic ' + input.id + ': ' + input.name);
+            // console.log(action);
+            // console.log(state);
+            // console.log('isValidFilename ', isValidFilename);
+            // console.log('isUnique ', isUnique);
+            // console.groupEnd();
 
             if (!isValidFilename && isProcessing) {
                 console.log('filename not valid');
@@ -100,18 +98,28 @@ export const newOutputEpic = (action$, state$) => action$.pipe(
 
                 actions.push(executeFlagChangeAction(InputEnums.executeFlags.processed, index));
 
-                const processResult = process(input);
+                const processResult = ProcessorService.process(input);
+                const outputData = {
+					id: input.id,
+					name: input.name,
+					mode: input.mode,
+					context: input.context,
+					value: input.value,
+					executeFlag: OutputEnums.executeFlags.processed,
+					logs: processResult.out,
+					file: processResult.file,
+                    infos: processResult.infos
+				};
 
-                processed.push({
-                    id: input.id,
-                    name: input.name,
-                    mode: input.mode,
-                    context: input.context,
-                    value: input.value,
-                    executeFlag: OutputEnums.executeFlags.processed,
-                    logs: processResult.out,
-                    file: processResult.file
-                });
+				// rename files via deleting the existi
+                if (state.outputs[index] && state.outputs[index].infos &&
+					processResult.infos &&
+					processResult.infos.absoluteFilePath !== state.outputs[index].infos.absoluteFilePath &&
+                    fs.existsSync(state.outputs[index].infos.absoluteFilePath)) {
+					fs.unlinkSync(state.outputs[index].infos.absoluteFilePath);
+                }
+
+                processed.push(outputData);
             }
         });
 

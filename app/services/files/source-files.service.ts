@@ -2,13 +2,16 @@ import * as fs from 'fs';
 import { environment } from '../../environments/environment';
 import { ISourceFileInfos } from '../../shared/interfaces/source-file.interface';
 
+export interface IFileInfoParameters {
+	value: string;
+	name: string;
+	mode: string;
+	context: string;
+}
+
 export class SourceFilesService {
-	static createIfNotExists (
-		value: string,
-		filename: string,
-		mode: string,
-		context: string
-	): ISourceFileInfos {
+
+	static getFileInfos({value, name, mode, context}: IFileInfoParameters): ISourceFileInfos {
 		const rootDirectory = '/nodebook';
 		const relativeSourceDirectory = rootDirectory + '/src/';
 		const absoluteSourceDirectory = '/' + relativeSourceDirectory;
@@ -16,33 +19,49 @@ export class SourceFilesService {
 		const modeObject = environment.config.input.modes.find((extMode) => {
 			return extMode.value === mode;
 		}) || {short: 'txt'};
-		const relativeFilePath = '..'  + nodebookContextDirectory + filename + '.' + modeObject.short;
-		const absoluteFilePath = process.cwd() + nodebookContextDirectory + filename + '.' + modeObject.short;
-
-		if (!fs.existsSync(process.cwd() + rootDirectory)) {
-			fs.mkdirSync(process.cwd() + rootDirectory);
-		}
-
-		if (!fs.existsSync(process.cwd() + absoluteSourceDirectory)) {
-			fs.mkdirSync(process.cwd() + absoluteSourceDirectory);
-		}
-
-		if (!fs.existsSync(process.cwd() + nodebookContextDirectory)) {
-			fs.mkdirSync(process.cwd() + nodebookContextDirectory);
-		}
-
-		fs.writeFileSync(
-			process.cwd() + nodebookContextDirectory + filename + '.' + modeObject.short,
-			value,
-			{encoding: 'utf-8'}
-		);
+		const extension = modeObject.short
+		const relativeFilePath = '..'  + nodebookContextDirectory + name + '.' + modeObject.short;
+		const absoluteFilePath = process.cwd() + nodebookContextDirectory + name + '.' + modeObject.short;
 
 		return {
+			rootDirectory,
 			nodebookContextDirectory,
 			relativeSourceDirectory,
 			absoluteSourceDirectory,
 			relativeFilePath,
-			absoluteFilePath
+			absoluteFilePath,
+			extension,
+			size: (new Blob([value]).size),
+			cwd: process.cwd()
 		};
+	}
+
+	static createIfNotExists (
+		value: string,
+		name: string,
+		mode: string,
+		context: string
+	): ISourceFileInfos {
+		const fileInfos = SourceFilesService.getFileInfos({value, name, mode, context});
+
+		if (!fs.existsSync(fileInfos.cwd + fileInfos.rootDirectory)) {
+			fs.mkdirSync(fileInfos.cwd + fileInfos.rootDirectory);
+		}
+
+		if (!fs.existsSync(fileInfos.cwd + fileInfos.absoluteSourceDirectory)) {
+			fs.mkdirSync(fileInfos.cwd + fileInfos.absoluteSourceDirectory);
+		}
+
+		if (!fs.existsSync(fileInfos.cwd + fileInfos.nodebookContextDirectory)) {
+			fs.mkdirSync(fileInfos.cwd + fileInfos.nodebookContextDirectory);
+		}
+
+		fs.writeFileSync(
+			fileInfos.cwd + fileInfos.nodebookContextDirectory + name + '.' + fileInfos.extension,
+			value,
+			{encoding: 'utf-8'}
+		);
+
+		return fileInfos;
 	}
 }

@@ -90,7 +90,7 @@ export class TypescriptServerProcessorService {
             return e.toString();
         }
 
-		return {out, file: sourceFileInfos.relativeFilePath};
+		return {out, file: sourceFileInfos.relativeFilePath, infos: sourceFileInfos};
     }
 }
 /* tslint:enable */

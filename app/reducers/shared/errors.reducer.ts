@@ -1,6 +1,5 @@
 import { actionWithPayload } from '../../actions/index';
 import { rootState } from '../../store/state';
-import { INPUT_VALIDATION_ERRORS_CHANGE } from '../../actions/input/input.actions';
 import { IErrorsInterface } from '../../shared/interfaces/errors.interface';
 import { INPUTS_VALIDATION_ERRORS_CHANGE } from '../../actions/input/inputs.actions';
 
@@ -12,7 +11,6 @@ export function inputErrorsReducer(
     console.log('inputErrorsReducer', action.type, action.payload);
 
     switch (action.type) {
-        case INPUT_VALIDATION_ERRORS_CHANGE:
         case INPUTS_VALIDATION_ERRORS_CHANGE: {
             return {
                 ...state,

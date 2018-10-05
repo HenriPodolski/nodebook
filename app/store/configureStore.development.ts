@@ -4,7 +4,7 @@ import { createHashHistory } from 'history';
 import { routerMiddleware, push } from 'react-router-redux';
 import { createLogger } from 'redux-logger';
 import { rootReducer } from '../reducers';
-import { inputActions, inputsActions } from '../actions';
+import { inputsActions, outputsActions } from '../actions';
 import { rootState } from './state';
 import { rootEpic } from '../epics';
 
@@ -19,7 +19,7 @@ declare const module: NodeModule & {
 };
 
 const actionCreators = Object.assign({},
-    inputActions,
+	outputsActions,
     inputsActions,
   {push}
 );

@@ -5,6 +5,6 @@ import { dirtyExecuteFlagOutputEpic, newOutputEpic } from './outputs.epic';
 export const rootEpic = combineEpics(
     newInputEpic,
     contextInputEpic,
-    newOutputEpic,
+	newOutputEpic,
     dirtyExecuteFlagOutputEpic
 );

@@ -1,5 +1,5 @@
-import * as exportInputActions from './input/input.actions';
 import * as exportInputsActions from './input/inputs.actions';
+import * as exportOutputsActions from './output/outputs.actions';
 
 export type action = {
     type: string
@@ -11,5 +11,5 @@ export type actionWithPayload<T> = {
     payload: T
 };
 
-export const inputActions = exportInputActions;
 export const inputsActions = exportInputsActions;
+export const outputsActions = exportOutputsActions;
