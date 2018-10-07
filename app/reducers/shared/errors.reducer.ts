@@ -7,9 +7,6 @@ export function inputErrorsReducer(
     state: {[key: string]: IErrorsInterface[]} = rootState.inputs[0].errors,
     action: actionWithPayload<{[key: string]: IErrorsInterface[]}>
 ) {
-
-    console.log('inputErrorsReducer', action.type, action.payload);
-
     switch (action.type) {
         case INPUTS_VALIDATION_ERRORS_CHANGE: {
             return {

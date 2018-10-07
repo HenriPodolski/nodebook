@@ -1,6 +1,6 @@
 import { ofType } from 'redux-observable';
-import { switchMap, withLatestFrom } from 'rxjs/internal/operators';
-import { updateAction } from '../actions/output/outputs.actions';
+import { map, switchMap, withLatestFrom } from 'rxjs/internal/operators';
+import { OUTPUTS_UPDATE, stateAction, updateAction } from '../actions/output/outputs.actions';
 import {
 	executeFlagChangeAction,
 	INPUTS_EXECUTE_FLAG_CHANGE,
@@ -10,6 +10,15 @@ import { ProcessorService } from '../services/processors/processor.service';
 import { InputEnums } from '../enums/input.enums';
 import { OutputEnums } from '../enums/output.enums';
 import * as fs from 'fs';
+
+export const packageOutputsEpic = (action$, state$) => action$.pipe(
+	ofType(OUTPUTS_UPDATE),
+	withLatestFrom(state$),
+	map(([action, state]) => {
+		console.log('packageOutputsEpic', action, state);
+		return stateAction();
+	})
+);
 
 export const dirtyExecuteFlagOutputEpic = (action$, state$) => action$.pipe(
     ofType(INPUTS_EXECUTE_FLAG_CHANGE),
@@ -34,7 +43,9 @@ export const dirtyExecuteFlagOutputEpic = (action$, state$) => action$.pipe(
             }
         });
 
-        actions.push(updateAction(processed));
+        if (processed.length) {
+			actions.push(updateAction(processed));
+		}
 
         return actions;
     }));
@@ -123,7 +134,9 @@ export const newOutputEpic = (action$, state$) => action$.pipe(
             }
         });
 
-        actions.push(updateAction(processed));
+		if (processed.length) {
+			actions.push(updateAction(processed));
+		}
 
         return actions;
     })

@@ -16,24 +16,30 @@ export class ProcessorService {
 			context: inputObject.context
 		};
 
+		let processOutput: IProcessOutput = {out: [], file: ''};
+
 		switch (true) {
 			case (inputObject.mode === ModeEnums.js.value && inputObject.context === ContextEnums.js.client): {
-				return JavascriptClientProcessorService.process(config);
+				processOutput = JavascriptClientProcessorService.process(config);
+				break;
 			}
 
 			case (inputObject.mode === ModeEnums.js.value && inputObject.context === ContextEnums.js.server): {
-				return JavascriptServerProcessorService.process(config);
+				processOutput = JavascriptServerProcessorService.process(config);
+				break;
 			}
 
 			case (inputObject.mode === ModeEnums.ts.value && inputObject.context === ContextEnums.ts.client): {
-				return TypescriptClientProcessorService.process(config);
+				processOutput = TypescriptClientProcessorService.process(config);
+				break;
 			}
 
 			case (inputObject.mode === ModeEnums.ts.value && inputObject.context === ContextEnums.ts.server): {
-				return TypescriptServerProcessorService.process(config);
+				processOutput = TypescriptServerProcessorService.process(config);
+				break;
 			}
 		}
 
-		return {out: [], file: ''};
+		return processOutput;
     }
 }
