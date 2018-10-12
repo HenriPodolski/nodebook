@@ -34,13 +34,12 @@ export class AppComponent extends React.Component {
                         <li style={{textDecoration: 'line-through'}}>Integrate toggle between browser and node code</li>
                         <li style={{textDecoration: 'line-through'}}>Implement js execution context for client aka browser</li>
                         <li style={{textDecoration: 'line-through'}}>Handle filename changes by renaming existing files</li>
-
-                        <li>
-                            Integrate display/execution order into package.json within key nodebook
+                        <li></li>
+                        <li style={{textDecoration: 'line-through'}}>
+                            Integrate display/execution order into package.json using nodebook attribute
                             <pre>
                                 {JSON.stringify({
                                     "nodebook": {
-                                        "title": "Some title",
                                         "nodes": [
                                             {
                                                 "id": 1,
@@ -50,7 +49,7 @@ export class AppComponent extends React.Component {
                                                 "id": 2,
                                                 "name": "filename.ext"
                                             }
-                                        ],
+                                        ]
                                     }
                                 }, null, 2)}
                             </pre>
@@ -58,7 +57,7 @@ export class AppComponent extends React.Component {
                         <li>Use nodebook config as file loading and code execution logic</li>
                         <li>Apply code execution chain to processors</li>
                         <li>Add logic to deal with different code states</li>
-
+						<li></li>
                         <li>Process js code values for output store</li>
                         <li>Process ts code values for output store</li>
                         <li>Process html code values for output store</li>
@@ -68,21 +67,32 @@ export class AppComponent extends React.Component {
                         <li>Parse json data values for output store</li>
                         <li>Get stdout from executed scss code and write it to output store</li>
                         <li>Get parse error from json and write it to output store</li>
-
+						<li></li>
+                        <li>
+                            Add title to package.json nodebook
+							<pre>
+                                {JSON.stringify({
+									"nodebook": {
+										"title": "Some title",
+										"nodes": []
+									}
+								}, null, 2)}
+                            </pre>
+                        </li>
                         <li>Make title editable</li>
-
+						<li></li>
                         <li>Integrate console hooks for all modes and contexts</li>
                         <li>Implement console hooks as observer, which update the console output view</li>
                         <li>Design and implement full featured logging component</li>
                         <li>Delete editor item functionality, if readOnly</li>
                         <li>Create ux design and change views accordingly</li>
                         <li>Create visual design and apply it</li>
-
+						<li></li>
 						<li>Implement nodebook package.json dependency config</li>
 						<li>Display list of installed packages in the gui</li>
 						<li>Perform install on package add</li>
 						<li>Integrate npm package autocomplete</li>
-
+						<li></li>
                         <li>Provide release artefact workflow in github</li>
                         <li>Add documentation</li>
                         <li>Provide landing page</li>

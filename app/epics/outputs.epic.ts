@@ -10,12 +10,13 @@ import { ProcessorService } from '../services/processors/processor.service';
 import { InputEnums } from '../enums/input.enums';
 import { OutputEnums } from '../enums/output.enums';
 import * as fs from 'fs';
+import { PackageJsonService } from '../services/files/package-json.service';
 
 export const packageOutputsEpic = (action$, state$) => action$.pipe(
 	ofType(OUTPUTS_UPDATE),
 	withLatestFrom(state$),
 	map(([action, state]) => {
-		console.log('packageOutputsEpic', action, state);
+		PackageJsonService.updateNodebookNodes(action.payload);
 		return stateAction();
 	})
 );

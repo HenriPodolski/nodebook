@@ -13,15 +13,16 @@ export class SourceFilesService {
 
 	static getFileInfos({value, name, mode, context}: IFileInfoParameters): ISourceFileInfos {
 		const rootDirectory = '/nodebook';
+		const cwd = process.cwd();
 		const relativeSourceDirectory = rootDirectory + '/src/';
-		const absoluteSourceDirectory = '/' + relativeSourceDirectory;
+		const absoluteSourceDirectory = relativeSourceDirectory;
 		const nodebookContextDirectory = relativeSourceDirectory + (context ? context + '/' : '');
 		const modeObject = environment.config.input.modes.find((extMode) => {
 			return extMode.value === mode;
 		}) || {short: 'txt'};
-		const extension = modeObject.short
+		const extension = modeObject.short;
 		const relativeFilePath = '..'  + nodebookContextDirectory + name + '.' + modeObject.short;
-		const absoluteFilePath = process.cwd() + nodebookContextDirectory + name + '.' + modeObject.short;
+		const absoluteFilePath = cwd + nodebookContextDirectory + name + '.' + modeObject.short;
 
 		return {
 			rootDirectory,
@@ -32,7 +33,7 @@ export class SourceFilesService {
 			absoluteFilePath,
 			extension,
 			size: (new Blob([value]).size),
-			cwd: process.cwd()
+			cwd: cwd
 		};
 	}
 
