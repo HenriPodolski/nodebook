@@ -1,17 +1,17 @@
 import { connect } from 'react-redux';
 import { AppComponent } from '../components/app.component';
-import { stopAction } from '../actions/loading/loading.actions';
+import { initAction } from '../actions/init/init.actions';
 
 const mapStateToProps = state => ({
 	loading: state.loading,
 	debug: state.debug.components
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
 	return ({
-		stopLoading: (state) => {
-			return dispatch(stopAction(state));
-		},
+		init: () => {
+			return dispatch(initAction());
+		}
 	});
 };
 

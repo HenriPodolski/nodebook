@@ -82,7 +82,7 @@ export class TypescriptServerProcessorService {
                     ignoreWarnings: false
                 });
                 
-                require('${sourceFileInfos.relativeFilePath}');   
+                require('.${sourceFileInfos.relativeFilePath}');   
                 delete require.cache[require.resolve('${sourceFileInfos.relativeFilePath}')];                                       
                 `))();
         } catch(e) {

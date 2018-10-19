@@ -7,13 +7,13 @@ let styles = require('./app.component.scss');
 interface IComponentProps {
     debug: string;
 	loading: any;
-	stopLoading: (payload: string) => {type: string, payload: string};
+	init: () => {type: string};
 }
 
 export class AppComponent extends React.Component<IComponentProps> {
 
 	componentWillMount() {
-		setTimeout(() => this.props.stopLoading(LoadingEnums.components.application), 4000);
+		this.props.init();
 	}
 
 	todos() {
@@ -64,7 +64,10 @@ export class AppComponent extends React.Component<IComponentProps> {
 								}, null, 2)}
                             </pre>
 					</li>
-					<li>Use nodebook config as file loading and code execution logic</li>
+					<li style={{textDecoration: 'line-through'}}>Use nodebook config as file loading and code execution logic</li>
+					<li>Bugfix for package nodebook persistence overrides previous node</li>
+					<li>Make file operations asynchronous</li>
+					<li>Handle errors caused by package.json nodebook config</li>
 					<li>Show application loading screen until first load done</li>
 					<li>Apply code execution chain to processors</li>
 					<li>Add logic to deal with different code states</li>
@@ -112,7 +115,6 @@ export class AppComponent extends React.Component<IComponentProps> {
 				</ol>
 				<h3>Backlog</h3>
 				<ol>
-					<li>Make file operations asynchronous</li>
 					<li>Add dark and bright mode switch</li>
 					<li>Create deployable bundles of server and client side nodebooks</li>
 					<li>Integrate NODE red</li>

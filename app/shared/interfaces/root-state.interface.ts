@@ -8,5 +8,6 @@ export interface IRootState {
 		components: string,
 		store: string
 	},
-	loading: ILoading
+	loading: ILoading,
+	init: boolean
 }

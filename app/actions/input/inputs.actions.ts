@@ -1,5 +1,5 @@
-import { environment } from '../../environments/environment';
 import { IErrorsInterface } from '../../shared/interfaces/errors.interface';
+import { IInput } from '../../shared/interfaces/input.interface';
 
 export const INPUTS_NEW = 'INPUTS_NEW';
 export const INPUTS_VALIDATION_ERRORS_CHANGE = 'INPUTS_VALIDATION_ERRORS_CHANGE';
@@ -12,7 +12,7 @@ export const INPUTS_HEIGHT_CHANGE = 'INPUTS_HEIGHT_CHANGE';
 export const INPUTS_THEME_CHANGE = 'INPUTS_THEME_CHANGE';
 export const INPUTS_EXECUTE_FLAG_CHANGE = 'INPUTS_EXECUTE_FLAG_CHANGE';
 
-export function newAction(payload = {...environment.config.input.editableConfig}) {
+export function newAction(payload: IInput) {
     return {
         type: INPUTS_NEW,
         payload

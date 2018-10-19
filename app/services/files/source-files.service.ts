@@ -11,17 +11,33 @@ export interface IFileInfoParameters {
 
 export class SourceFilesService {
 
-	static getFileInfos({value, name, mode, context}: IFileInfoParameters): ISourceFileInfos {
+	static getNodebookFolderInfos() {
 		const rootDirectory = '/nodebook';
 		const cwd = process.cwd();
 		const relativeSourceDirectory = rootDirectory + '/src/';
-		const absoluteSourceDirectory = relativeSourceDirectory;
+
+		return {
+			rootDirectory,
+			cwd,
+			relativeSourceDirectory,
+			absoluteSourceDirectory: relativeSourceDirectory
+		};
+	}
+
+	static getFileInfos({value, name, mode, context}: IFileInfoParameters): ISourceFileInfos {
+		const {
+			rootDirectory,
+			cwd,
+			relativeSourceDirectory,
+			absoluteSourceDirectory
+		} = SourceFilesService.getNodebookFolderInfos();
+
 		const nodebookContextDirectory = relativeSourceDirectory + (context ? context + '/' : '');
 		const modeObject = environment.config.input.modes.find((extMode) => {
 			return extMode.value === mode;
 		}) || {short: 'txt'};
 		const extension = modeObject.short;
-		const relativeFilePath = '..'  + nodebookContextDirectory + name + '.' + modeObject.short;
+		const relativeFilePath = '.'  + nodebookContextDirectory + name + '.' + modeObject.short;
 		const absoluteFilePath = cwd + nodebookContextDirectory + name + '.' + modeObject.short;
 
 		return {

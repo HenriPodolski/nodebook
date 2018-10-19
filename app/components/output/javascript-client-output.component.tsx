@@ -22,7 +22,7 @@ export class JavascriptClientOutputComponent extends React.Component<IComponentP
                 <head></head>
                 <body>
                     <div id="mount"></div>
-                    <script src="${this.props.file}"></script>
+                    <script src=".${this.props.file}"></script>
                 </body>
             </html>
         `;

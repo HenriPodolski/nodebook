@@ -7,11 +7,10 @@ export const rootState: IRootState = {
         components: SupportEnums.logLevel.off,
         store: SupportEnums.logLevel.off
     },
-    inputs: [
-        {...environment.config.input.editableConfig}
-    ],
+    inputs: [],
     outputs: [],
     loading: {
         ...environment.config.loading
-    }
+    },
+    init: false
 };

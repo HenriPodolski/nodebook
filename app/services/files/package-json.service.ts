@@ -1,6 +1,8 @@
 // import * as fs from 'fs';
-import { IFileInfoParameters, SourceFilesService } from './source-files.service';
+import { SourceFilesService } from './source-files.service';
 import * as fs from "fs";
+import { environment } from '../../environments/environment';
+import { IInput } from '../../shared/interfaces/input.interface';
 
 interface IPackageJsonNodebookParams {
 	id: number;
@@ -14,6 +16,7 @@ interface IPackageJsonNodebookParams {
 const packageJsonInitialData = {
 	private: true,
 	nodebook: {
+		title: '',
 		nodes: []
 	},
 	dependencies: {},
@@ -21,9 +24,55 @@ const packageJsonInitialData = {
 };
 
 export class PackageJsonService {
+	static loadNodebook(): IInput[] {
+		const nodebookPath = PackageJsonService.createIfNotExistsAndGet();
+		const packageJsonFileContent = fs.readFileSync(nodebookPath, 'utf-8');
+		const packageJsonObject = JSON.parse(packageJsonFileContent);
+		const nodebookConfig = packageJsonObject.nodebook;
+
+		if (nodebookConfig && nodebookConfig.nodes && nodebookConfig.nodes.length) {
+
+				// load files
+				const inputNodes: IInput[] = nodebookConfig.nodes.map((node) => {
+				const pathSplit = node.file.split('/');
+				const fileName = pathSplit.pop();
+				const fileNameSplit = fileName.split('.');
+				const extension = fileNameSplit.pop();
+				const name = fileNameSplit.pop();
+				const mode: string = environment.config.input.modes.reduce((prev, next) => {
+					if (next.short === extension) {
+						prev = next.value.toString();
+					}
+
+					return prev;
+				}, '');
+
+				const input = Object.assign(
+					{},
+					environment.config.input.editableConfig,
+					{
+						id: node.id,
+						name,
+						value: fs.readFileSync(node.file, 'utf-8'),
+						context: node.context,
+						mode
+					}
+				);
+
+				return input;
+			});
+
+			inputNodes.push({...environment.config.input.editableConfig});
+
+			return inputNodes;
+		}
+
+		return [{...environment.config.input.editableConfig}];
+	}
+
 	static updateNodebookNodes(params: IPackageJsonNodebookParams[]) {
 		if (params[0]) {
-			const nodebookPath = PackageJsonService.createIfNotExistsAndGet(params[0]);
+			const nodebookPath = PackageJsonService.createIfNotExistsAndGet();
 			const packageJsonFileContent = fs.readFileSync(nodebookPath, 'utf-8');
 			let packageJsonObject = JSON.parse(packageJsonFileContent);
 
@@ -60,8 +109,8 @@ export class PackageJsonService {
 		return packageJsonObject;
 	}
 
-	static createIfNotExistsAndGet({value, name, mode, context}: IFileInfoParameters) {
-		const nodebookInfos = SourceFilesService.getFileInfos({value, name, mode, context});
+	static createIfNotExistsAndGet() {
+		const nodebookInfos = SourceFilesService.getNodebookFolderInfos();
 		const nodebookPath = `${nodebookInfos.cwd}${nodebookInfos.rootDirectory}/package.json`;
 
 		if (!fs.existsSync(nodebookInfos.cwd + nodebookInfos.rootDirectory)) {
