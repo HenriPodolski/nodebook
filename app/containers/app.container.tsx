@@ -1,11 +1,18 @@
-import * as React from 'react';
+import { connect } from 'react-redux';
+import { AppComponent } from '../components/app.component';
+import { stopAction } from '../actions/loading/loading.actions';
 
-export class AppContainer extends React.Component {
-  render() {
-    return (
-      <>
-        {this.props.children}
-      </>
-    );
-  }
-}
+const mapStateToProps = state => ({
+	loading: state.loading,
+	debug: state.debug.components
+});
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+	return ({
+		stopLoading: (state) => {
+			return dispatch(stopAction(state));
+		},
+	});
+};
+
+export const AppContainer = connect(mapStateToProps, mapDispatchToProps)(AppComponent);

@@ -1,7 +1,11 @@
 import { ModeEnums } from '../enums/mode.enums';
+import { LoadingEnums } from '../enums/loading.enums';
 
 export const environment = {
     config: {
+        loading: {
+			[LoadingEnums.components.application]: true
+        },
         input: {
             editableConfig: {
                 id: 1,
