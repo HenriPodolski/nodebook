@@ -65,8 +65,10 @@ export class AppComponent extends React.Component<IComponentProps> {
                             </pre>
 					</li>
 					<li style={{textDecoration: 'line-through'}}>Use nodebook config as file loading and code execution logic</li>
-					<li>Bugfix for package nodebook persistence overrides previous node</li>
-					<li>Make file operations asynchronous</li>
+					<li style={{textDecoration: 'line-through'}}>Bugfix for package nodebook persistence overrides previous node</li>
+					<li>Bugfix for loaded inputs do not get renamed after name change</li>
+					<li>Handle manual file deletions, without cleaning package.json nodebook by not passing input and delete object</li>
+					<li>Execute items on first load</li>
 					<li>Handle errors caused by package.json nodebook config</li>
 					<li>Show application loading screen until first load done</li>
 					<li>Apply code execution chain to processors</li>
@@ -129,6 +131,7 @@ export class AppComponent extends React.Component<IComponentProps> {
 					</li>
 					<li>Implement multiselect for snippets to use for current context (necessary?, valuable?)</li>
 					<li>Add dependencies fields in nodebook package json (necessary?, valuable?)</li>
+					<li>Make file operations asynchronous (necessary?, valuable?)</li>
 				</ol>
 			</div>
 		)}

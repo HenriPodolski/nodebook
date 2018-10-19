@@ -16,7 +16,7 @@ export const packageOutputsEpic = (action$, state$) => action$.pipe(
 	ofType(OUTPUTS_UPDATE),
 	withLatestFrom(state$),
 	map(([action, state]) => {
-		PackageJsonService.updateNodebookNodes(action.payload);
+		PackageJsonService.updateNodebookNodes(state.outputs);
 		return stateAction();
 	})
 );
