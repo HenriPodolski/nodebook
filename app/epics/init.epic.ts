@@ -4,7 +4,9 @@ import { INIT, stateAction } from '../actions/init/init.actions';
 import { stopAction } from '../actions/loading/loading.actions';
 import { LoadingEnums } from '../enums/loading.enums';
 import { PackageJsonService } from '../services/files/package-json.service';
-import { newAction } from '../actions/input/inputs.actions';
+import { executeFlagChangeAction, newAction } from '../actions/input/inputs.actions';
+import { InputEnums } from '../enums/input.enums';
+import { IInput } from '../shared/interfaces/input.interface';
 
 export const initEpic = (action$, state$) => action$.pipe(
 	ofType(INIT),
@@ -17,8 +19,13 @@ export const initEpic = (action$, state$) => action$.pipe(
 
 		console.log(initialInputs);
 
-		initialInputs.forEach((input) => {
+		initialInputs.forEach((input: IInput, index: number) => {
+
 			actions.push(newAction(input));
+
+			if (index < (initialInputs.length - 1)) {
+				actions.push(executeFlagChangeAction(InputEnums.executeFlags.processing, index));
+			}
 		});
 
 		actions.push(stopAction(LoadingEnums.components.application));

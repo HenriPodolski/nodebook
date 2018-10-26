@@ -3,6 +3,7 @@ import { SourceFilesService } from './source-files.service';
 import * as fs from "fs";
 import { environment } from '../../environments/environment';
 import { IInput } from '../../shared/interfaces/input.interface';
+import { IPackageNode } from '../../shared/interfaces/package-node.interface';
 
 interface IPackageJsonNodebookParams {
 	id: number;
@@ -31,36 +32,48 @@ export class PackageJsonService {
 		const nodebookConfig = packageJsonObject.nodebook;
 
 		if (nodebookConfig && nodebookConfig.nodes && nodebookConfig.nodes.length) {
+			let remainingPackageNodes: IPackageJsonNodebookParams[] = [];
+			// load files
+			const inputNodes: IInput[] = nodebookConfig.nodes.reduce((prev, next) => {
+				try {
+					const pathSplit = next.file.split('/');
+					const fileName = pathSplit.pop();
+					const fileNameSplit = fileName.split('.');
+					const extension = fileNameSplit.pop();
+					const name = fileNameSplit.pop();
+					const mode: string = environment.config.input.modes.reduce((prevValue, nextMode) => {
+						if (nextMode.short === extension) {
+							prevValue = nextMode.value.toString();
+						}
 
-				// load files
-				const inputNodes: IInput[] = nodebookConfig.nodes.map((node) => {
-				const pathSplit = node.file.split('/');
-				const fileName = pathSplit.pop();
-				const fileNameSplit = fileName.split('.');
-				const extension = fileNameSplit.pop();
-				const name = fileNameSplit.pop();
-				const mode: string = environment.config.input.modes.reduce((prev, next) => {
-					if (next.short === extension) {
-						prev = next.value.toString();
-					}
+						return prevValue;
+					}, '');
+					const codeContent = fs.readFileSync(next.file, 'utf-8');
 
-					return prev;
-				}, '');
+					const input = Object.assign(
+						{},
+						environment.config.input.editableConfig,
+						{
+							id: next.id,
+							name,
+							value: codeContent,
+							context: next.context,
+							mode
+						}
+					);
 
-				const input = Object.assign(
-					{},
-					environment.config.input.editableConfig,
-					{
-						id: node.id,
-						name,
-						value: fs.readFileSync(node.file, 'utf-8'),
-						context: node.context,
-						mode
-					}
-				);
+					prev.push(input);
+					remainingPackageNodes.push(next);
+				} catch (e) {
+					console.error(e);
+				}
 
-				return input;
-			});
+				return prev;
+			}, []);
+
+			if (remainingPackageNodes.length !== nodebookConfig.nodes.length) {
+				PackageJsonService.updateNodebookNodes(remainingPackageNodes);
+			}
 
 			inputNodes.push({...environment.config.input.editableConfig});
 
@@ -71,19 +84,17 @@ export class PackageJsonService {
 	}
 
 	static updateNodebookNodes(params: IPackageJsonNodebookParams[]) {
-		if (params[0]) {
-			const nodebookPath = PackageJsonService.createIfNotExistsAndGet();
-			const packageJsonFileContent = fs.readFileSync(nodebookPath, 'utf-8');
-			let packageJsonObject = JSON.parse(packageJsonFileContent);
+		const nodebookPath = PackageJsonService.createIfNotExistsAndGet();
+		const packageJsonFileContent = fs.readFileSync(nodebookPath, 'utf-8');
+		let packageJsonObject = JSON.parse(packageJsonFileContent);
 
-			packageJsonObject = PackageJsonService.addNodebookItems(packageJsonObject,  params);
+		packageJsonObject = PackageJsonService.addNodebookItems(packageJsonObject,  params);
 
-			fs.writeFileSync(
-				nodebookPath,
-				JSON.stringify(packageJsonObject, null, 2),
-				{encoding: 'utf-8'}
-			);
-		}
+		fs.writeFileSync(
+			nodebookPath,
+			JSON.stringify(packageJsonObject, null, 2),
+			{encoding: 'utf-8'}
+		);
 	}
 
 	static addNodebookItems(packageJsonObject, items): string {
@@ -96,7 +107,7 @@ export class PackageJsonService {
 		}
 
 		packageJsonObject.nodebook.nodes = items.reduce(
-			(prev, next) => {
+			(prev, next): IPackageNode[] => {
 				prev.push({
 					id: next.id,
 					file: next.file,

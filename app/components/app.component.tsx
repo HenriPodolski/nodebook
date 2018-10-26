@@ -66,11 +66,11 @@ export class AppComponent extends React.Component<IComponentProps> {
 					</li>
 					<li style={{textDecoration: 'line-through'}}>Use nodebook config as file loading and code execution logic</li>
 					<li style={{textDecoration: 'line-through'}}>Bugfix for package nodebook persistence overrides previous node</li>
-					<li>Bugfix for loaded inputs do not get renamed after name change</li>
-					<li>Handle manual file deletions, without cleaning package.json nodebook by not passing input and delete object</li>
-					<li>Execute items on first load</li>
-					<li>Handle errors caused by package.json nodebook config</li>
-					<li>Show application loading screen until first load done</li>
+					<li style={{textDecoration: 'line-through'}}>Bugfix for loaded inputs do not get renamed after name change</li>
+					<li style={{textDecoration: 'line-through'}}>Manual code file deletions update package.json nodes on startup</li>
+					<li style={{textDecoration: 'line-through'}}>Execute items on first load</li>
+					<li style={{textDecoration: 'line-through'}}>Handle errors caused by package.json nodebook config</li>
+					<li style={{textDecoration: 'line-through'}}>Show application loading screen until first load done</li>
 					<li>Apply code execution chain to processors</li>
 					<li>Add logic to deal with different code states</li>
 					<li></li>
