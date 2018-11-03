@@ -2,7 +2,7 @@ import * as React from 'react';
 import { MarkdownOutputContainer } from '../../containers/output/markdown-output.container';
 import { TypescriptOutputContainer } from '../../containers/output/typescript-output.container';
 import Frame from 'react-frame-component';
-import { JavascriptClientOutputContainer } from '../../containers/output/javascript-client-output.container';
+import { ClientOutputContainer } from '../../containers/output/client-output.container';
 import { LogsOutputContainer } from '../../containers/output/logs-output.container';
 import { ContextEnums } from '../../enums/contexts.enums';
 import { ModeEnums } from '../../enums/mode.enums';
@@ -40,7 +40,7 @@ export class OutputComponent extends React.Component<IComponentProps> {
             case (mode === ModeEnums.js.value && context === ContextEnums.js.client): {
                 return (
                     <>
-						<JavascriptClientOutputContainer index={this.props.index} />
+						<ClientOutputContainer index={this.props.index} />
                         <LogsOutputContainer index={this.props.index} />
                     </>
                 )

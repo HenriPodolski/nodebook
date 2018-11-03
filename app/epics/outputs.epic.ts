@@ -108,8 +108,6 @@ export const newOutputEpic = (action$, state$) => action$.pipe(
                     filename: []
                 }, index));
 
-                actions.push(executeFlagChangeAction(InputEnums.executeFlags.processed, index));
-
                 const processResult = ProcessorService.process(input);
                 const outputData = {
 					id: input.id,
@@ -137,6 +135,10 @@ export const newOutputEpic = (action$, state$) => action$.pipe(
 
 		if (processed.length) {
 			actions.push(updateAction(processed));
+
+			for (let i = 0; i < processed.length; i++) {
+				actions.push(executeFlagChangeAction(InputEnums.executeFlags.processed, i));
+			}
 		}
 
         return actions;

@@ -1,6 +1,6 @@
 import { ofType } from 'redux-observable';
 import { switchMap, withLatestFrom } from 'rxjs/operators';
-import { INIT, stateAction } from '../actions/init/init.actions';
+import { INIT } from '../actions/init/init.actions';
 import { stopAction } from '../actions/loading/loading.actions';
 import { LoadingEnums } from '../enums/loading.enums';
 import { PackageJsonService } from '../services/files/package-json.service';
@@ -29,7 +29,7 @@ export const initEpic = (action$, state$) => action$.pipe(
 		});
 
 		actions.push(stopAction(LoadingEnums.components.application));
-		actions.push(stateAction());
+		// actions.push(stateAction());
 
 		return actions;
 	})

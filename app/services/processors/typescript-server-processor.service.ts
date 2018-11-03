@@ -69,6 +69,7 @@ export class TypescriptServerProcessorService {
 		const sourceFileInfos: ISourceFileInfos = SourceFilesService
 			.createIfNotExists(value, filename, mode, context);
 		let out;
+		const originalConsole = console;
 
         try {
             out = (new Function(`    
@@ -83,9 +84,11 @@ export class TypescriptServerProcessorService {
                 });
                 
                 require('.${sourceFileInfos.relativeFilePath}');   
-                delete require.cache[require.resolve('${sourceFileInfos.relativeFilePath}')];                                       
+                delete require.cache[require.resolve('.${sourceFileInfos.relativeFilePath}')];                                       
                 `))();
         } catch(e) {
+			// Asure console unhook
+			console = originalConsole;
             console.error(e);
             return e.toString();
         }

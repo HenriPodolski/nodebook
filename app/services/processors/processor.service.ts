@@ -18,6 +18,8 @@ export class ProcessorService {
 
 		let processOutput: IProcessOutput = {out: [], file: ''};
 
+		console.log('ProcessorService.process()', JSON.stringify(inputObject, null, 4));
+
 		switch (true) {
 			case (inputObject.mode === ModeEnums.js.value && inputObject.context === ContextEnums.js.client): {
 				processOutput = JavascriptClientProcessorService.process(config);
@@ -25,7 +27,9 @@ export class ProcessorService {
 			}
 
 			case (inputObject.mode === ModeEnums.js.value && inputObject.context === ContextEnums.js.server): {
+				console.log('ProcessorService.process() processing server side js');
 				processOutput = JavascriptServerProcessorService.process(config);
+				console.log('ProcessorService.process() processed server side js', JSON.stringify(processOutput, null, 4));
 				break;
 			}
 

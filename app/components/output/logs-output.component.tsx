@@ -13,6 +13,10 @@ export class LogsOutputComponent extends React.Component<IComponentProps> {
     }
 
     switchOutput(logs: {type: string, out: any}[]) {
+        if (!logs || !logs.length) {
+            return (<></>);
+        }
+
         return (<>
             {logs.map((log, i) => {
             console.log(styles, log.type);

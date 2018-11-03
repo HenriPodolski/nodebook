@@ -71,19 +71,21 @@ export class AppComponent extends React.Component<IComponentProps> {
 					<li style={{textDecoration: 'line-through'}}>Execute items on first load</li>
 					<li style={{textDecoration: 'line-through'}}>Handle errors caused by package.json nodebook config</li>
 					<li style={{textDecoration: 'line-through'}}>Show application loading screen until first load done</li>
-					<li>Apply code execution chain to processors</li>
-					<li>Add logic to deal with different code states</li>
 					<li></li>
 					<li style={{textDecoration: 'line-through'}}>Provide loading screen and actions to start and stop loading</li>
 					<li></li>
+					<li style={{textDecoration: 'line-through'}}>Fix js server side code execution</li>
+					<li>Fix endless loop which occurs after adding > 1 js client files</li>
+					<li>Refactor js client output component as it should execute all client side code</li>
 					<li>Process js code values for output store</li>
 					<li>Process ts code values for output store</li>
 					<li>Process html code values for output store</li>
 					<li>Process md code values for output store</li>
 					<li>Process css code values for output store</li>
-					<li>Process scss code values for output store</li>
 					<li>Parse json data values for output store</li>
-					<li>Get stdout from executed scss code and write it to output store</li>
+					<li>Apply code execution chain to processors</li>
+					<li>Add typescript interpreter to the client in client output component</li>
+					<li>Make selectors available here, to make it possible to specify html placement in client output component</li>
 					<li>Get parse error from json and write it to output store</li>
 					<li></li>
 					<li>
@@ -98,6 +100,9 @@ export class AppComponent extends React.Component<IComponentProps> {
                             </pre>
 					</li>
 					<li>Make title editable</li>
+					<li></li>
+					<li>Add asset file uploads</li>
+					<li>Make it possible to load data from other/remote data sources</li>
 					<li></li>
 					<li>Integrate console hooks for all modes and contexts</li>
 					<li>Implement console hooks as observer, which update the console output view</li>
@@ -117,6 +122,9 @@ export class AppComponent extends React.Component<IComponentProps> {
 				</ol>
 				<h3>Backlog</h3>
 				<ol>
+					<li>Add scss to supported modes</li>
+					<li>Process scss code values for output store</li>
+					<li>Get stdout from executed scss code and write it to output store</li>
 					<li>Add dark and bright mode switch</li>
 					<li>Create deployable bundles of server and client side nodebooks</li>
 					<li>Integrate NODE red</li>
