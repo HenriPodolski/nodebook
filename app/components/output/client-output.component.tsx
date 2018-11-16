@@ -27,6 +27,9 @@ export class ClientOutputComponent extends React.Component<IComponentProps> {
         let css = '';
 
         this.props.outputs.forEach(output => {
+
+            console.log(output, ModeEnums.html.value, output.mode === ModeEnums.html.value);
+
             switch(true) {
                 case (output.mode === ModeEnums.js.value): {
 					scripts += `<script src=".${output.file}"></script>`;
