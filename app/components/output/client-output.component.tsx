@@ -20,7 +20,6 @@ export class ClientOutputComponent extends React.Component<IComponentProps> {
     }
 
     render() {
-
         let scripts = '';
 		let typeScripts = '';
 

@@ -75,9 +75,9 @@ export class AppComponent extends React.Component<IComponentProps> {
 					<li style={{textDecoration: 'line-through'}}>Provide loading screen and actions to start and stop loading</li>
 					<li></li>
 					<li style={{textDecoration: 'line-through'}}>Fix js server side code execution</li>
-					<li>Fix endless loop which occurs after adding > 1 js client files</li>
-					<li>Refactor js client output component as it should execute all client side code</li>
-					<li>Process js code values for output store</li>
+					<li style={{textDecoration: 'line-through'}}>Fix endless loop which occurs after adding > 1 js client files</li>
+					<li style={{textDecoration: 'line-through'}}>Refactor js client output component as it should execute all client side code</li>
+					<li style={{textDecoration: 'line-through'}}>Process js code values for output store</li>
 					<li>Process ts code values for output store</li>
 					<li>Process html code values for output store</li>
 					<li>Process md code values for output store</li>

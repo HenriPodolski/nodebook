@@ -58,80 +58,81 @@ export const newOutputEpic = (action$, state$) => action$.pipe(
 
         let processed: any[] = [];
         let actions: { type: string; payload: any; }[] = [];
+        const index = action.id;
+        const input = state.inputs[index];
+        const output = state.outputs[index];
 
-        state.inputs.forEach((input, index) => {
-            let validationErrors: {message: string}[] = [];
-            const isProcessing = input.executeFlag === InputEnums.executeFlags.processing;
-            // tslint:disable
-            const isValidFilename = /^(?!\.)(?!com[0-9]$)(?!con$)(?!lpt[0-9]$)(?!nul$)(?!prn$)[^\|\*\?\\:<>/$"]*[^\.\|\*\?\\:<>/$"]+$/
-                .test(input.name);
-            // tslint:enable
-            const isUnique = !(state
-                .inputs
-                .filter(filteredInput => {
-                    return filteredInput.id !== input.id &&
-                        filteredInput.name === input.name &&
-                        filteredInput.mode === input.mode &&
-                        (!input.context || filteredInput.context === input.context)
-                })
-                .length);
-            const isValidName = isValidFilename && isUnique;
+        let validationErrors: {message: string}[] = [];
+        const isProcessing = input.executeFlag === InputEnums.executeFlags.processing;
+        // tslint:disable
+        const isValidFilename = /^(?!\.)(?!com[0-9]$)(?!con$)(?!lpt[0-9]$)(?!nul$)(?!prn$)[^\|\*\?\\:<>/$"]*[^\.\|\*\?\\:<>/$"]+$/
+            .test(input.name);
+        // tslint:enable
+        const isUnique = !(state
+            .inputs
+            .filter(filteredInput => {
+                return filteredInput.id !== input.id &&
+                    filteredInput.name === input.name &&
+                    filteredInput.mode === input.mode &&
+                    (!input.context || filteredInput.context === input.context)
+            })
+            .length);
+        const isValidName = isValidFilename && isUnique;
 
-            // console.group('newOutputEpic ' + input.id + ': ' + input.name);
-            // console.log(action);
-            // console.log(state);
-            // console.log('isValidFilename ', isValidFilename);
-            // console.log('isUnique ', isUnique);
-            // console.groupEnd();
+        // console.group('newOutputEpic ' + input.id + ': ' + input.name);
+        // console.log(action);
+        // console.log(state);
+        // console.log('isValidFilename ', isValidFilename);
+        // console.log('isUnique ', isUnique);
+        // console.groupEnd();
 
-            if (!isValidFilename && isProcessing) {
-                console.log('filename not valid');
-                validationErrors.push({message: 'filename not valid'});
+        if (!isValidFilename && isProcessing) {
+            console.log('filename not valid');
+            validationErrors.push({message: 'filename not valid'});
+        }
+
+        if (isValidFilename && !isUnique && isProcessing) {
+            console.log('filename not unique');
+            validationErrors.push({message: 'filename not unique'});
+        }
+
+        if (validationErrors.length) {
+            actions.push(validationErrorsChangeAction({
+                filename: validationErrors
+            }, index));
+
+            actions.push(executeFlagChangeAction(InputEnums.executeFlags.idle, index));
+        }
+
+        if (isProcessing && isValidName) {
+
+            actions.push(validationErrorsChangeAction({
+                filename: []
+            }, index));
+
+            const processResult = ProcessorService.process(input);
+            const outputData = {
+                id: input.id,
+                name: input.name,
+                mode: input.mode,
+                context: input.context,
+                value: input.value,
+                executeFlag: OutputEnums.executeFlags.processed,
+                logs: processResult.out,
+                file: processResult.file,
+                infos: processResult.infos
+            };
+
+            // rename files via deleting the existing
+            if (output && output.infos &&
+                processResult.infos &&
+                processResult.infos.absoluteFilePath !== output.infos.absoluteFilePath &&
+                fs.existsSync(output.infos.absoluteFilePath)) {
+                fs.unlinkSync(output.infos.absoluteFilePath);
             }
 
-            if (isValidFilename && !isUnique && isProcessing) {
-                console.log('filename not unique');
-                validationErrors.push({message: 'filename not unique'});
-            }
-
-            if (validationErrors.length) {
-                actions.push(validationErrorsChangeAction({
-                    filename: validationErrors
-                }, index));
-
-                actions.push(executeFlagChangeAction(InputEnums.executeFlags.idle, index));
-            }
-
-            if (isProcessing && isValidName) {
-
-                actions.push(validationErrorsChangeAction({
-                    filename: []
-                }, index));
-
-                const processResult = ProcessorService.process(input);
-                const outputData = {
-					id: input.id,
-					name: input.name,
-					mode: input.mode,
-					context: input.context,
-					value: input.value,
-					executeFlag: OutputEnums.executeFlags.processed,
-					logs: processResult.out,
-					file: processResult.file,
-                    infos: processResult.infos
-				};
-
-				// rename files via deleting the existi
-                if (state.outputs[index] && state.outputs[index].infos &&
-					processResult.infos &&
-					processResult.infos.absoluteFilePath !== state.outputs[index].infos.absoluteFilePath &&
-                    fs.existsSync(state.outputs[index].infos.absoluteFilePath)) {
-					fs.unlinkSync(state.outputs[index].infos.absoluteFilePath);
-                }
-
-                processed.push(outputData);
-            }
-        });
+            processed.push(outputData);
+        }
 
 		if (processed.length) {
 			actions.push(updateAction(processed));

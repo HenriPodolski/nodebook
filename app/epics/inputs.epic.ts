@@ -6,21 +6,20 @@ import {
 	stateAction
 } from '../actions/input/inputs.actions';
 import { environment } from '../environments/environment';
-import { actionWithPayload } from '../actions';
 import { InputEnums } from '../enums/input.enums';
 
 export const newInputEpic = (action$, state$) => action$.pipe(
     ofType(INPUTS_EXECUTE_FLAG_CHANGE),
     withLatestFrom(state$),
-    map((action: actionWithPayload<string>) => {
+    map(([action, state]) => {
 
         console.log('newInputEpic', action);
 
-        const unprocessed = state$.value.inputs.filter(
-            input => input.executeFlag !== InputEnums.executeFlags.processed
+        const idle = state.inputs.filter(
+            input => input.executeFlag === InputEnums.executeFlags.idle
         );
 
-        if (unprocessed.length === 0) {
+        if (idle.length === 0) {
             return newAction({...environment.config.input.editableConfig});
         } else {
             return stateAction();

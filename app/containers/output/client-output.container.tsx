@@ -11,7 +11,7 @@ const mapStateToProps = (state, ownProps) => ({
     // select which uses outputs created before the current index
     // and which should be available for the client
     outputs: state.outputs.filter((output, index) => {
-        const isAvailableOutputInScope = ownProps.index <= index;
+        const isAvailableOutputInScope = ownProps.index >= index;
         const isClientJS = output.mode === ModeEnums.js.value && output.context === ContextEnums.js.client;
 		const isClientTS = output.mode === ModeEnums.ts.value && output.context === ContextEnums.ts.client;
 		const isClientCSS = output.mode === ModeEnums.css.value;
