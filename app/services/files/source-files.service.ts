@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import { environment } from '../../environments/environment';
 import { ISourceFileInfos } from '../../shared/interfaces/source-file.interface';
+import * as path from 'path';
 
 export interface IFileInfoParameters {
 	value: string;
@@ -12,9 +13,9 @@ export interface IFileInfoParameters {
 export class SourceFilesService {
 
 	static getNodebookFolderInfos() {
-		const rootDirectory = '/nodebook';
+		const rootDirectory = path.sep + 'nodebook';
 		const cwd = process.cwd();
-		const relativeSourceDirectory = rootDirectory + '/src/';
+		const relativeSourceDirectory = rootDirectory + path.sep + 'src' + path.sep;
 
 		return {
 			rootDirectory,
@@ -32,13 +33,14 @@ export class SourceFilesService {
 			absoluteSourceDirectory
 		} = SourceFilesService.getNodebookFolderInfos();
 
-		const nodebookContextDirectory = relativeSourceDirectory + (context ? context + '/' : '');
+		const nodebookContextDirectory = relativeSourceDirectory + (context ?
+			context + path.sep : path.sep);
 		const modeObject = environment.config.input.modes.find((extMode) => {
 			return extMode.value === mode;
 		}) || {short: 'txt'};
 		const extension = modeObject.short;
-		const relativeFilePath = '.'  + nodebookContextDirectory + name + '.' + modeObject.short;
-		const absoluteFilePath = cwd + nodebookContextDirectory + name + '.' + modeObject.short;
+		const relativeFilePath = '.' + nodebookContextDirectory + modeObject.short + path.sep + name + '.' + modeObject.short;
+		const absoluteFilePath = cwd + nodebookContextDirectory + modeObject.short + path.sep + name + '.' + modeObject.short;
 
 		return {
 			rootDirectory,
@@ -61,6 +63,10 @@ export class SourceFilesService {
 	): ISourceFileInfos {
 		const fileInfos = SourceFilesService.getFileInfos({value, name, mode, context});
 
+        const modeObject = environment.config.input.modes.find((extMode) => {
+            return extMode.value === mode;
+        }) || {short: 'txt'};
+
 		if (!fs.existsSync(fileInfos.cwd + fileInfos.rootDirectory)) {
 			fs.mkdirSync(fileInfos.cwd + fileInfos.rootDirectory);
 		}
@@ -73,8 +79,12 @@ export class SourceFilesService {
 			fs.mkdirSync(fileInfos.cwd + fileInfos.nodebookContextDirectory);
 		}
 
+        if (!fs.existsSync(fileInfos.cwd + fileInfos.nodebookContextDirectory + modeObject.short)) {
+            fs.mkdirSync(fileInfos.cwd + fileInfos.nodebookContextDirectory + modeObject.short);
+        }
+
 		fs.writeFileSync(
-			fileInfos.cwd + fileInfos.nodebookContextDirectory + name + '.' + fileInfos.extension,
+			fileInfos.cwd + fileInfos.nodebookContextDirectory + modeObject.short + path.sep + name + '.' + fileInfos.extension,
 			value,
 			{encoding: 'utf-8'}
 		);

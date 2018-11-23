@@ -142,11 +142,13 @@ export class AppComponent extends React.Component<IComponentProps> {
                             <li style={{textDecoration: 'line-through'}}>Process html code values
                                 for output store
                             </li>
-                            <li>Fix output of multiple default .md inputs</li>
+                            <li style={{textDecoration: 'line-through'}}>Fix output of multiple default .md inputs</li>
                             <li>Process ts code values for output store</li>
                             <li>Process md code values for output store</li>
                             <li>Process css code values for output store</li>
                             <li>Save css, md, html to nodebook and make it load on initialize</li>
+                            <li>Delete input/output functionality and UI</li>
+                            <li>Add confirm delete modal</li>
                             <li>Parse json data values for output store</li>
                             <li>Apply code execution chain to processors</li>
                             <li>Add typescript interpreter to the client in client output

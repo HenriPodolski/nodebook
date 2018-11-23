@@ -1,5 +1,5 @@
 import { ofType } from 'redux-observable';
-import { map, withLatestFrom } from 'rxjs/internal/operators';
+import { debounceTime, map, withLatestFrom } from 'rxjs/internal/operators';
 import {
 	contextChangeAction,
 	INPUTS_EXECUTE_FLAG_CHANGE, INPUTS_MODE_CHANGE, newAction,
@@ -11,6 +11,7 @@ import { InputEnums } from '../enums/input.enums';
 export const newInputEpic = (action$, state$) => action$.pipe(
     ofType(INPUTS_EXECUTE_FLAG_CHANGE),
     withLatestFrom(state$),
+    debounceTime(300),
     map(([action, state]) => {
 
         console.log('newInputEpic', action);

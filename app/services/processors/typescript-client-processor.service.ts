@@ -4,7 +4,7 @@ import { SourceFilesService } from '../files/source-files.service';
 import { IProcessOutput } from '../../shared/interfaces/output.interface';
 
 const compilerOptions = {
-/* Basic Options */
+    /* Basic Options */
     "target": "es5",                          /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018' or 'ESNEXT'. */
     "module": "commonjs",                     /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
     "lib": [
@@ -65,10 +65,11 @@ const compilerOptions = {
 };
 
 export class TypescriptClientProcessorService {
-	static process({value, filename, mode, context}): IProcessOutput {
-		const sourceFileInfos: ISourceFileInfos = SourceFilesService
-			.createIfNotExists(value, filename, mode, context);
-		let out;
+    static process({value, filename, mode, context}): IProcessOutput {
+        const sourceFileInfos: ISourceFileInfos = SourceFilesService
+            .createIfNotExists(value, filename, mode, context);
+        let out;
+        const originalConsole = console;
 
         try {
             out = (new Function(`    
@@ -77,20 +78,23 @@ export class TypescriptClientProcessorService {
                 tsNode.register({
                     project: false,
                     compilerOptions: ${JSON.stringify(compilerOptions)},
-                    cache: false,
+                    cache: true,
+                    cacheDirectory: '.${sourceFileInfos.relativeSourceDirectory}',
                     typeCheck: true,
                     ignoreWarnings: false
                 });
                 
                 require('.${sourceFileInfos.relativeFilePath}');   
-                delete require.cache[require.resolve('${sourceFileInfos.relativeFilePath}')];                                       
+                delete require.cache[require.resolve('.${sourceFileInfos.relativeFilePath}')];                                       
                 `))();
         } catch(e) {
+            // Asure console unhook
+            console = originalConsole;
             console.error(e);
             return e.toString();
         }
 
-		return {out, file: sourceFileInfos.relativeFilePath, infos: sourceFileInfos};
+        return {out, file: sourceFileInfos.relativeFilePath, infos: sourceFileInfos};
     }
 }
 /* tslint:enable */

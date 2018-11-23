@@ -4,6 +4,7 @@ import * as fs from "fs";
 import { environment } from '../../environments/environment';
 import { IInput } from '../../shared/interfaces/input.interface';
 import { IPackageNode } from '../../shared/interfaces/package-node.interface';
+import * as path from 'path';
 
 interface IPackageJsonNodebookParams {
 	id: number;
@@ -122,7 +123,7 @@ export class PackageJsonService {
 
 	static createIfNotExistsAndGet() {
 		const nodebookInfos = SourceFilesService.getNodebookFolderInfos();
-		const nodebookPath = `${nodebookInfos.cwd}${nodebookInfos.rootDirectory}/package.json`;
+		const nodebookPath = `${nodebookInfos.cwd}${nodebookInfos.rootDirectory}${path.sep}package.json`;
 
 		if (!fs.existsSync(nodebookInfos.cwd + nodebookInfos.rootDirectory)) {
 			fs.mkdirSync(nodebookInfos.cwd + nodebookInfos.rootDirectory);

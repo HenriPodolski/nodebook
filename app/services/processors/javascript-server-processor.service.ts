@@ -17,7 +17,6 @@ export class JavascriptServerProcessorService {
 
         try {
             out = (new Function(`
-                console.log('started', __dirname);
                 const ConsoleOutputService = require('../injects/console-output.service.js');
                 const consoleOutputService = new ConsoleOutputService();
                 console.log('consoleOutputService', consoleOutputService);
