@@ -151,7 +151,7 @@ export class AppComponent extends React.Component<IComponentProps> {
                             <li style={{textDecoration: 'line-through'}}>Save css, md, html to nodebook and make it load on initialize</li>
                             <li>Delete input/output functionality and UI</li>
                             <li>Add confirm delete modal</li>
-                            <li>Parse json data values for output</li>
+                            <li>Parse json data values for output and make it available for scripting</li>
                             <li>Apply code execution chain to processors and reload output that might have changed</li>
                             <li>Remove Editor for Markdown as it is documentation</li>
                             <li>Make selectors available for HTML, to make it possible to specify exact html
