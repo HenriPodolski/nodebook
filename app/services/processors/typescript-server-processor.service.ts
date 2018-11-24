@@ -9,7 +9,10 @@ const compilerOptions = {
     "module": "commonjs",                     /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
     "lib": [
         "dom",
-        "es6"
+        "ES2015",
+        "ES2016",
+        "ES2017",
+        "ES2018"
     ],                                        /* Specify library files to be included in the compilation. */
     // "allowJs": true,                       /* Allow javascript files to be compiled. */
     // "checkJs": true,                       /* Report errors in .js files. */
@@ -72,8 +75,8 @@ export class TypescriptServerProcessorService {
 		const originalConsole = console;
 
         try {
-            out = (new Function(`    
-                const tsNode = require('ts-node')
+            out = (new Function(`  
+                const tsNode = require('ts-node');
                 
                 tsNode.register({
                     project: false,
@@ -83,9 +86,17 @@ export class TypescriptServerProcessorService {
                     ignoreWarnings: false
                 });
                 
+                const ConsoleOutputService = require('../injects/console-output.service.js');
+                const consoleOutputService = new ConsoleOutputService();
+                console.log('consoleOutputService', consoleOutputService);
+                consoleOutputService.hook();
+                
                 require('.${sourceFileInfos.relativeFilePath}');   
-                delete require.cache[require.resolve('.${sourceFileInfos.relativeFilePath}')];                                       
-                `))();
+                delete require.cache[require.resolve('.${sourceFileInfos.relativeFilePath}')];                              
+                const output = consoleOutputService.expose();
+                consoleOutputService.unhook();
+                return output; 
+            `))();
         } catch(e) {
 			// Asure console unhook
 			console = originalConsole;

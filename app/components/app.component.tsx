@@ -143,7 +143,9 @@ export class AppComponent extends React.Component<IComponentProps> {
                                 for output store
                             </li>
                             <li style={{textDecoration: 'line-through'}}>Fix output of multiple default .md inputs</li>
-                            <li>Process ts code values for output store</li>
+                            <li style={{textDecoration: 'line-through'}}>Process ts code values for output store</li>
+                            <li style={{textDecoration: 'line-through'}}>Add typescript interpreter to the client in client output component
+                            </li>
                             <li>Process md code values for output store</li>
                             <li>Process css code values for output store</li>
                             <li>Save css, md, html to nodebook and make it load on initialize</li>
@@ -151,9 +153,6 @@ export class AppComponent extends React.Component<IComponentProps> {
                             <li>Add confirm delete modal</li>
                             <li>Parse json data values for output store</li>
                             <li>Apply code execution chain to processors</li>
-                            <li>Add typescript interpreter to the client in client output
-                                component
-                            </li>
                             <li>Make selectors available here, to make it possible to specify html
                                 placement in client output component
                             </li>
@@ -175,7 +174,7 @@ export class AppComponent extends React.Component<IComponentProps> {
                             <li>Add asset file uploads</li>
                             <li>Make it possible to load data from other/remote data sources</li>
                             <li></li>
-                            <li>Integrate console hooks for all modes and contexts</li>
+                            <li>Integrate console hooks for all modes and contexts (consider using _console and replacement in code)</li>
                             <li>Implement console hooks as observer, which update the console output
                                 view
                             </li>

@@ -24,14 +24,18 @@ export class LogsOutputComponent extends React.Component<IComponentProps> {
                    case (log.type === 'error'): {
                        return (
                            <div key={i} className={styles.LogsError}>
-                               {log.out}
+                               <pre>
+                               {JSON.stringify(log.out, null, 4)}
+                               </pre>
                            </div>
                        );
                    }
                    default: {
                        return (
                            <div key={i} className={styles.LogsLog}>
-                               {log.out}
+                               <pre>
+                               {JSON.stringify(log.out, null, 4)}
+                               </pre>
                            </div>
                        );
                    }
