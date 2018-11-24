@@ -111,7 +111,7 @@ export const newOutputEpic = (action$, state$) => action$.pipe(
             }, index));
 
             const processResult = ProcessorService.process(input);
-            const outputData = {
+            const outputData: any = {
                 id: input.id,
                 name: input.name,
                 mode: input.mode,
@@ -122,6 +122,10 @@ export const newOutputEpic = (action$, state$) => action$.pipe(
                 file: processResult.file,
                 infos: processResult.infos
             };
+
+            if (processResult.compiledFile)  {
+                outputData.compiledFile = processResult.compiledFile;
+            }
 
             // rename files via deleting the existing
             if (output && output.infos &&

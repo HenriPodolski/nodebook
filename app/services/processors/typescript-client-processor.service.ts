@@ -2,11 +2,12 @@
 import { ISourceFileInfos } from '../../shared/interfaces/source-file.interface';
 import { SourceFilesService } from '../files/source-files.service';
 import { IProcessOutput } from '../../shared/interfaces/output.interface';
+import * as fs from 'fs';
 
 const compilerOptions = {
     /* Basic Options */
     "target": "es5",                          /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018' or 'ESNEXT'. */
-    "module": "commonjs",                     /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
+    "module": "umd",                     /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
     "lib": [
         "dom",
         "es6"
@@ -48,7 +49,7 @@ const compilerOptions = {
     // "paths": {},                           /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
     // "rootDirs": [],                        /* List of root folders whose combined content represents the structure of the project at runtime. */
     "typeRoots": ["node_modules/@types"],                       /* List of folders to include type definitions from. */
-    "types": ["node"],                           /* Type declaration files to be included in compilation. */
+    "types": [],                           /* Type declaration files to be included in compilation. */
     "allowSyntheticDefaultImports": true,  /* Allow default imports from modules with no default export. This does not affect code emit, just typechecking. */
     "esModuleInterop": true,                   /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
     // "preserveSymlinks": true,              /* Do not resolve the real path of symlinks. */
@@ -70,22 +71,34 @@ export class TypescriptClientProcessorService {
             .createIfNotExists(value, filename, mode, context);
         let out;
         const originalConsole = console;
+        const relativeCompileFilePath = sourceFileInfos.relativeFilePath.replace('.ts', '.js');
+
+        if (!relativeCompileFilePath.includes('.js', relativeCompileFilePath.length - 4)) {
+            throw new Error('Cannot transpile ts to js.');
+        }
+
+        if (!fs.existsSync(`${relativeCompileFilePath}`)) {
+            fs.writeFileSync(`${relativeCompileFilePath}`, '', {encoding: 'utf-8'});
+        }
+
+        const codeValue = escape(value);
 
         try {
             out = (new Function(`    
-                const tsNode = require('ts-node')
+                const tsNode = require('ts-node');
+                const path = require('path');
+                const fs = require('fs');
                 
-                tsNode.register({
+                const tsNodeRegistered = tsNode.register({
                     project: false,
                     compilerOptions: ${JSON.stringify(compilerOptions)},
-                    cache: true,
-                    cacheDirectory: '.${sourceFileInfos.relativeSourceDirectory}',
+                    noCache: true,
+                    transpileOnly: true,
                     typeCheck: true,
                     ignoreWarnings: false
-                });
-                
-                require('.${sourceFileInfos.relativeFilePath}');   
-                delete require.cache[require.resolve('.${sourceFileInfos.relativeFilePath}')];                                       
+                });                
+                const transpiled = tsNodeRegistered.compile(unescape('${codeValue}'), path.resolve('${sourceFileInfos.relativeFilePath}'));
+                fs.writeFileSync('${relativeCompileFilePath}', transpiled, {encoding: 'utf-8'});
                 `))();
         } catch(e) {
             // Asure console unhook
@@ -94,7 +107,7 @@ export class TypescriptClientProcessorService {
             return e.toString();
         }
 
-        return {out, file: sourceFileInfos.relativeFilePath, infos: sourceFileInfos};
+        return {out, file: sourceFileInfos.relativeFilePath, compiledFile: relativeCompileFilePath, infos: sourceFileInfos};
     }
 }
 /* tslint:enable */

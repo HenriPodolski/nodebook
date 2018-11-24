@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { MarkdownOutputContainer } from '../../containers/output/markdown-output.container';
-import { TypescriptOutputContainer } from '../../containers/output/typescript-output.container';
 import Frame from 'react-frame-component';
 import { ClientOutputContainer } from '../../containers/output/client-output.container';
 import { LogsOutputContainer } from '../../containers/output/logs-output.container';
@@ -66,7 +65,7 @@ export class OutputComponent extends React.Component<IComponentProps> {
 				return (
 					<>
 						<Frame className={styles.OutputFrame}>
-							<TypescriptOutputContainer index={this.props.index} />
+							<ClientOutputContainer index={this.props.index} />
 						</Frame>
 						<LogsOutputContainer index={this.props.index} />
 					</>

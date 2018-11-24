@@ -9,6 +9,7 @@ interface IComponentProps {
 		mode: string;
 		index: number;
 		file: string;
+        compiledFile?: string;
     }[];
     changeExecuteFlag: (payload: string) => {type: string, payload: string};
 }
@@ -36,8 +37,7 @@ export class ClientOutputComponent extends React.Component<IComponentProps> {
                     break;
                 }
 				case (output.mode === ModeEnums.ts.value): {
-					// todo: Add typescript interpreter to the client
-					typeScripts += `<script src=".${output.file}"></script>`;
+					typeScripts += `<script src=".${output.compiledFile}"></script>`;
 					break;
 				}
 				case (output.mode === ModeEnums.css.value): {
