@@ -34,7 +34,7 @@ export class SourceFilesService {
 		} = SourceFilesService.getNodebookFolderInfos();
 
 		const nodebookContextDirectory = relativeSourceDirectory + (context ?
-			context + path.sep : path.sep);
+			context + path.sep : '');
 		const modeObject = environment.config.input.modes.find((extMode) => {
 			return extMode.value === mode;
 		}) || {short: 'txt'};

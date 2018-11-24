@@ -53,6 +53,14 @@ export class OutputComponent extends React.Component<IComponentProps> {
                 )
             }
 
+            case (mode === ModeEnums.css.value): {
+                return (
+                    <>
+                        <ClientOutputContainer index={this.props.index} />
+                    </>
+                )
+            }
+
 			case (mode === ModeEnums.js.value && context === ContextEnums.js.server): {
 				return (
                     <>

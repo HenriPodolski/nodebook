@@ -146,17 +146,19 @@ export class AppComponent extends React.Component<IComponentProps> {
                             <li style={{textDecoration: 'line-through'}}>Process ts code values for output store</li>
                             <li style={{textDecoration: 'line-through'}}>Add typescript interpreter to the client in client output component
                             </li>
-                            <li>Process md code values for output store</li>
-                            <li>Process css code values for output store</li>
-                            <li>Save css, md, html to nodebook and make it load on initialize</li>
+                            <li style={{textDecoration: 'line-through'}}>Process md code for output</li>
+                            <li style={{textDecoration: 'line-through'}}>Process css code for output</li>
+                            <li style={{textDecoration: 'line-through'}}>Save css, md, html to nodebook and make it load on initialize</li>
                             <li>Delete input/output functionality and UI</li>
                             <li>Add confirm delete modal</li>
-                            <li>Parse json data values for output store</li>
-                            <li>Apply code execution chain to processors</li>
-                            <li>Make selectors available here, to make it possible to specify html
+                            <li>Parse json data values for output</li>
+                            <li>Apply code execution chain to processors and reload output that might have changed</li>
+                            <li>Remove Editor for Markdown as it is documentation</li>
+                            <li>Make selectors available for HTML, to make it possible to specify exact html
                                 placement in client output component
                             </li>
                             <li>Get parse error from json and write it to output store</li>
+                            <li>Clean up nodebook folder if code source folder becomes empty</li>
                             <li></li>
                             <li>
                                 Add title to package.json nodebook
@@ -174,9 +176,12 @@ export class AppComponent extends React.Component<IComponentProps> {
                             <li>Add asset file uploads</li>
                             <li>Make it possible to load data from other/remote data sources</li>
                             <li></li>
+                            <li>Add scss to supported modes</li>
+                            <li>Process scss code values for output</li>
+                            <li></li>
                             <li>Integrate console hooks for all modes and contexts (consider using _console and replacement in code)</li>
                             <li>Implement console hooks as observer, which update the console output
-                                view
+                                view whenever included code logs
                             </li>
                             <li>Design and implement full featured logging component</li>
                             <li>Delete editor item functionality, if readOnly</li>
@@ -188,14 +193,12 @@ export class AppComponent extends React.Component<IComponentProps> {
                             <li>Perform install on package add</li>
                             <li>Integrate npm package autocomplete</li>
                             <li></li>
-                            <li>Provide release artefact workflow in github</li>
+                            <li>Provide release artefact workflow in github (travis)</li>
                             <li>Add documentation</li>
                             <li>Provide landing page</li>
                         </ol>
                         <h3>Backlog</h3>
                         <ol>
-                            <li>Add scss to supported modes</li>
-                            <li>Process scss code values for output store</li>
                             <li>Get stdout from executed scss code and write it to output store</li>
                             <li>Add dark and bright mode switch</li>
                             <li>Create deployable bundles of server and client side nodebooks</li>

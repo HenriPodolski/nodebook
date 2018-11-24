@@ -86,19 +86,6 @@ export const environment = {
                             value: 'server'
                         }
                     ]
-                },
-                {
-                    mode: 'css',
-                    values: [
-                        {
-                            label: 'Local',
-                            value: 'local'
-                        },
-                        {
-                            label: 'Global',
-                            value: 'global'
-                        }
-                    ]
                 }
             ]
         }

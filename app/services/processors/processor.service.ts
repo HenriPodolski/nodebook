@@ -6,6 +6,8 @@ import { ModeEnums } from '../../enums/mode.enums';
 import { JavascriptClientProcessorService } from './javascript-client-processor.service';
 import { TypescriptClientProcessorService } from './typescript-client-processor.service';
 import { IProcessOutput } from '../../shared/interfaces/output.interface';
+import { MarkdownProcessorService } from './markdown-processor.service';
+import { StylesheetProcessorService } from './stylesheet-processor.service';
 
 export class ProcessorService {
 	static process(inputObject: IInput): IProcessOutput {
@@ -21,15 +23,19 @@ export class ProcessorService {
 		console.log('ProcessorService.process()', JSON.stringify(inputObject, null, 4));
 
 		switch (true) {
+
+            case (inputObject.mode === ModeEnums.md.value): {
+                processOutput = MarkdownProcessorService.process(config);
+                break;
+            }
+
 			case (inputObject.mode === ModeEnums.js.value && inputObject.context === ContextEnums.js.client): {
 				processOutput = JavascriptClientProcessorService.process(config);
 				break;
 			}
 
 			case (inputObject.mode === ModeEnums.js.value && inputObject.context === ContextEnums.js.server): {
-				console.log('ProcessorService.process() processing server side js');
 				processOutput = JavascriptServerProcessorService.process(config);
-				console.log('ProcessorService.process() processed server side js', JSON.stringify(processOutput, null, 4));
 				break;
 			}
 
@@ -38,10 +44,15 @@ export class ProcessorService {
 				break;
 			}
 
-			case (inputObject.mode === ModeEnums.ts.value && inputObject.context === ContextEnums.ts.server): {
-				processOutput = TypescriptServerProcessorService.process(config);
-				break;
-			}
+            case (inputObject.mode === ModeEnums.ts.value && inputObject.context === ContextEnums.ts.server): {
+                processOutput = TypescriptServerProcessorService.process(config);
+                break;
+            }
+
+            case (inputObject.mode === ModeEnums.css.value): {
+                processOutput = StylesheetProcessorService.process(config);
+                break;
+            }
 		}
 
 		return processOutput;
