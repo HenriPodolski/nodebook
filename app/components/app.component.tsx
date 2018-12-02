@@ -159,8 +159,7 @@ export class AppComponent extends React.Component<IComponentProps> {
                                 placement in client output component
                             </li>
                             <li>Get parse error from json and write it to output store</li>
-                            <li>Clean up nodebook folder if code source folder becomes empty</li>
-                            <li></li>
+                            <li>Clean up nodebook folder if code source folder becomes empty on removeFile</li>
                             <li>
                                 Add title to package.json nodebook
                                 <pre>
@@ -189,20 +188,20 @@ export class AppComponent extends React.Component<IComponentProps> {
                             <li>Create ux design and change views accordingly</li>
                             <li>Create visual design and apply it</li>
                             <li></li>
-                            <li>Implement nodebook package.json dependency config</li>
-                            <li>Display list of installed packages in the gui</li>
-                            <li>Perform install on package add</li>
-                            <li>Integrate npm package autocomplete</li>
-                            <li></li>
                             <li>Provide release artefact workflow in github (travis)</li>
                             <li>Add documentation</li>
                             <li>Provide landing page</li>
                         </ol>
                         <h3>Backlog</h3>
                         <ol>
-                            <li>If file is last in nodebook type folder on removeFile, remove folder too</li>
                             <li>Confirm file override in case file is present but not in package.json</li>
                             <li>Get stdout from executed scss code and write it to output store</li>
+                            <li></li>
+                            <li>Implement nodebook package.json dependency config</li>
+                            <li>Display list of installed packages in the gui</li>
+                            <li>Perform install on package add</li>
+                            <li>Integrate npm package autocomplete</li>
+                            <li></li>
                             <li>Add dark and bright mode switch</li>
                             <li>Create deployable bundles of server and client side nodebooks</li>
                             <li>Integrate NODE red</li>
