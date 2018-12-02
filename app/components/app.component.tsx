@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { InputsContainer } from '../containers/inputs.container';
 import { LoadingEnums } from '../enums/loading.enums';
+import { ModalDialogContainer } from '../containers/controls/modal-dialog.container';
 
 let styles = require('./app.component.scss');
 
@@ -149,8 +150,8 @@ export class AppComponent extends React.Component<IComponentProps> {
                             <li style={{textDecoration: 'line-through'}}>Process md code for output</li>
                             <li style={{textDecoration: 'line-through'}}>Process css code for output</li>
                             <li style={{textDecoration: 'line-through'}}>Save css, md, html to nodebook and make it load on initialize</li>
-                            <li>Delete input/output functionality and UI</li>
-                            <li>Add confirm delete modal</li>
+                            <li style={{textDecoration: 'line-through'}}>Delete input/output functionality and UI</li>
+                            <li style={{textDecoration: 'line-through'}}>Add confirm delete modal</li>
                             <li>Parse json data values for output and make it available for scripting</li>
                             <li>Apply code execution chain to processors and reload output that might have changed</li>
                             <li>Remove Editor for Markdown as it is documentation</li>
@@ -199,6 +200,8 @@ export class AppComponent extends React.Component<IComponentProps> {
                         </ol>
                         <h3>Backlog</h3>
                         <ol>
+                            <li>If file is last in nodebook type folder on removeFile, remove folder too</li>
+                            <li>Confirm file override in case file is present but not in package.json</li>
                             <li>Get stdout from executed scss code and write it to output store</li>
                             <li>Add dark and bright mode switch</li>
                             <li>Create deployable bundles of server and client side nodebooks</li>
@@ -248,6 +251,7 @@ export class AppComponent extends React.Component<IComponentProps> {
     render() {
         return (
             <>
+                <ModalDialogContainer></ModalDialogContainer>
                 {
                     !this.props.loading[LoadingEnums.components.application] ?
                         this.application() : this.loading()

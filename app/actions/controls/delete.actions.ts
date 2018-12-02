@@ -8,9 +8,10 @@ export function deleteIntentionAction(index) {
     };
 }
 
-export function deleteAction(index) {
+export function deleteAction(index, deleteFile: boolean) {
 	return {
 		type: CONTROLS_DELETE_ENTRY,
-		index
+		index,
+        deleteFile
 	};
 }

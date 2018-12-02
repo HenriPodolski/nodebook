@@ -1,9 +1,8 @@
 import { actionWithPayload } from '../../actions/index';
-import { rootState } from '../../store/state';
 import { INPUTS_CONTEXT_CHANGE } from '../../actions/input/inputs.actions';
 
 export function inputContextReducer(
-    state: string = rootState.inputs[0].context,
+    state: string,
     action: actionWithPayload<string>
 ) {
     switch (action.type) {

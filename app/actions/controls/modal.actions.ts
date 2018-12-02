@@ -1,16 +1,17 @@
-export const MODAL_DIALOG_SHOW = 'MODAL_DIALOG_SHOW';
-export const MODAL_DIALOG_HIDE = 'MODAL_DIALOG_HIDE';
+import { IModalDialog } from '../../shared/interfaces/modal-dialog.interface';
 
-export function showModalDialogAction(payload: any) {
+export const CONTROLS_MODAL_DIALOG_SHOW = 'CONTROLS_MODAL_DIALOG_SHOW';
+export const CONTROLS_MODAL_DIALOG_HIDE = 'MODAL_DIALOG_HIDE';
+
+export function showModalDialogAction(payload: IModalDialog) {
     return {
-        type: MODAL_DIALOG_SHOW,
+        type: CONTROLS_MODAL_DIALOG_SHOW,
         payload
     };
 }
 
-export function hideModalDialogAction(payload: any) {
+export function hideModalDialogAction() {
     return {
-        type: MODAL_DIALOG_HIDE,
-        payload
+        type: CONTROLS_MODAL_DIALOG_HIDE
     };
 }
