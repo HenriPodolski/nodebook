@@ -6,6 +6,7 @@ let outputStyles = require('./output.component.scss');
 interface IComponentProps {
     outputs: {
         value: string;
+        name: string;
 		mode: string;
 		index: number;
 		file: string;
@@ -23,15 +24,19 @@ export class ClientOutputComponent extends React.Component<IComponentProps> {
     render() {
         let scripts = '';
 		let typeScripts = '';
+		let dataSources = '';
 
         let html = '';
         let css = '';
 
         this.props.outputs.forEach(output => {
-
-            console.log(output, ModeEnums.html.value, output.mode === ModeEnums.html.value);
-
             switch(true) {
+                case (output.mode === ModeEnums.json.value): {
+                    dataSources += `<script>
+                        nodebook.data.${output.name} = ${JSON.parse(JSON.stringify(output.value))};
+                    </script>`;
+                    break;
+                }
                 case (output.mode === ModeEnums.js.value): {
 					scripts += `<script src=".${output.file}"></script>`;
                     break;
@@ -59,9 +64,16 @@ export class ClientOutputComponent extends React.Component<IComponentProps> {
                 <head>
                     <title>Client Output</title>
                     ${css}
+                    <script>
+                        // data namespace
+                        var nodebook = {
+                            data: {}
+                        };
+                    </script>
                 </head>
                 <body>
                     <div id="mount"></div>
+                    ${dataSources}
                     ${typeScripts}
                     ${scripts}
                 </body>

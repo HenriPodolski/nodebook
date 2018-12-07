@@ -110,7 +110,7 @@ export const newOutputEpic = (action$, state$) => action$.pipe(
                 filename: []
             }, index));
 
-            const processResult = ProcessorService.process(input);
+            const processResult = ProcessorService.process(input, state);
             const outputData: any = {
                 id: input.id,
                 name: input.name,

@@ -10,10 +10,12 @@ import { MarkdownProcessorService } from './markdown-processor.service';
 import { StylesheetProcessorService } from './stylesheet-processor.service';
 import { HtmlProcessorService } from './html-processor.service';
 import { JsonProcessorService } from './json-processor.service';
+import { IRootState } from '../../shared/interfaces/root-state.interface';
 
 export class ProcessorService {
-	static process(inputObject: IInput): IProcessOutput {
+	static process(inputObject: IInput, state: IRootState): IProcessOutput {
 		const config = {
+			id: inputObject.id,
 			value: inputObject.value,
 			filename: inputObject.name,
 			mode: inputObject.mode,
@@ -22,7 +24,7 @@ export class ProcessorService {
 
 		let processOutput: IProcessOutput = {out: [], file: ''};
 
-		console.log('ProcessorService.process()', JSON.stringify(inputObject, null, 4));
+		// console.log('ProcessorService.process()', JSON.stringify(inputObject, null, 4));
 
 		switch (true) {
 
@@ -37,7 +39,7 @@ export class ProcessorService {
 			}
 
 			case (inputObject.mode === ModeEnums.js.value && inputObject.context === ContextEnums.js.server): {
-				processOutput = JavascriptServerProcessorService.process(config);
+				processOutput = JavascriptServerProcessorService.process(config, state);
 				break;
 			}
 
@@ -47,7 +49,7 @@ export class ProcessorService {
 			}
 
             case (inputObject.mode === ModeEnums.ts.value && inputObject.context === ContextEnums.ts.server): {
-                processOutput = TypescriptServerProcessorService.process(config);
+                processOutput = TypescriptServerProcessorService.process(config, state);
                 break;
             }
 

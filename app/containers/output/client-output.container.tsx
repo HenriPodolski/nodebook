@@ -15,9 +15,10 @@ const mapStateToProps = (state, ownProps) => ({
         const isClientJS = output.mode === ModeEnums.js.value && output.context === ContextEnums.js.client;
 		const isClientTS = output.mode === ModeEnums.ts.value && output.context === ContextEnums.ts.client;
 		const isClientCSS = output.mode === ModeEnums.css.value;
+        const isClientJSON = output.mode === ModeEnums.json.value;
 		const isClientHTML = output.mode === ModeEnums.html.value;
 
-		return isAvailableOutputInScope && (isClientJS || isClientTS || isClientCSS || isClientHTML);
+		return isAvailableOutputInScope && (isClientJS || isClientTS || isClientJSON || isClientCSS || isClientHTML);
     }),
     index: ownProps.index
 });

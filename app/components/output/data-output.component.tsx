@@ -13,9 +13,12 @@ export class DataOutputComponent extends React.Component<IComponentProps> {
     render() {
         return (
             <div>
-                <p>To use as data source in scripting:</p>
-                <pre>
-                    import * as data from '{this.props.output.infos.relativeFilePath}';
+                <p>Exposed data source for scripting:</p>
+                JS: <pre>
+                    const {this.props.output.name} = nodebook.data.{this.props.output.name};
+                </pre>
+                TS: <pre>
+                    const {this.props.output.name} = global.nodebook.data.{this.props.output.name};
                 </pre>
             </div>
         );
