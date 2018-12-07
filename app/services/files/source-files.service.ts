@@ -55,6 +55,12 @@ export class SourceFilesService {
 		};
 	}
 
+	static removeFile(filePath) {
+        if (fs.existsSync(filePath)) {
+            fs.unlinkSync(filePath);
+        }
+	}
+
 	static createIfNotExists (
 		value: string,
 		name: string,

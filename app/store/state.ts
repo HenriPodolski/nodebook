@@ -7,6 +7,9 @@ export const rootState: IRootState = {
         components: SupportEnums.logLevel.off,
         store: SupportEnums.logLevel.off
     },
+    controls: {
+        modalDialog: null
+    },
     inputs: [],
     outputs: [],
     loading: {

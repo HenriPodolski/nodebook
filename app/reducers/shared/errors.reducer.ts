@@ -1,10 +1,9 @@
 import { actionWithPayload } from '../../actions/index';
-import { rootState } from '../../store/state';
 import { IErrorsInterface } from '../../shared/interfaces/errors.interface';
 import { INPUTS_VALIDATION_ERRORS_CHANGE } from '../../actions/input/inputs.actions';
 
 export function inputErrorsReducer(
-    state: {[key: string]: IErrorsInterface[]} = rootState.inputs[0].errors,
+    state: {[key: string]: IErrorsInterface[]},
     action: actionWithPayload<{[key: string]: IErrorsInterface[]}>
 ) {
     switch (action.type) {

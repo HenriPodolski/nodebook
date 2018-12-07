@@ -1,11 +1,20 @@
 import { actionWithPayload } from '../../actions';
-import { OUTPUTS_UPDATE } from '../../actions/output/outputs.actions';
+import { OUTPUTS_DELETE, OUTPUTS_UPDATE } from '../../actions/output/outputs.actions';
+import { immutableSplice } from '../../helpers/immutable.helpers';
+import { inputReducer } from '../input/input.reducer';
 
 export function outputsReducer(
     state: any[] = [],
     action: actionWithPayload<any>
 ): any[] {
     switch (action.type) {
+        case OUTPUTS_DELETE: {
+            const items = immutableSplice(state, action.id, 1);
+            const currentState = [...items];
+            return currentState.map((current, index) =>
+                inputReducer(current, action, index + 1)
+            )
+        }
         case OUTPUTS_UPDATE: {
             // new?
             const newOutputs = action.payload.filter((newOutput) => {

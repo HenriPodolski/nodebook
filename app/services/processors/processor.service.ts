@@ -8,6 +8,8 @@ import { TypescriptClientProcessorService } from './typescript-client-processor.
 import { IProcessOutput } from '../../shared/interfaces/output.interface';
 import { MarkdownProcessorService } from './markdown-processor.service';
 import { StylesheetProcessorService } from './stylesheet-processor.service';
+import { HtmlProcessorService } from './html-processor.service';
+import { JsonProcessorService } from './json-processor.service';
 
 export class ProcessorService {
 	static process(inputObject: IInput): IProcessOutput {
@@ -51,6 +53,16 @@ export class ProcessorService {
 
             case (inputObject.mode === ModeEnums.css.value): {
                 processOutput = StylesheetProcessorService.process(config);
+                break;
+            }
+
+            case (inputObject.mode === ModeEnums.html.value): {
+                processOutput = HtmlProcessorService.process(config);
+                break;
+            }
+
+            case (inputObject.mode === ModeEnums.json.value): {
+                processOutput = JsonProcessorService.process(config);
                 break;
             }
 		}

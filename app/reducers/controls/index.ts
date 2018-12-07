@@ -1,0 +1,1 @@
+export { modalDialogReducer } from './modal-dialog.reducer';

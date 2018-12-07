@@ -1,9 +1,8 @@
 import { actionWithPayload } from '../../actions/index';
-import { rootState } from '../../store/state';
 import { INPUTS_THEME_CHANGE } from '../../actions/input/inputs.actions';
 
 export function inputThemeReducer(
-    state: string = rootState.inputs[0].theme,
+    state: string,
     action: actionWithPayload<string>
 ) {
     switch (action.type) {

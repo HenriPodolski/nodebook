@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { InputsContainer } from '../containers/inputs.container';
 import { LoadingEnums } from '../enums/loading.enums';
+import { ModalDialogContainer } from '../containers/controls/modal-dialog.container';
 
 let styles = require('./app.component.scss');
 
@@ -149,8 +150,9 @@ export class AppComponent extends React.Component<IComponentProps> {
                             <li style={{textDecoration: 'line-through'}}>Process md code for output</li>
                             <li style={{textDecoration: 'line-through'}}>Process css code for output</li>
                             <li style={{textDecoration: 'line-through'}}>Save css, md, html to nodebook and make it load on initialize</li>
-                            <li>Delete input/output functionality and UI</li>
-                            <li>Add confirm delete modal</li>
+                            <li style={{textDecoration: 'line-through'}}>Delete input/output functionality and UI</li>
+                            <li style={{textDecoration: 'line-through'}}>Add confirm delete modal</li>
+                            <li>Serve nodebook folder output from a server, to be able to access it as usual</li>
                             <li>Parse json data values for output and make it available for scripting</li>
                             <li>Apply code execution chain to processors and reload output that might have changed</li>
                             <li>Remove Editor for Markdown as it is documentation</li>
@@ -158,8 +160,7 @@ export class AppComponent extends React.Component<IComponentProps> {
                                 placement in client output component
                             </li>
                             <li>Get parse error from json and write it to output store</li>
-                            <li>Clean up nodebook folder if code source folder becomes empty</li>
-                            <li></li>
+                            <li>Clean up nodebook folder if code source folder becomes empty on removeFile</li>
                             <li>
                                 Add title to package.json nodebook
                                 <pre>
@@ -172,6 +173,10 @@ export class AppComponent extends React.Component<IComponentProps> {
                             </pre>
                             </li>
                             <li>Make title editable</li>
+                            <li></li>
+                            <li>Validate html for not using html, body, head</li>
+                            <li>Build html selector UI for selecting where to place HTML snippet</li>
+                            <li>Add selector for html placement in html input</li>
                             <li></li>
                             <li>Add asset file uploads</li>
                             <li>Make it possible to load data from other/remote data sources</li>
@@ -187,11 +192,7 @@ export class AppComponent extends React.Component<IComponentProps> {
                             <li>Delete editor item functionality, if readOnly</li>
                             <li>Create ux design and change views accordingly</li>
                             <li>Create visual design and apply it</li>
-                            <li></li>
-                            <li>Implement nodebook package.json dependency config</li>
-                            <li>Display list of installed packages in the gui</li>
-                            <li>Perform install on package add</li>
-                            <li>Integrate npm package autocomplete</li>
+                            <li>Style output section, add tabs and add max-height and scrollbars for long output</li>
                             <li></li>
                             <li>Provide release artefact workflow in github (travis)</li>
                             <li>Add documentation</li>
@@ -199,7 +200,14 @@ export class AppComponent extends React.Component<IComponentProps> {
                         </ol>
                         <h3>Backlog</h3>
                         <ol>
+                            <li>Confirm file override in case file is present but not in package.json</li>
                             <li>Get stdout from executed scss code and write it to output store</li>
+                            <li></li>
+                            <li>Implement nodebook package.json dependency config</li>
+                            <li>Display list of installed packages in the gui</li>
+                            <li>Perform install on package add</li>
+                            <li>Integrate npm package autocomplete</li>
+                            <li></li>
                             <li>Add dark and bright mode switch</li>
                             <li>Create deployable bundles of server and client side nodebooks</li>
                             <li>Integrate NODE red</li>
@@ -248,6 +256,7 @@ export class AppComponent extends React.Component<IComponentProps> {
     render() {
         return (
             <>
+                <ModalDialogContainer></ModalDialogContainer>
                 {
                     !this.props.loading[LoadingEnums.components.application] ?
                         this.application() : this.loading()

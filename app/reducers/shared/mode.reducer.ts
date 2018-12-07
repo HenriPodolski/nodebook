@@ -1,9 +1,8 @@
 import { actionWithPayload } from '../../actions/index';
-import { rootState } from '../../store/state';
 import { INPUTS_MODE_CHANGE } from '../../actions/input/inputs.actions';
 
 export function inputModeReducer(
-    state: string = rootState.inputs[0].mode,
+    state: string,
     action: actionWithPayload<string>
 ) {
     switch (action.type) {

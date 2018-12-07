@@ -89,13 +89,38 @@ export class PackageJsonService {
 		const packageJsonFileContent = fs.readFileSync(nodebookPath, 'utf-8');
 		let packageJsonObject = JSON.parse(packageJsonFileContent);
 
-		packageJsonObject = PackageJsonService.addNodebookItems(packageJsonObject,  params);
+		packageJsonObject = PackageJsonService.addNodebookItems(packageJsonObject, params);
 
 		fs.writeFileSync(
 			nodebookPath,
 			JSON.stringify(packageJsonObject, null, 2),
 			{encoding: 'utf-8'}
 		);
+	}
+
+	static removeNodebookItem(id: number) {
+        const nodebookPath = PackageJsonService.createIfNotExistsAndGet();
+        const packageJsonFileContent = fs.readFileSync(nodebookPath, 'utf-8');
+        let packageJsonObject = JSON.parse(packageJsonFileContent);
+
+        packageJsonObject.nodebook.nodes = packageJsonObject.nodebook.nodes.reduce(
+            (prev, next): IPackageNode[] => {
+            	if (next.id !== id) {
+                    prev.push({
+                        id: next.id,
+                        file: next.file,
+                        context: next.context
+                    });
+                }
+
+                return prev;
+            }, []);
+
+        fs.writeFileSync(
+            nodebookPath,
+            JSON.stringify(packageJsonObject, null, 2),
+            {encoding: 'utf-8'}
+        );
 	}
 
 	static addNodebookItems(packageJsonObject, items): string {

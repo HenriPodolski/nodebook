@@ -6,6 +6,7 @@ import { DebugContainer } from '../containers/debug.container';
 import { OutputFilenameContainer } from '../containers/output/output-filename.container';
 import { OutputEnums } from '../enums/output.enums';
 import { ContextInputContainer } from '../containers/input/context-input.container';
+import { DeleteEntryContainer } from '../containers/controls/delete-entry.container';
 
 interface IComponentProps {
     inputs: any[];
@@ -27,6 +28,9 @@ export class InputsComponent extends React.Component<IComponentProps> {
                 {this.props.inputs.map((dataset, i) => {
                     return (
                         <React.Fragment key={i}>
+                            {this.props.outputs[i] &&
+                            this.props.outputs[i].executeFlag === OutputEnums.executeFlags.processed &&
+                            <DeleteEntryContainer index={i} />}
                             {(!this.props.outputs[i] ||
                              this.props.outputs[i].executeFlag !== OutputEnums.executeFlags.processed) &&
                                 <OutputFilenameContainer index={i} />}
