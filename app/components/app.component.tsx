@@ -152,6 +152,7 @@ export class AppComponent extends React.Component<IComponentProps> {
                             <li style={{textDecoration: 'line-through'}}>Save css, md, html to nodebook and make it load on initialize</li>
                             <li style={{textDecoration: 'line-through'}}>Delete input/output functionality and UI</li>
                             <li style={{textDecoration: 'line-through'}}>Add confirm delete modal</li>
+                            <li>Serve nodebook folder output from a server, to be able to access it as usual</li>
                             <li>Parse json data values for output and make it available for scripting</li>
                             <li>Apply code execution chain to processors and reload output that might have changed</li>
                             <li>Remove Editor for Markdown as it is documentation</li>
@@ -173,6 +174,10 @@ export class AppComponent extends React.Component<IComponentProps> {
                             </li>
                             <li>Make title editable</li>
                             <li></li>
+                            <li>Validate html for not using html, body, head</li>
+                            <li>Build html selector UI for selecting where to place HTML snippet</li>
+                            <li>Add selector for html placement in html input</li>
+                            <li></li>
                             <li>Add asset file uploads</li>
                             <li>Make it possible to load data from other/remote data sources</li>
                             <li></li>
@@ -187,6 +192,7 @@ export class AppComponent extends React.Component<IComponentProps> {
                             <li>Delete editor item functionality, if readOnly</li>
                             <li>Create ux design and change views accordingly</li>
                             <li>Create visual design and apply it</li>
+                            <li>Style output section, add tabs and add max-height and scrollbars for long output</li>
                             <li></li>
                             <li>Provide release artefact workflow in github (travis)</li>
                             <li>Add documentation</li>
