@@ -14,11 +14,8 @@ export class DataOutputComponent extends React.Component<IComponentProps> {
         return (
             <div>
                 <p>Exposed data source for scripting:</p>
-                JS: <pre>
+                <pre>
                     const {this.props.output.name} = nodebook.data.{this.props.output.name};
-                </pre>
-                TS: <pre>
-                    const {this.props.output.name} = global.nodebook.data.{this.props.output.name};
                 </pre>
             </div>
         );

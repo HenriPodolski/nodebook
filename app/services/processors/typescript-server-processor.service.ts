@@ -107,9 +107,11 @@ export class TypescriptServerProcessorService {
                 console.log('consoleOutputService', consoleOutputService);
                 consoleOutputService.hook();
                 
-                global.nodebook = {
+                var nodebook = {
                     data: ${data}
                 };
+                
+                global.nodebook = nodebook;
                 
                 require('.${sourceFileInfos.relativeFilePath}');   
                 delete require.cache[require.resolve('.${sourceFileInfos.relativeFilePath}')];                              
