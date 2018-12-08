@@ -1,5 +1,5 @@
 import { ofType } from 'redux-observable';
-import { map, switchMap, withLatestFrom } from 'rxjs/internal/operators';
+import { switchMap, withLatestFrom } from 'rxjs/internal/operators';
 import { OUTPUTS_UPDATE, stateAction, updateAction } from '../actions/output/outputs.actions';
 import {
 	executeFlagChangeAction,
@@ -12,12 +12,17 @@ import { OutputEnums } from '../enums/output.enums';
 import * as fs from 'fs';
 import { PackageJsonService } from '../services/files/package-json.service';
 
-export const packageOutputsEpic = (action$, state$) => action$.pipe(
+export const outputsUpdateEpic = (action$, state$) => action$.pipe(
 	ofType(OUTPUTS_UPDATE),
 	withLatestFrom(state$),
-	map(([action, state]) => {
+	switchMap(([action, state]) => {
+        let actions: { type: string; payload?: any; }[] = [];
 		PackageJsonService.updateNodebookNodes(state.outputs);
-		return stateAction();
+		// Process every output which could probably depend on
+        // previous output update
+        console.log('outputsUpdateEpic', action);
+		actions.push(stateAction());
+		return actions;
 	})
 );
 
@@ -78,13 +83,6 @@ export const newOutputEpic = (action$, state$) => action$.pipe(
             })
             .length);
         const isValidName = isValidFilename && isUnique;
-
-        // console.group('newOutputEpic ' + input.id + ': ' + input.name);
-        // console.log(action);
-        // console.log(state);
-        // console.log('isValidFilename ', isValidFilename);
-        // console.log('isUnique ', isUnique);
-        // console.groupEnd();
 
         if (!isValidFilename && isProcessing) {
             console.log('filename not valid');
@@ -149,3 +147,4 @@ export const newOutputEpic = (action$, state$) => action$.pipe(
         return actions;
     })
 );
+
