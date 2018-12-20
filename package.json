@@ -173,6 +173,7 @@
     "history": "^4.6.1",
     "react": "^16.0.0",
     "react-ace": "^6.1.1",
+    "react-beautiful-dnd": "^10.0.2",
     "react-dom": "^16.0.0",
     "react-frame-component": "^4.0.0",
     "react-markdown": "^3.3.4",

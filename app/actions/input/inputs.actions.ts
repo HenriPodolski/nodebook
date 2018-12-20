@@ -3,6 +3,7 @@ import { IInput } from '../../shared/interfaces/input.interface';
 
 export const INPUTS_NEW = 'INPUTS_NEW';
 export const INPUTS_DELETE = 'INPUTS_DELETE';
+export const INPUTS_REORDER = 'INPUTS_REORDER';
 export const INPUTS_VALIDATION_ERRORS_CHANGE = 'INPUTS_VALIDATION_ERRORS_CHANGE';
 export const INPUTS_NAME_CHANGE = 'INPUTS_NAME_CHANGE';
 export const INPUTS_MODE_CHANGE = 'INPUTS_MODE_CHANGE';
@@ -18,6 +19,14 @@ export function newAction(payload: IInput) {
         type: INPUTS_NEW,
         payload
     };
+}
+
+export function reorderAction(payload: {sourceId: number, targetId: number}) {
+  console.log(payload);
+  return {
+    type: INPUTS_REORDER,
+    payload
+  };
 }
 
 export function deleteAction(payload: {id: number}) {
