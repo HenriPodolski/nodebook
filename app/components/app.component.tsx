@@ -155,26 +155,30 @@ export class AppComponent extends React.Component<IComponentProps> {
                             <li style={{textDecoration: 'line-through'}}>Parse json data values for output and make it available for scripting</li>
                             <li style={{textDecoration: 'line-through'}}>Make inputs/outputs sortable by drag and drop to the UI (https://codesandbox.io/s/k260nyxq9v)</li>
                             <li style={{textDecoration: 'line-through'}}>Apply code execution chain to processors and reload output that might have changed, on delete, sort, value update or mode change using updateOutputsEpic</li>
-                            <li>Remove Editor for Markdown as it is documentation</li>
-                            <li>Make selectors available for HTML, to make it possible to specify exact html
-                                placement in client output component
-                            </li>
                             <li>Get scripting errors from scripting execution and write it to output store</li>
-                            <li>Get parse error from json and write it to output store</li>
-                            <li>Clean up nodebook folder if code source folder becomes empty on removeFile</li>
+                            <li>Asure that moved inputs trigger code execution chain again and everything what is following in line after a deleted input</li>
+                            <li></li>
                             <li>
-                                Add title to package.json nodebook
-                                <pre>
-                                {JSON.stringify({
+                              Add title to package.json nodebook
+                              <pre>
+                                  {JSON.stringify({
                                     "nodebook": {
-                                        "title": "Some title",
-                                        "nodes": []
+                                      "title": "Some title",
+                                      "nodes": []
                                     }
-                                }, null, 2)}
-                            </pre>
+                                  }, null, 2)}
+                              </pre>
                             </li>
                             <li>Make title editable</li>
+                            <li>Save title to package.json and read title from package.json</li>
+                            <li>Validate title and allow creation of code if title is valid</li>
                             <li></li>
+                            <li>Implement nodebook package.json dependency config</li>
+                            <li>Display list of installed packages in the gui</li>
+                            <li>Perform install on package add</li>
+                            <li>Integrate npm package autocomplete</li>
+                            <li></li>
+                            <li>Clean up nodebook folder if code source folder becomes empty on removeFile</li>
                             <li>Validate html for not using html, body, head</li>
                             <li>Build html selector UI for selecting where to place HTML snippet</li>
                             <li>Add selector for html placement in html input</li>
@@ -185,14 +189,17 @@ export class AppComponent extends React.Component<IComponentProps> {
                             <li>Add scss to supported modes</li>
                             <li>Process scss code values for output</li>
                             <li></li>
+                            <li>Get parse error from json and write it to output store</li>
                             <li>Integrate console hooks for all modes and contexts (consider using _console and replacement in code)</li>
                             <li>Implement console hooks as observer, which update the console output
                                 view whenever included code logs
                             </li>
                             <li>Design and implement full featured logging component</li>
-                            <li>Delete editor item functionality, if readOnly</li>
+                            <li>Delete editor item functionality, like blinking cursor if readOnly</li>
                             <li>Create ux design and change views accordingly</li>
-                            <li>Create visual design and apply it</li>
+                            <li>Remove latest idle item from the list of items which are draggable</li>
+                            <li>Create visual design and apply it, e.g. icons for drag and drop, edit, delete and so on</li>
+                            <li>Remove Editor for Markdown as it is documentation and leave the edit icon in the UI</li>
                             <li>Style output section, add tabs and add max-height and scrollbars for long output</li>
                             <li></li>
                             <li>Provide release artefact workflow in github (travis)</li>
@@ -203,11 +210,7 @@ export class AppComponent extends React.Component<IComponentProps> {
                         <ol>
                             <li>Confirm file override in case file is present but not in package.json</li>
                             <li>Get stdout from executed scss code and write it to output store</li>
-                            <li></li>
-                            <li>Implement nodebook package.json dependency config</li>
-                            <li>Display list of installed packages in the gui</li>
-                            <li>Perform install on package add</li>
-                            <li>Integrate npm package autocomplete</li>
+                            <li>Add new window support for long code inputs</li>
                             <li></li>
                             <li>Add dark and bright mode switch</li>
                             <li>Create deployable bundles of server and client side nodebooks</li>
@@ -220,9 +223,6 @@ export class AppComponent extends React.Component<IComponentProps> {
                                     <li>CSS</li>
                                     <li>HTML</li>
                                 </ol>
-                            </li>
-                            <li>Implement multiselect for snippets to use for current context
-                                (necessary?, valuable?)
                             </li>
                             <li>Add dependencies fields in nodebook package json (necessary?,
                                 valuable?)
