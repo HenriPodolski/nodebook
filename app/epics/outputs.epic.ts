@@ -2,9 +2,9 @@ import { ofType } from 'redux-observable';
 import { switchMap, withLatestFrom } from 'rxjs/internal/operators';
 import { OUTPUTS_UPDATE, stateAction, updateAction } from '../actions/output/outputs.actions';
 import {
-	executeFlagChangeAction,
-	INPUTS_EXECUTE_FLAG_CHANGE,
-	validationErrorsChangeAction
+  executeFlagChangeAction,
+  INPUTS_EXECUTE_FLAG_CHANGE,
+  validationErrorsChangeAction
 } from '../actions/input/inputs.actions';
 import { ProcessorService } from '../services/processors/processor.service';
 import { InputEnums } from '../enums/input.enums';
@@ -16,11 +16,11 @@ export const outputsUpdateEpic = (action$, state$) => action$.pipe(
 	ofType(OUTPUTS_UPDATE),
 	withLatestFrom(state$),
 	switchMap(([action, state]) => {
-        let actions: { type: string; payload?: any; }[] = [];
+
+	  let actions: { type: string; payload?: any; }[] = [];
 		PackageJsonService.updateNodebookNodes(state.outputs);
-		// Process every output which could probably depend on
-        // previous output update
-        console.log('outputsUpdateEpic', action);
+
+		console.log('outputsUpdateEpic', action);
 		actions.push(stateAction());
 		return actions;
 	})
@@ -50,8 +50,8 @@ export const dirtyExecuteFlagOutputEpic = (action$, state$) => action$.pipe(
         });
 
         if (processed.length) {
-			actions.push(updateAction(processed));
-		}
+          actions.push(updateAction(processed));
+        }
 
         return actions;
     }));

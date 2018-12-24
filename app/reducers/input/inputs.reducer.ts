@@ -7,6 +7,7 @@ import {
 import { inputReducer } from './input.reducer';
 import { IInput } from '../../shared/interfaces/input.interface';
 import { immutableSplice } from '../../helpers/immutable.helpers';
+import { InputEnums } from '../../enums/input.enums';
 
 export function inputsReducer(state: IInput[] = rootState.inputs,
                               action: actionWithPayload<any>): IInput[] {
@@ -16,7 +17,11 @@ export function inputsReducer(state: IInput[] = rootState.inputs,
       const targetId = action.payload.targetId;
       const result = Array.from([...state]);
       const [removed] = result.splice(sourceId, 1);
-      result.splice(targetId, 0, removed);
+      result.splice(targetId, 0, removed)
+        .map((current, index) => {
+          current.executeFlag = InputEnums.executeFlags.idle;
+          return inputReducer(current, action, index + 1)
+        });
 
       return result;
     }
@@ -31,7 +36,6 @@ export function inputsReducer(state: IInput[] = rootState.inputs,
       const items = immutableSplice(state, action.id, 1).map((item, index) => {
         return inputReducer(item, action, index + 1);
       });
-      console.log('inputsReducer INPUTS_DELETE', items);
 
       return [...items];
     }

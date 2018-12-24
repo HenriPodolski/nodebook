@@ -153,8 +153,8 @@ export class AppComponent extends React.Component<IComponentProps> {
                             <li style={{textDecoration: 'line-through'}}>Delete input/output functionality and UI</li>
                             <li style={{textDecoration: 'line-through'}}>Add confirm delete modal</li>
                             <li style={{textDecoration: 'line-through'}}>Parse json data values for output and make it available for scripting</li>
-                            <li>Make inputs/outputs sortable by drag and drop to the UI (https://codesandbox.io/s/k260nyxq9v)</li>
-                            <li>Apply code execution chain to processors and reload output that might have changed, on delete or value update or mode change using updateOutputsEpic</li>
+                            <li style={{textDecoration: 'line-through'}}>Make inputs/outputs sortable by drag and drop to the UI (https://codesandbox.io/s/k260nyxq9v)</li>
+                            <li style={{textDecoration: 'line-through'}}>Apply code execution chain to processors and reload output that might have changed, on delete, sort, value update or mode change using updateOutputsEpic</li>
                             <li>Remove Editor for Markdown as it is documentation</li>
                             <li>Make selectors available for HTML, to make it possible to specify exact html
                                 placement in client output component
