@@ -111,8 +111,12 @@ export class ClientOutputComponent extends React.Component<IComponentProps> {
         <FrameContextConsumer>
           {
             ({document, window}) => {
-              {this.frameHook(document, window)}
-              <div dangerouslySetInnerHTML={{__html: html}}></div>
+              this.frameHook(document, window);
+              return (
+                <>
+                  <div dangerouslySetInnerHTML={{__html: html}}></div>
+                </>
+              );
             }
           }
         </FrameContextConsumer>

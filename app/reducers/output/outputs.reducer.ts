@@ -21,7 +21,7 @@ export function outputsReducer(state: any[] = [],
           {},
           output,
           {
-            logs: [...output.logs, action.payload]
+            logs: [action.payload]
           });
       });
     }

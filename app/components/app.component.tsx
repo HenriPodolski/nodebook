@@ -170,8 +170,9 @@ export class AppComponent extends React.Component<IComponentProps> {
                 and reload output that might have changed, on delete, sort, value update or mode
                 change using updateOutputsEpic
               </li>
-              <li style={{textDecoration: 'line-through'}}>Get scripting errors from scripting execution and write it to output store</li>
-              <li>Normalize error output using the current js client error output (Error, Receipe, File, Line, Column)</li>
+              <li style={{textDecoration: 'line-through'}}>Get scripting errors from scripting
+                execution and write it to output store
+              </li>
               <li>Asure that moved inputs trigger code execution chain again and everything what is
                 following in line after a deleted input
               </li>
@@ -213,6 +214,9 @@ export class AppComponent extends React.Component<IComponentProps> {
               </li>
               <li>Implement console hooks as observer, which update the console output
                 view whenever included code logs
+              </li>
+              <li>Normalize error and logs output using the current js client error output (Error,
+                Receipe, File, Line, Column)
               </li>
               <li>Design and implement full featured logging component</li>
               <li>Delete editor item functionality, like blinking cursor if readOnly</li>
