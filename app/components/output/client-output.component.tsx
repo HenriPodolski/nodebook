@@ -13,6 +13,7 @@ interface IComponentProps {
     file: string;
     compiledFile?: string;
   }[];
+  index: number;
   changeExecuteFlag: (payload: string) => { type: string, payload: string };
   log: (payload: {type: string, out: string}) => { type: string, payload: {type: string, out: string}};
 }
@@ -24,10 +25,12 @@ export class ClientOutputComponent extends React.Component<IComponentProps> {
   }
 
   frameHook(contentDocument, contentWindow) {
-    console.log('ClientOutputComponent.frameHook()', contentDocument, contentWindow);
+    // console.log('ClientOutputComponent.frameHook()', contentDocument, contentWindow);
+
+    const originalError = contentWindow.onerror;
 
     contentWindow.onerror = (err, file, line, col) => {
-      console.log(err, line, col, file);
+      // console.log(err, line, col, file);
       let out = '';
       out += `Error: ${err}<br/>`;
       out += `Receipe: ${file.substring(file.lastIndexOf('/') + 1, file.length)}<br/>`;
@@ -39,6 +42,8 @@ export class ClientOutputComponent extends React.Component<IComponentProps> {
         type: 'error',
         out
       });
+
+      contentWindow.onerror = originalError;
 
       return false;
     }
@@ -52,7 +57,11 @@ export class ClientOutputComponent extends React.Component<IComponentProps> {
     let html = '';
     let css = '';
 
-    this.props.outputs.forEach(output => {
+    this.props.outputs.forEach((output, index) => {
+      if (this.props.index < index) {
+        return;
+      }
+
       switch (true) {
         case (output.mode === ModeEnums.json.value): {
           dataSources += `
@@ -79,9 +88,12 @@ export class ClientOutputComponent extends React.Component<IComponentProps> {
           break;
         }
       }
-
     });
 
+    // console.group('ClientOutputComponent.render() ' + this.props.index);
+    // console.log(html);
+    // console.log(scripts);
+    // console.groupEnd();
 
     let tpl = `<!DOCTYPE html>
             <html>
@@ -100,13 +112,30 @@ export class ClientOutputComponent extends React.Component<IComponentProps> {
                     ${dataSources}
                     ${typeScripts}
                     ${scripts}
+                    <script>
+                        console.log('Frame initialized ', ${this.props.index});
+                    </script>
                 </body>
             </html>
         `;
 
+
+    // tslint:disable
+    const hashCode = (s) =>{
+      return s.split('').reduce((a, b) => {
+        a = ((a << 5) - a) + b.charCodeAt(0);
+        return a & a
+      }, 0);
+    };
+    // tslint:enable
+
+    // keyhash is check for: if anything changes, render again
+    const keyHash = hashCode(tpl.toString() + html + String(this.props.index));
+
     return (
       <Frame initialContent={tpl.toString()}
              mountTarget='#mount'
+             key={keyHash}
              className={outputStyles.OutputFrame}>
         <FrameContextConsumer>
           {

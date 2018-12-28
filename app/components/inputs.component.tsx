@@ -73,36 +73,47 @@ export class InputsComponent extends React.Component<IComponentProps> {
 
   render() {
     return (
-      <DragDropContext onDragEnd={this.handleDragEnd}>
-        <DebugContainer inputs={this.props.inputs}/>
-        <Droppable droppableId="droppable">
-          {(provided, snapshot) => (
-            <div
-              ref={provided.innerRef}
-              style={getListStyle(snapshot.isDraggingOver)}
-            >
-              {this.props.inputs.map((dataset, i) => (
-                  <Draggable key={dataset.id} draggableId={dataset.id} index={i}>
-                    {(provided, snapshot) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        style={getItemStyle(
-                          snapshot.isDragging,
-                          provided.draggableProps.style
-                        )}
-                      >
-                        {this.ioItem(i)}
-                      </div>
-                    )}
-                  </Draggable>
-                )
-              )}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
+      <>
+        <DragDropContext onDragEnd={this.handleDragEnd}>
+          <DebugContainer inputs={this.props.inputs}/>
+          <Droppable droppableId="droppable">
+            {(provided, snapshot) => (
+              <div
+                ref={provided.innerRef}
+                style={getListStyle(snapshot.isDraggingOver)}
+              >
+                {this.props.inputs
+                  .filter((input, index) => {
+                    return (this.props.inputs.length - 1) > index;
+                  })
+                  .map((dataset, i) => (
+                    <Draggable key={dataset.id} draggableId={dataset.id} index={i}>
+                      {(provided, snapshot) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          style={getItemStyle(
+                            snapshot.isDragging,
+                            provided.draggableProps.style
+                          )}
+                        >
+                          {this.ioItem(i)}
+                        </div>
+                      )}
+                    </Draggable>
+                  )
+                )}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+        <div>
+          <div>
+            {this.ioItem(this.props.inputs.length - 1)}
+          </div>
+        </div>
+      </>
     );
   }
 }

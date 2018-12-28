@@ -18,6 +18,7 @@ export class AppComponent extends React.Component<IComponentProps> {
   }
 
   todos() {
+    // tslint:disable:max-line-length
     return (
       <>
         {this.props.debug && (
@@ -173,7 +174,8 @@ export class AppComponent extends React.Component<IComponentProps> {
               <li style={{textDecoration: 'line-through'}}>Get scripting errors from scripting
                 execution and write it to output store
               </li>
-              <li>Asure that moved inputs trigger code execution chain again and everything what is
+              <li style={{textDecoration: 'line-through'}}>Remove latest idle item from the list of items which are draggable</li>
+              <li style={{textDecoration: 'line-through'}}>Asure that moved inputs trigger code execution chain again and everything what is
                 following in line after a deleted input
               </li>
               <li></li>
@@ -221,8 +223,7 @@ export class AppComponent extends React.Component<IComponentProps> {
               <li>Design and implement full featured logging component</li>
               <li>Delete editor item functionality, like blinking cursor if readOnly</li>
               <li>Create ux design and change views accordingly</li>
-              <li>Make drag and drop available via sort button and end d&d mode via edit button</li>
-              <li>Remove latest idle item from the list of items which are draggable</li>
+              <li>Make drag and drop available via sort button and end drag and drop mode via edit button</li>
               <li>Create visual design and apply it, e.g. icons for drag and drop, edit, delete and
                 so on
               </li>
@@ -263,6 +264,7 @@ export class AppComponent extends React.Component<IComponentProps> {
         )}
       </>
     );
+    // tslint:enable:max-line-length
   }
 
   application() {
