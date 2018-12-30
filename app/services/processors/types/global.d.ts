@@ -1,0 +1,1 @@
+declare var nodebook: any;

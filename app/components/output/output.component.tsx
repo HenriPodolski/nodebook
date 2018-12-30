@@ -5,6 +5,7 @@ import { ClientOutputContainer } from '../../containers/output/client-output.con
 import { LogsOutputContainer } from '../../containers/output/logs-output.container';
 import { ContextEnums } from '../../enums/contexts.enums';
 import { ModeEnums } from '../../enums/mode.enums';
+import { DataOutputContainer } from '../../containers/output/data-output.container';
 
 let styles = require('./output.component.scss');
 
@@ -87,6 +88,14 @@ export class OutputComponent extends React.Component<IComponentProps> {
 					</>
 				)
 			}
+
+            case (mode === ModeEnums.json.value): {
+                return (
+                    <>
+                        <DataOutputContainer index={this.props.index} />
+                    </>
+                )
+            }
 
             default: {
                 return (

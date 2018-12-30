@@ -2,6 +2,8 @@
 import { ISourceFileInfos } from '../../shared/interfaces/source-file.interface';
 import { SourceFilesService } from '../files/source-files.service';
 import { IProcessOutput } from '../../shared/interfaces/output.interface';
+import { IRootState } from '../../shared/interfaces/root-state.interface';
+import { StateSnapShotService } from '../state/state-snapshot.service';
 
 const compilerOptions = {
 /* Basic Options */
@@ -50,7 +52,7 @@ const compilerOptions = {
     // "baseUrl": "./",                       /* Base directory to resolve non-absolute module names. */
     // "paths": {},                           /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
     // "rootDirs": [],                        /* List of root folders whose combined content represents the structure of the project at runtime. */
-    "typeRoots": ["node_modules/@types"],                       /* List of folders to include type definitions from. */
+    "typeRoots": ["node_modules/@types", "./types"],                       /* List of folders to include type definitions from. */
     "types": ["node"],                           /* Type declaration files to be included in compilation. */
     "allowSyntheticDefaultImports": true,  /* Allow default imports from modules with no default export. This does not affect code emit, just typechecking. */
     "esModuleInterop": true,                   /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
@@ -68,11 +70,25 @@ const compilerOptions = {
 };
 
 export class TypescriptServerProcessorService {
-	static process({value, filename, mode, context}): IProcessOutput {
+	static process({value, id, filename, mode, context}, state: IRootState): IProcessOutput {
 		const sourceFileInfos: ISourceFileInfos = SourceFilesService
 			.createIfNotExists(value, filename, mode, context);
-		let out;
-		const originalConsole = console;
+        let out;
+        let data = '{}';
+        const originalConsole = console;
+
+        const dataOutputs = StateSnapShotService
+            .getAllOutputsBeforeIndexWithSpecifiedModes(state, id, ['json']);
+
+        const dataSources = dataOutputs.reduce((prev, next) => {
+            prev += `${next.name}: ${JSON.stringify(JSON.parse(next.value))}`;
+            return prev;
+        }, '');
+
+        if (dataSources.length) {
+            data = `{${dataSources}}`;
+            console.log('Data sources applied', data);
+        }
 
         try {
             out = (new Function(`  
@@ -90,6 +106,12 @@ export class TypescriptServerProcessorService {
                 const consoleOutputService = new ConsoleOutputService();
                 console.log('consoleOutputService', consoleOutputService);
                 consoleOutputService.hook();
+                
+                var nodebook = {
+                    data: ${data}
+                };
+                
+                global.nodebook = nodebook;
                 
                 require('.${sourceFileInfos.relativeFilePath}');   
                 delete require.cache[require.resolve('.${sourceFileInfos.relativeFilePath}')];                              

@@ -1,13 +1,19 @@
 import { combineEpics } from 'redux-observable';
-import { contextInputEpic, newInputEpic } from './inputs.epic';
-import { dirtyExecuteFlagOutputEpic, newOutputEpic, packageOutputsEpic } from './outputs.epic';
+import { contextInputEpic, markInputsForExecutionEpic, newInputEpic } from './inputs.epic';
+import { dirtyExecuteFlagOutputEpic, newOutputEpic, outputsUpdateEpic } from './outputs.epic';
 import { initEpic } from './init.epic';
+import { deleteConfirmationEpic, deleteConfirmedEpic } from './controls.epic';
+import { updateTitleEpic } from './title.epic';
 
 export const rootEpic = combineEpics(
 	initEpic,
-    newInputEpic,
-    contextInputEpic,
+	newInputEpic,
+	contextInputEpic,
 	newOutputEpic,
-    dirtyExecuteFlagOutputEpic,
-	packageOutputsEpic
+	dirtyExecuteFlagOutputEpic,
+	outputsUpdateEpic,
+	deleteConfirmationEpic,
+	deleteConfirmedEpic,
+  markInputsForExecutionEpic,
+  updateTitleEpic
 );

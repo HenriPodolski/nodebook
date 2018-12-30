@@ -1,31 +1,47 @@
-// import * as fs from 'fs';
 import { SourceFilesService } from './source-files.service';
-import * as fs from "fs";
 import { environment } from '../../environments/environment';
 import { IInput } from '../../shared/interfaces/input.interface';
 import { IPackageNode } from '../../shared/interfaces/package-node.interface';
 import * as path from 'path';
+import * as fs from 'fs';
+import { IPackageJsonNodebookParams } from '../../shared/interfaces/package-json-nodebook.interface';
 
-interface IPackageJsonNodebookParams {
-	id: number;
-	file: string;
-	mode: string;
-	name: string;
-	context: string;
-	value: string;
-}
-
-const packageJsonInitialData = {
-	private: true,
-	nodebook: {
-		title: '',
-		nodes: []
-	},
-	dependencies: {},
-	devDependencies: {}
-};
+const packageJsonInitialData = environment.config.package;
 
 export class PackageJsonService {
+	static getTitle(): string {
+    const nodebookPath = PackageJsonService.createIfNotExistsAndGet();
+    const packageJsonFileContent = fs.readFileSync(nodebookPath, 'utf-8');
+    const packageJsonObject = JSON.parse(packageJsonFileContent);
+    const nodebookConfig = packageJsonObject.nodebook;
+
+    let title = nodebookConfig.title;
+
+    if (!title) {
+      title = PackageJsonService.updateTitle(packageJsonInitialData.nodebook.title);
+    }
+
+    return title;
+	}
+
+	static updateTitle(newTitle) {
+    const nodebookPath = PackageJsonService.createIfNotExistsAndGet();
+    const packageJsonFileContent = fs.readFileSync(nodebookPath, 'utf-8');
+    const packageJsonObject = JSON.parse(packageJsonFileContent);
+    const nodebookConfig = packageJsonObject.nodebook;
+
+    nodebookConfig.title = newTitle;
+    packageJsonObject.nodebook = nodebookConfig;
+
+    fs.writeFileSync(
+      nodebookPath,
+      JSON.stringify(packageJsonObject, null, 2),
+      {encoding: 'utf-8'}
+    );
+
+    return newTitle;
+	}
+
 	static loadNodebook(): IInput[] {
 		const nodebookPath = PackageJsonService.createIfNotExistsAndGet();
 		const packageJsonFileContent = fs.readFileSync(nodebookPath, 'utf-8');
@@ -89,13 +105,38 @@ export class PackageJsonService {
 		const packageJsonFileContent = fs.readFileSync(nodebookPath, 'utf-8');
 		let packageJsonObject = JSON.parse(packageJsonFileContent);
 
-		packageJsonObject = PackageJsonService.addNodebookItems(packageJsonObject,  params);
+		packageJsonObject = PackageJsonService.addNodebookItems(packageJsonObject, params);
 
 		fs.writeFileSync(
 			nodebookPath,
 			JSON.stringify(packageJsonObject, null, 2),
 			{encoding: 'utf-8'}
 		);
+	}
+
+	static removeNodebookItem(id: number) {
+        const nodebookPath = PackageJsonService.createIfNotExistsAndGet();
+        const packageJsonFileContent = fs.readFileSync(nodebookPath, 'utf-8');
+        let packageJsonObject = JSON.parse(packageJsonFileContent);
+
+        packageJsonObject.nodebook.nodes = packageJsonObject.nodebook.nodes.reduce(
+            (prev, next): IPackageNode[] => {
+            	if (next.id !== id) {
+                    prev.push({
+                        id: next.id,
+                        file: next.file,
+                        context: next.context
+                    });
+                }
+
+                return prev;
+            }, []);
+
+        fs.writeFileSync(
+            nodebookPath,
+            JSON.stringify(packageJsonObject, null, 2),
+            {encoding: 'utf-8'}
+        );
 	}
 
 	static addNodebookItems(packageJsonObject, items): string {
