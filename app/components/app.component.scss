@@ -2,6 +2,14 @@
   font-family: monospace;
 }
 
+.AppComponent__Title {
+  display: inline-block;
+}
+
+.AppComponent__Error {
+  color: red;
+}
+
 .AppComponent__Todos {
   margin: 20px 30px;
 }

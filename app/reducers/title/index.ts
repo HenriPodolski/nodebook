@@ -1,0 +1,1 @@
+export { titleReducer } from './title.reducer';

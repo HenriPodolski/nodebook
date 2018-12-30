@@ -7,6 +7,7 @@ import { PackageJsonService } from '../services/files/package-json.service';
 import { executeFlagChangeAction, newAction } from '../actions/input/inputs.actions';
 import { InputEnums } from '../enums/input.enums';
 import { IInput } from '../shared/interfaces/input.interface';
+import { updateAction } from '../actions/title/title.actions';
 
 export const initEpic = (action$, state$) => action$.pipe(
 	ofType(INIT),
@@ -17,8 +18,6 @@ export const initEpic = (action$, state$) => action$.pipe(
 
 		const initialInputs = PackageJsonService.loadNodebook();
 
-		console.log(initialInputs);
-
 		initialInputs.forEach((input: IInput, index: number) => {
 
 			actions.push(newAction(input));
@@ -28,6 +27,9 @@ export const initEpic = (action$, state$) => action$.pipe(
 			}
 		});
 
+		const initialTitle = PackageJsonService.getTitle();
+
+		actions.push(updateAction(initialTitle));
 		actions.push(stopAction(LoadingEnums.components.application));
 		// actions.push(stateAction());
 
