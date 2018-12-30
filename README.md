@@ -3,7 +3,7 @@
 A data science and rapid prototyping tool based on electron, TypeScript, Front-End development stack and inspired by Jupyter Notebook.
 
 ## Status
-Version: 0.0.0
+Version: 0.1.0
 Project setup is work in progress. Do not use!
 
 ## Libraries
