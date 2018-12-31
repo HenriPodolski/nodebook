@@ -5,6 +5,7 @@ import { cancelEditAction, editAction, updateAction } from '../actions/title/tit
 
 const mapStateToProps = state => ({
 	title: state.title,
+  configurePackages: state.packages.configure,
 	loading: state.loading,
 	debug: state.debug.components
 });

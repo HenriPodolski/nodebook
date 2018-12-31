@@ -3,6 +3,11 @@ import { IRootState } from '../shared/interfaces/root-state.interface';
 import { SupportEnums } from '../enums/support.enums';
 
 export const rootState: IRootState = {
+    packages: {
+      dependencies: {},
+      devDependencies: {},
+      configure: false
+    },
     title: {
         text: environment.config.package.nodebook.title,
         valid: false,
