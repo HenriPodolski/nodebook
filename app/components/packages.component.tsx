@@ -4,6 +4,7 @@ interface IComponentProps {
   configure: boolean;
   config: () => { type: string };
   cancelConfig: () => { type: string };
+  query: (query: string) => { type: string, payload: string }
 }
 
 export class PackagesComponent extends React.Component<IComponentProps> {
@@ -32,7 +33,7 @@ export class PackagesComponent extends React.Component<IComponentProps> {
   handlePackageInputChange(evt) {
     const value = evt.target.value;
 
-    console.info('Do autocomplete lookup with', value, 'if size is 2');
+    this.props.query(value);
   }
 
   handlePackageInstall(evt) {

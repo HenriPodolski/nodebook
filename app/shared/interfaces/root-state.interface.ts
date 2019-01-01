@@ -5,6 +5,10 @@ import { ITitle } from './title.interface';
 import { IPackages } from './packages.interface';
 
 export interface IRootState {
+  packagesAutocomplete: {
+    query: string,
+    found: string[]
+  },
   packages: IPackages,
 	title: ITitle,
 	inputs: IInput[],

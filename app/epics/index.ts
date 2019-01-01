@@ -4,6 +4,7 @@ import { dirtyExecuteFlagOutputEpic, newOutputEpic, outputsUpdateEpic } from './
 import { initEpic } from './init.epic';
 import { deleteConfirmationEpic, deleteConfirmedEpic } from './controls.epic';
 import { updateTitleEpic } from './title.epic';
+import { performQueryEpic } from './packages.epic';
 
 export const rootEpic = combineEpics(
 	initEpic,
@@ -15,5 +16,6 @@ export const rootEpic = combineEpics(
 	deleteConfirmationEpic,
 	deleteConfirmedEpic,
   markInputsForExecutionEpic,
-  updateTitleEpic
+  updateTitleEpic,
+  performQueryEpic
 );

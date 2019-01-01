@@ -6,10 +6,11 @@ import { loadingReducer } from './loading';
 import { modalDialogReducer } from './controls';
 import { initReducer } from './init';
 import { titleReducer } from './title';
-import { packagesReducer } from './packages';
+import { packagesAutocompleteReducer, packagesReducer } from './packages';
 
 export const rootReducer = combineReducers({
   packages: packagesReducer,
+  packagesAutocomplete: packagesAutocompleteReducer,
   title: titleReducer,
   inputs: inputsReducer,
   outputs: outputsReducer,
