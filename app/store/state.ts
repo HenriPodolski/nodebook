@@ -5,6 +5,7 @@ import { SupportEnums } from '../enums/support.enums';
 export const rootState: IRootState = {
   packagesAutocomplete: {
     query: '',
+    selected: null,
     found: []
   },
   packages: {

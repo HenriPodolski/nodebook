@@ -216,6 +216,15 @@ export const todos = () => {
         <li>Style output section, add tabs and add max-height and scrollbars for long output
         </li>
         <li></li>
+        <li>Add filter for previous inputs next stages inputs, example:
+            Filter: test.ts, test.js
+        +   -----------------------------------
+            Next Level: start.js, start.css, basic.scss
+        </li>
+        <li>Implement js/ts output to data source (json), by writing output to the nodebook.data variable</li>
+        <li>Make nodebook available in the browser and make file operation services optional</li>
+        <li>Replace the file operations with a zip export, which includes the files and structure</li>
+        <li></li>
         <li>Provide release artefact workflow in github (travis)</li>
         <li>Add documentation</li>
         <li>Provide landing page</li>

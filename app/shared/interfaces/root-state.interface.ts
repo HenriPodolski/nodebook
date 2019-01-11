@@ -2,13 +2,10 @@ import { IInput } from './input.interface';
 import { ILoading } from './loading.interface';
 import { IModalDialog } from './modal-dialog.interface';
 import { ITitle } from './title.interface';
-import { IPackages } from './packages.interface';
+import { IPackages, IPackagesAutocomplete } from './packages.interface';
 
 export interface IRootState {
-  packagesAutocomplete: {
-    query: string,
-    found: string[]
-  },
+  packagesAutocomplete: IPackagesAutocomplete,
   packages: IPackages,
 	title: ITitle,
 	inputs: IInput[],

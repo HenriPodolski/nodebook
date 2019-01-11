@@ -4,19 +4,23 @@ import {
   PACKAGES_AUTOCOMPLETE_UPDATE_FINDINGS
 } from '../../actions/packages/packages-autocomplete.actions';
 import { isValidAutocompleteQuery } from '../../helpers/packages-autocomplete-validator.helper';
+import { IPackagesAutocomplete } from '../../shared/interfaces/packages.interface';
+import { rootState } from '../../store/state';
 
 export function packagesAutocompleteReducer(
-  state: {query: string, found: string[]} = {query: '', found: []},
+  state: IPackagesAutocomplete = rootState.packagesAutocomplete,
   action: actionWithPayload<any>
-): {query: string, found: string[]} {
+): IPackagesAutocomplete {
   switch (action.type) {
     case PACKAGES_AUTOCOMPLETE_QUERY: {
-      if (isValidAutocompleteQuery(action.payload)) {
-        return state;
+      let query = action.payload.trim();
+
+      if (!isValidAutocompleteQuery(query)) {
+        query = '';
       }
       return {
         ...state,
-        query: action.payload.trim()
+        query
       };
     }
     case PACKAGES_AUTOCOMPLETE_UPDATE_FINDINGS: {

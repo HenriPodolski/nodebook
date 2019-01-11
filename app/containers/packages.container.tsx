@@ -4,7 +4,8 @@ import { cancelConfigureAction, configureAction } from '../actions/packages/pack
 import { queryAction } from '../actions/packages/packages-autocomplete.actions';
 
 const mapStateToProps = state => ({
-  configure: state.packages.configure
+  configure: state.packages.configure,
+  packagesAutocomplete: state.packagesAutocomplete
 });
 
 const mapDispatchToProps = (dispatch) => {

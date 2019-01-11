@@ -2,6 +2,7 @@ import * as React from 'react';
 
 interface IComponentProps {
   configure: boolean;
+  packagesAutocomplete: {query: string, found: any[]};
   config: () => { type: string };
   cancelConfig: () => { type: string };
   query: (query: string) => { type: string, payload: string }
@@ -15,6 +16,7 @@ export class PackagesComponent extends React.Component<IComponentProps> {
     this.handlePackageConfiguration = this.handlePackageConfiguration.bind(this);
     this.handlePackageInstall = this.handlePackageInstall.bind(this);
     this.handlePackageInputChange = this.handlePackageInputChange.bind(this);
+    this.handlePackageSuggestChange = this.handlePackageSuggestChange.bind(this);
     this.handleCancelPackageConfiguration = this.handleCancelPackageConfiguration.bind(this);
   }
 
@@ -30,16 +32,33 @@ export class PackagesComponent extends React.Component<IComponentProps> {
     this.props.cancelConfig();
   }
 
-  handlePackageInputChange(evt) {
-    const value = evt.target.value;
-
-    this.props.query(value);
-  }
-
   handlePackageInstall(evt) {
     evt.preventDefault();
 
     console.info(`Perform install of ${evt.target.package.value} !`);
+  }
+
+  handlePackageInputChange(evt) {
+    console.log(evt);
+  }
+
+  handlePackageSuggestChange(evt) {
+    this.props.query(evt.target.value);
+  }
+
+  autosuggest() {
+    return (
+      <div>
+        <input id="package" name="package" onChange={this.handlePackageSuggestChange} />
+        {this.props.packagesAutocomplete.found.map((item, i) => {
+          return (
+            <div key={i}>
+              {item.name}
+            </div>
+          )
+        })}
+      </div>
+    );
   }
 
   render() {
@@ -55,7 +74,7 @@ export class PackagesComponent extends React.Component<IComponentProps> {
           <form onSubmit={this.handlePackageInstall}>
             <fieldset>
               <label htmlFor="package">NPM package</label>
-              <input type="text" id="package" name="package" onChange={this.handlePackageInputChange} />
+              {this.autosuggest()}
               <button type="submit">Install</button>
             </fieldset>
           </form>

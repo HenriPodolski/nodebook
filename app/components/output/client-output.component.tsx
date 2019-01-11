@@ -119,7 +119,7 @@ export class ClientOutputComponent extends React.Component<IComponentProps> {
             </html>
         `;
 
-
+    // todo: move to helper
     // tslint:disable
     const hashCode = (s) =>{
       return s.split('').reduce((a, b) => {

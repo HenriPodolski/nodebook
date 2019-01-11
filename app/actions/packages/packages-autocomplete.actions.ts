@@ -10,7 +10,7 @@ export function queryAction(query: string) {
   };
 }
 
-export function updateFindingsAction(found: string[]) {
+export function updateFindingsAction(found: any[]) {
   return {
     type: PACKAGES_AUTOCOMPLETE_UPDATE_FINDINGS,
     payload: found
