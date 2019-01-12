@@ -10,7 +10,9 @@ export const rootState: IRootState = {
   },
   packages: {
     dependencies: {},
+    stagedDependencies: [],
     devDependencies: {},
+    stagedDevDependencies: [],
     configure: false
   },
   title: {

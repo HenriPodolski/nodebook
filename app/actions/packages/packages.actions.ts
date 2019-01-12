@@ -5,9 +5,11 @@ export const PACKAGES_CONFIGURE = 'PACKAGES_CONFIGURE';
 export const PACKAGES_CANCEL_CONFIGURE = 'PACKAGES_CANCEL_CONFIGURE';
 export const PACKAGES_UPDATE = 'PACKAGES_UPDATE';
 export const PACKAGES_UPDATE_DEPENDENCY = 'PACKAGES_UPDATE_DEPENDENCY';
+export const PACKAGES_STAGE_DEPENDENCY = 'PACKAGES_STAGE_DEPENDENCY';
 export const PACKAGES_ADD_DEPENDENCY = 'PACKAGES_ADD_DEPENDENCY';
 export const PACKAGES_REMOVE_DEPENDENCY = 'PACKAGES_REMOVE_DEPENDENCY';
 export const PACKAGES_UPDATE_DEV_DEPENDENCY = 'PACKAGES_UPDATE_DEV_DEPENDENCY';
+export const PACKAGES_STAGE_DEV_DEPENDENCY = 'PACKAGES_STAGE_DEV_DEPENDENCY';
 export const PACKAGES_ADD_DEV_DEPENDENCY = 'PACKAGES_ADD_DEV_DEPENDENCY';
 export const PACKAGES_REMOVE_DEV_DEPENDENCY = 'PACKAGES_REMOVE_DEV_DEPENDENCY';
 
@@ -15,6 +17,13 @@ export function updateAction(packages: IPackages) {
   return {
     type: PACKAGES_UPDATE,
     payload: packages
+  };
+}
+
+export function stageDependencyAction(dependency) {
+  return {
+    type: PACKAGES_STAGE_DEPENDENCY,
+    payload: dependency
   };
 }
 
@@ -35,6 +44,13 @@ export function removeDependencyAction(dependency) {
 export function updateDependencyAction(dependency) {
   return {
     type: PACKAGES_UPDATE_DEPENDENCY,
+    payload: dependency
+  };
+}
+
+export function stageDevDependencyAction(dependency) {
+  return {
+    type: PACKAGES_STAGE_DEV_DEPENDENCY,
     payload: dependency
   };
 }

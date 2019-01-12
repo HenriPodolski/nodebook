@@ -8,7 +8,7 @@ export const queryNpm = (query): Promise<any[]> => {
   let perform;
 
   if (mock) {
-    perform = new Promise((resolve, reject) => {
+    perform = new Promise((resolve) => {
       resolve(mockData);
     })
   } else {
@@ -38,6 +38,18 @@ export const queryNpm = (query): Promise<any[]> => {
         }
       });
     });
+  }
+
+  return perform;
+};
+
+export const installNpmPackage = (npmPackage: string, isDev: boolean = false): Promise<any[]> => {
+  let perform;
+
+  if (isDev) {
+    perform = new Promise((resolve, reject) => {});
+  } else {
+    perform = new Promise((resolve, reject) => {});
   }
 
   return perform;

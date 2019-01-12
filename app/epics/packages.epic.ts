@@ -7,9 +7,22 @@ import {
 } from '../actions/packages/packages-autocomplete.actions';
 import { isValidAutocompleteQuery } from '../helpers/packages-autocomplete-validator.helper';
 import { queryNpm } from '../services/npm/npm.service';
-import { from, of } from '../../node_modules/rxjs';
-import { PACKAGES_CANCEL_CONFIGURE } from '../actions/packages/packages.actions';
+import { from, of } from 'rxjs';
+import {
+    PACKAGES_CANCEL_CONFIGURE,
+    PACKAGES_STAGE_DEPENDENCY,
+    PACKAGES_STAGE_DEV_DEPENDENCY, stateAction
+} from '../actions/packages/packages.actions';
 import { actionWithPayload } from '../actions';
+
+export const performInstallEpic = (action$, state$) => action$.pipe(
+    ofType(PACKAGES_STAGE_DEPENDENCY, PACKAGES_STAGE_DEV_DEPENDENCY),
+    withLatestFrom(state$),
+    switchMap(function([action, state])  {
+        console.log(action);
+        return of(stateAction());
+    })
+);
 
 export const performQueryEpic = (action$, state$) => action$.pipe(
   ofType(PACKAGES_AUTOCOMPLETE_QUERY),

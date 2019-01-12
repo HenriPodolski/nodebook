@@ -1,6 +1,10 @@
 import { connect } from 'react-redux';
 import { PackagesComponent } from '../components/packages.component';
-import { addDependencyAction, cancelConfigureAction, configureAction } from '../actions/packages/packages.actions';
+import {
+  cancelConfigureAction,
+  configureAction,
+  stageDependencyAction, stageDevDependencyAction
+} from '../actions/packages/packages.actions';
 import { queryAction } from '../actions/packages/packages-autocomplete.actions';
 
 const mapStateToProps = state => ({
@@ -10,8 +14,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => {
   return ({
-    addDependency: (dependency: string) => {
-      return dispatch(addDependencyAction(dependency));
+    stageDependencyAction: (dependency: string) => {
+      return dispatch(stageDependencyAction(dependency));
+    },
+    stageDevDependencyAction: (dependency: string) => {
+      return dispatch(stageDevDependencyAction(dependency));
     },
     config: () => {
       return dispatch(configureAction());

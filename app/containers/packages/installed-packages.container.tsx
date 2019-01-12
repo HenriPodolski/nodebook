@@ -3,7 +3,8 @@ import { InstalledPackagesComponent } from '../../components/packages/installed-
 
 
 const mapStateToProps = state => ({
-
+  dependencies: state.packages.dependencies,
+  devDependencies: state.packages.devDependencies
 });
 
 const mapDispatchToProps = (dispatch) => {
