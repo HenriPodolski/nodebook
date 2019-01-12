@@ -6,7 +6,7 @@ import {
   updateFindingsAction
 } from '../actions/packages/packages-autocomplete.actions';
 import { isValidAutocompleteQuery } from '../helpers/packages-autocomplete-validator.helper';
-import { queryNpm } from '../services/npm/npm.service';
+import { NpmService } from '../services/npm/npm.service';
 import { from, of } from 'rxjs';
 import {
     PACKAGES_CANCEL_CONFIGURE,
@@ -29,7 +29,7 @@ export const performQueryEpic = (action$, state$) => action$.pipe(
   withLatestFrom(state$),
   switchMap(function([action, state])  {
     if (isValidAutocompleteQuery(action.payload)) {
-      return from(queryNpm(action.payload))
+      return from(NpmService.queryNpm(action.payload))
         .pipe(switchMap((res: any[]) => {
           return of(updateFindingsAction(res));
         }));
