@@ -1,3 +1,5 @@
+import { ReplaySubject } from 'rxjs';
+
 const child_process = require('child_process');
 const mockData = require('./npm.mock.json');
 
@@ -42,15 +44,25 @@ export class NpmService {
     return perform;
   }
 
-  static installNpmPackage(npmPackage: string, isDev: boolean = false): Promise<any[]> {
-    let perform;
+  static installNpmPackage(
+  	npmPackage: string,
+	isDev: boolean = false
+  ): ReplaySubject<{stderror?: string, stdout?: string}> {
+    const perform$: ReplaySubject<any> = new ReplaySubject<any>();
 
-    if (isDev) {
-      perform = new Promise((resolve, reject) => {});
-    } else {
-      perform = new Promise((resolve, reject) => {});
-    }
+    child_process
+		.exec(`npm i --prefix ./nodebook ${npmPackage} ${isDev ? '-D' : '-S'}`,
+		(stderror, stdout) => {
+		    if (stderror) {
+			  perform$.next({stderror: stderror});
+			}
 
-    return perform;
+			if (stdout) {
+              perform$.next({stdout: stdout});
+            }
+
+		});
+
+    return perform$;
   }
 }

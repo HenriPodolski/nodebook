@@ -176,12 +176,14 @@ export const todos = () => {
         <li style={{textDecoration: 'line-through'}}>Save title to package.json and read title from package.json</li>
         <li style={{textDecoration: 'line-through'}}>Validate title and allow creation of code if title is valid</li>
         <li></li>
-        <li>Implement nodebook package.json dependency config, with global-npm</li>
-        <li>Display list of installed packages in the gui, using npm.commands.list in node</li>
-        <li>Perform install on package add, using npm.commands.install in node</li>
-        <li>Integrate npm package autocomplete, using npm.commands.search in node</li>
+        <li style={{textDecoration: 'line-through'}}>Implement nodebook package.json dependency config, with global-npm</li>
+        <li style={{textDecoration: 'line-through'}}>Perform install on package add, using npm.commands.install in node</li>
+        <li style={{textDecoration: 'line-through'}}>Integrate npm package autocomplete, using npm.commands.search in node</li>
+        <li>Display list of installed packages in the gui, using npm ls -json -depth 0 dev/prod in node</li>
         <li>Send a message to recommend installation of npm, if nodebook is meant to be used with packages</li>
+        <li>Add button which allows to perform npm install on nodebook</li>
         <li></li>
+        <li>Allow type=module for scripts in client output component</li>
         <li>Clean up nodebook folder if code source folder becomes empty on removeFile</li>
         <li>Validate html for not using html, body, head</li>
         <li>Build html selector UI for selecting where to place HTML snippet</li>

@@ -28,9 +28,9 @@ export class InstalledPackagesComponent extends React.Component<IComponentProps>
                     <li>
                         Dependencies
                         <ul>
-							{Object.keys(this.props.dependencies).map((dependencyKey) => {
+							{Object.keys(this.props.dependencies).map((dependencyKey, i) => {
 								return (
-									<li>{dependencyKey}: {this.props.dependencies[dependencyKey]}</li>
+									<li key={i}>{dependencyKey}: {this.props.dependencies[dependencyKey]}</li>
 								);
 							})}
                         </ul>
@@ -40,9 +40,9 @@ export class InstalledPackagesComponent extends React.Component<IComponentProps>
                     <li>
                         Dependencies
                         <ul>
-							{Object.keys(this.props.devDependencies).map((devDependencyKey) => {
+							{Object.keys(this.props.devDependencies).map((devDependencyKey, i) => {
 								return (
-									<li>{devDependencyKey}: {this.props.devDependencies[devDependencyKey]}</li>
+									<li key={i}>{devDependencyKey}: {this.props.devDependencies[devDependencyKey]}</li>
 								);
 							})}
                         </ul>

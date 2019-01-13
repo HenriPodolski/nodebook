@@ -5,7 +5,7 @@ import { cancelEditAction, editAction, updateAction } from '../actions/title/tit
 
 const mapStateToProps = state => ({
 	title: state.title,
-  configurePackages: state.packages.configure,
+	configurePackages: state.packages.configure,
 	loading: state.loading,
 	debug: state.debug.components
 });
@@ -18,12 +18,12 @@ const mapDispatchToProps = (dispatch) => {
 		updateTitle: (newTitle) => {
 			return dispatch(updateAction(newTitle));
 		},
-    editTitle: () => {
-      return dispatch(editAction());
-    },
-    cancelEditTitle: () => {
-      return dispatch(cancelEditAction());
-    }
+		editTitle: () => {
+			return dispatch(editAction());
+		},
+		cancelEditTitle: () => {
+			return dispatch(cancelEditAction());
+		}
 	});
 };
 

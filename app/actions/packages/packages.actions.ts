@@ -12,6 +12,8 @@ export const PACKAGES_UPDATE_DEV_DEPENDENCY = 'PACKAGES_UPDATE_DEV_DEPENDENCY';
 export const PACKAGES_STAGE_DEV_DEPENDENCY = 'PACKAGES_STAGE_DEV_DEPENDENCY';
 export const PACKAGES_ADD_DEV_DEPENDENCY = 'PACKAGES_ADD_DEV_DEPENDENCY';
 export const PACKAGES_REMOVE_DEV_DEPENDENCY = 'PACKAGES_REMOVE_DEV_DEPENDENCY';
+export const PACKAGES_ADD_MESSAGE = 'PACKAGES_ADD_MESSAGE';
+export const PACKAGES_REMOVE_MESSAGES = 'PACKAGES_REMOVE_MESSAGES';
 
 export function updateAction(packages: IPackages) {
   return {
@@ -73,6 +75,19 @@ export function updateDevDependencyAction(devDependency) {
   return {
     type: PACKAGES_UPDATE_DEV_DEPENDENCY,
     payload: devDependency
+  };
+}
+
+export function addMessageAction(message) {
+  return {
+    type: PACKAGES_ADD_MESSAGE,
+    payload: message
+  };
+}
+
+export function removeMessagesAction() {
+  return {
+    type: PACKAGES_REMOVE_MESSAGES
   };
 }
 

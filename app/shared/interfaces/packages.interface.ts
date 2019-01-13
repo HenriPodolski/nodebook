@@ -4,6 +4,7 @@ export interface IPackages {
   stagedDevDependencies: string[];
   devDependencies: {[key: string]: string};
   configure: boolean;
+  messages: string[];
 }
 
 export interface IPackagesAutocomplete {

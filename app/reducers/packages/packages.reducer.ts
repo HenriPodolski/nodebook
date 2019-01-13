@@ -2,11 +2,11 @@ import { actionWithPayload } from '../../actions';
 import { IPackages } from '../../shared/interfaces/packages.interface';
 import {
 	PACKAGES_ADD_DEPENDENCY,
-	PACKAGES_ADD_DEV_DEPENDENCY,
+	PACKAGES_ADD_DEV_DEPENDENCY, PACKAGES_ADD_MESSAGE,
 	PACKAGES_CANCEL_CONFIGURE,
 	PACKAGES_CONFIGURE,
 	PACKAGES_REMOVE_DEPENDENCY,
-	PACKAGES_REMOVE_DEV_DEPENDENCY,
+	PACKAGES_REMOVE_DEV_DEPENDENCY, PACKAGES_REMOVE_MESSAGES,
 	PACKAGES_STAGE_DEPENDENCY,
 	PACKAGES_STAGE_DEV_DEPENDENCY,
 	PACKAGES_UPDATE,
@@ -79,6 +79,21 @@ export function packagesReducer(
 				devDependencies: {
 					...withoutRemoved
 				}
+			};
+		}
+		case PACKAGES_ADD_MESSAGE: {
+			return {
+				...state,
+				messages: [
+					...state.messages,
+					action.payload as string
+				]
+			};
+		}
+		case PACKAGES_REMOVE_MESSAGES: {
+			return {
+				...state,
+				messages: []
 			};
 		}
 		case PACKAGES_CONFIGURE: {

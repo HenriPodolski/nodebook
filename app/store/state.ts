@@ -13,7 +13,8 @@ export const rootState: IRootState = {
     stagedDependencies: [],
     devDependencies: {},
     stagedDevDependencies: [],
-    configure: false
+    configure: false,
+    messages: []
   },
   title: {
     text: environment.config.package.nodebook.title,

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { InstalledPackagesContainer } from '../containers/packages/installed-packages.container';
+import { MessagesPackagesContainer } from '../containers/packages/messages-packages.container';
 
 interface IComponentProps {
   configure: boolean;
@@ -50,6 +51,12 @@ export class PackagesComponent extends React.Component<IComponentProps> {
     this.props.query('');
   }
 
+  setDevCheckbox(checked: boolean) {
+    if (this.devInput.current) {
+      this.devInput.current.checked = checked;
+    }
+  }
+
   handlePackageConfiguration(evt) {
     evt.preventDefault();
 
@@ -69,7 +76,7 @@ export class PackagesComponent extends React.Component<IComponentProps> {
     if (form.package && form.package.value) {
       this.props.stageDependencyAction(form.package.value);
       this.changeQueryAndState('');
-      this.devInput.current.checked = false;
+      this.setDevCheckbox(false);
     }
   }
 
@@ -80,7 +87,7 @@ export class PackagesComponent extends React.Component<IComponentProps> {
     if (form.package && form.package.value) {
       this.props.stageDevDependencyAction(form.package.value);
       this.changeQueryAndState('');
-      this.devInput.current.checked = false;
+      this.setDevCheckbox(false);
     }
   }
 
@@ -144,7 +151,7 @@ export class PackagesComponent extends React.Component<IComponentProps> {
             <fieldset>
               <label htmlFor="package">NPM package</label>
               {this.autosuggest()}
-              {!!this.devInput &&
+              {!!this.devInput && !!this.devInput.current &&
               <button
                   onClick={this.devInput.current.checked ?
                       this.handleDevDependencyInstallClick :
@@ -153,6 +160,7 @@ export class PackagesComponent extends React.Component<IComponentProps> {
                 Install
               </button>
               }
+              <MessagesPackagesContainer />
             </fieldset>
           </form>
         </div>}

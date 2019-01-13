@@ -1,5 +1,6 @@
 export namespace LoadingEnums {
 	export enum components {
-		application = 'application'
+		application = 'application',
+		userinterface = 'userinterface'
 	}
 }
