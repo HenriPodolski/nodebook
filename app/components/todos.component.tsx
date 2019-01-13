@@ -183,8 +183,7 @@ export const todos = () => {
         <li>Send a message to recommend installation of npm, if nodebook is meant to be used with packages</li>
         <li>Add button which allows to perform npm install on nodebook</li>
         <li></li>
-        <li>Allow type=module for scripts in client output component</li>
-        <li>Clean up nodebook folder if code source folder becomes empty on removeFile</li>
+        <li>Allow type=module for scripts in client output component (custom protocol?)</li>
         <li>Validate html for not using html, body, head</li>
         <li>Build html selector UI for selecting where to place HTML snippet</li>
         <li>Add selector for html placement in html input</li>
@@ -197,9 +196,9 @@ export const todos = () => {
         <li></li>
         <li>Get parse error from json and write it to output store</li>
         <li>Integrate console hooks for all modes and contexts (consider using _console and
-          replacement in code)
+          replacement in code, or muting all console outputs from the original app)
         </li>
-        <li>Implement console hooks as observer, which update the console output
+        <li>Implement console hooks as observer in store, which update the console output
           view whenever included code logs
         </li>
         <li>Normalize error and logs output using the current js client error output (Error,
@@ -224,8 +223,6 @@ export const todos = () => {
             Next Level: start.js, start.css, basic.scss
         </li>
         <li>Implement js/ts output to data source (json), by writing output to the nodebook.data variable</li>
-        <li>Make nodebook available in the browser and make file operation services optional</li>
-        <li>Replace the file operations with a zip export, which includes the files and structure</li>
         <li></li>
         <li>Provide release artefact workflow in github (travis)</li>
         <li>Add documentation</li>
@@ -234,6 +231,9 @@ export const todos = () => {
       </ol>
       <h3>Backlog</h3>
       <ol>
+        <li>Make nodebook available in the browser and make file operation services optional</li>
+        <li>Replace the file operations with a zip export, which includes the files and structure</li>
+        <li>Clean up nodebook folder if code source folder becomes empty on removeFile</li>
         <li>Confirm file override in case file is present but not in package.json</li>
         <li>Get stdout from executed scss code and write it to output store</li>
         <li>Add new window support or in tabs solution for long code inputs</li>
