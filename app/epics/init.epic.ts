@@ -8,6 +8,7 @@ import { executeFlagChangeAction, newAction } from '../actions/input/inputs.acti
 import { InputEnums } from '../enums/input.enums';
 import { IInput } from '../shared/interfaces/input.interface';
 import { updateAction } from '../actions/title/title.actions';
+import {readAllDependenciesAction} from "../actions/packages/packages.actions";
 
 export const initEpic = (action$, state$) => action$.pipe(
 	ofType(INIT),
@@ -30,6 +31,7 @@ export const initEpic = (action$, state$) => action$.pipe(
 		const initialTitle = PackageJsonService.getTitle();
 
 		actions.push(updateAction(initialTitle));
+		actions.push(readAllDependenciesAction());
 		actions.push(stopAction(LoadingEnums.components.application));
 		// actions.push(stateAction());
 

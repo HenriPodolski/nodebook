@@ -1,28 +1,46 @@
-import { ofType } from 'redux-observable';
-import { withLatestFrom } from 'rxjs/operators';
-import { switchMap } from 'rxjs/internal/operators';
+import {ofType} from 'redux-observable';
+import {withLatestFrom} from 'rxjs/operators';
+import {switchMap} from 'rxjs/internal/operators';
 import {
-  PACKAGES_AUTOCOMPLETE_QUERY, queryAction,
-  updateFindingsAction
+    PACKAGES_AUTOCOMPLETE_QUERY, queryAction,
+    updateFindingsAction
 } from '../actions/packages/packages-autocomplete.actions';
-import { isValidAutocompleteQuery } from '../helpers/packages-autocomplete-validator.helper';
-import { NpmService } from '../services/npm/npm.service';
-import { from, of } from 'rxjs';
+import {isValidAutocompleteQuery} from '../helpers/packages-autocomplete-validator.helper';
+import {NpmService} from '../services/npm/npm.service';
+import {from, of} from 'rxjs';
 import {
     addMessageAction,
     PACKAGES_CANCEL_CONFIGURE,
+    PACKAGES_READ_ALL_DEPENDENCIES,
     PACKAGES_STAGE_DEPENDENCY,
-    PACKAGES_STAGE_DEV_DEPENDENCY, stateAction
+    PACKAGES_STAGE_DEV_DEPENDENCY,
+    stateAction,
+    updateDependenciesAction,
+    updateDevDependenciesAction
 } from '../actions/packages/packages.actions';
-import { action, actionWithPayload } from '../actions';
-import { startAction, stopAction } from '../actions/loading/loading.actions';
-import { LoadingEnums } from '../enums/loading.enums';
+import {action, actionWithPayload} from '../actions';
+import {startAction, stopAction} from '../actions/loading/loading.actions';
+import {LoadingEnums} from '../enums/loading.enums';
+import {PackageJsonService} from "../services/files/package-json.service";
 
+export const mirrorDependenciesToStoreEpic = (action$, state$) => action$.pipe(
+    ofType(PACKAGES_READ_ALL_DEPENDENCIES),
+    withLatestFrom(state$),
+    switchMap(function () {
+        let actions: Array<actionWithPayload<any> | action> = [];
+        const packageJson = PackageJsonService.readPackageJson();
+        // todo use watcher to add data, because it takes some time until everything is there
+        // todo remove file watcher if everything is done
+        actions.push(updateDependenciesAction(packageJson.dependencies));
+        actions.push(updateDevDependenciesAction(packageJson.devDependencies));
+        return actions;
+    })
+);
 
 export const startInstallLoaderEpic = (action$, state$) => action$.pipe(
     ofType(PACKAGES_STAGE_DEPENDENCY, PACKAGES_STAGE_DEV_DEPENDENCY),
     withLatestFrom(state$),
-    switchMap(function() {
+    switchMap(function () {
         return of(startAction(LoadingEnums.components.userinterface));
     })
 );
@@ -30,12 +48,12 @@ export const startInstallLoaderEpic = (action$, state$) => action$.pipe(
 export const performInstallEpic = (action$, state$) => action$.pipe(
     ofType(PACKAGES_STAGE_DEPENDENCY, PACKAGES_STAGE_DEV_DEPENDENCY),
     withLatestFrom(state$),
-    switchMap(function([action]) {
+    switchMap(function ([action]) {
         const isDev = action.type === PACKAGES_STAGE_DEV_DEPENDENCY;
         let actions: Array<actionWithPayload<any> | action> = [];
 
         return NpmService.installNpmPackage(action.payload, isDev)
-            .pipe(switchMap((out: {stderror?: string, stdout?: string}) => {
+            .pipe(switchMap((out: { stderror?: string, stdout?: string }) => {
                 let messages: string[] = [];
                 if (out.stdout) {
                     messages = out.stdout.split('\n');
@@ -59,36 +77,35 @@ export const performInstallEpic = (action$, state$) => action$.pipe(
                     }
                 }
 
-
                 return actions;
             }));
     })
 );
 
 export const performQueryEpic = (action$, state$) => action$.pipe(
-  ofType(PACKAGES_AUTOCOMPLETE_QUERY),
-  withLatestFrom(state$),
-  switchMap(function([action, state])  {
-    if (isValidAutocompleteQuery(action.payload)) {
-      return from(NpmService.queryNpm(action.payload))
-        .pipe(switchMap((res: any[]) => {
-          return of(updateFindingsAction(res));
-        }));
-    }
+    ofType(PACKAGES_AUTOCOMPLETE_QUERY),
+    withLatestFrom(state$),
+    switchMap(function ([action, state]) {
+        if (isValidAutocompleteQuery(action.payload)) {
+            return from(NpmService.queryNpm(action.payload))
+                .pipe(switchMap((res: any[]) => {
+                    return of(updateFindingsAction(res));
+                }));
+        }
 
-    return of(updateFindingsAction([]));
-  })
+        return of(updateFindingsAction([]));
+    })
 );
 
 export const resetQueryEpic = (action$, state$) => action$.pipe(
-  ofType(PACKAGES_CANCEL_CONFIGURE),
-  withLatestFrom(state$),
-  switchMap(function([action, state])  {
-    let actions: actionWithPayload<any>[] = [];
+    ofType(PACKAGES_CANCEL_CONFIGURE),
+    withLatestFrom(state$),
+    switchMap(function ([action, state]) {
+        let actions: actionWithPayload<any>[] = [];
 
-    actions.push(queryAction(''));
-    actions.push(updateFindingsAction([]));
+        actions.push(queryAction(''));
+        actions.push(updateFindingsAction([]));
 
-    return actions;
-  })
+        return actions;
+    })
 );

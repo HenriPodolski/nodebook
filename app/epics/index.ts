@@ -4,7 +4,13 @@ import { dirtyExecuteFlagOutputEpic, newOutputEpic, outputsUpdateEpic } from './
 import { initEpic } from './init.epic';
 import { deleteConfirmationEpic, deleteConfirmedEpic } from './controls.epic';
 import { updateTitleEpic } from './title.epic';
-import { performInstallEpic, performQueryEpic, resetQueryEpic, startInstallLoaderEpic } from './packages.epic';
+import {
+	mirrorDependenciesToStoreEpic,
+	performInstallEpic,
+	performQueryEpic,
+	resetQueryEpic,
+	startInstallLoaderEpic
+} from './packages.epic';
 
 export const rootEpic = combineEpics(
 	initEpic,
@@ -20,5 +26,6 @@ export const rootEpic = combineEpics(
 	performQueryEpic,
 	resetQueryEpic,
 	startInstallLoaderEpic,
-	performInstallEpic
+	performInstallEpic,
+	mirrorDependenciesToStoreEpic
 );

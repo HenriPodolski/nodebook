@@ -4,14 +4,11 @@ export const PACKAGES_STATE = 'PACKAGES_STATE';
 export const PACKAGES_CONFIGURE = 'PACKAGES_CONFIGURE';
 export const PACKAGES_CANCEL_CONFIGURE = 'PACKAGES_CANCEL_CONFIGURE';
 export const PACKAGES_UPDATE = 'PACKAGES_UPDATE';
-export const PACKAGES_UPDATE_DEPENDENCY = 'PACKAGES_UPDATE_DEPENDENCY';
 export const PACKAGES_STAGE_DEPENDENCY = 'PACKAGES_STAGE_DEPENDENCY';
-export const PACKAGES_ADD_DEPENDENCY = 'PACKAGES_ADD_DEPENDENCY';
-export const PACKAGES_REMOVE_DEPENDENCY = 'PACKAGES_REMOVE_DEPENDENCY';
-export const PACKAGES_UPDATE_DEV_DEPENDENCY = 'PACKAGES_UPDATE_DEV_DEPENDENCY';
 export const PACKAGES_STAGE_DEV_DEPENDENCY = 'PACKAGES_STAGE_DEV_DEPENDENCY';
-export const PACKAGES_ADD_DEV_DEPENDENCY = 'PACKAGES_ADD_DEV_DEPENDENCY';
-export const PACKAGES_REMOVE_DEV_DEPENDENCY = 'PACKAGES_REMOVE_DEV_DEPENDENCY';
+export const PACKAGES_UPDATE_DEPENDENCIES = 'PACKAGES_UPDATE_DEPENDENCIES';
+export const PACKAGES_UPDATE_DEV_DEPENDENCIES = 'PACKAGES_UPDATE_DEV_DEPENDENCIES';
+export const PACKAGES_READ_ALL_DEPENDENCIES = 'PACKAGES_READ_ALL_DEPENDENCIES';
 export const PACKAGES_ADD_MESSAGE = 'PACKAGES_ADD_MESSAGE';
 export const PACKAGES_REMOVE_MESSAGES = 'PACKAGES_REMOVE_MESSAGES';
 
@@ -29,27 +26,6 @@ export function stageDependencyAction(dependency) {
   };
 }
 
-export function addDependencyAction(dependency) {
-  return {
-    type: PACKAGES_ADD_DEPENDENCY,
-    payload: dependency
-  };
-}
-
-export function removeDependencyAction(dependency) {
-  return {
-    type: PACKAGES_REMOVE_DEPENDENCY,
-    payload: dependency
-  };
-}
-
-export function updateDependencyAction(dependency) {
-  return {
-    type: PACKAGES_UPDATE_DEPENDENCY,
-    payload: dependency
-  };
-}
-
 export function stageDevDependencyAction(dependency) {
   return {
     type: PACKAGES_STAGE_DEV_DEPENDENCY,
@@ -57,24 +33,23 @@ export function stageDevDependencyAction(dependency) {
   };
 }
 
-export function addDevDependencyAction(devDependency) {
+export function updateDependenciesAction(dependencies: IPackages['dependencies']) {
   return {
-    type: PACKAGES_ADD_DEV_DEPENDENCY,
-    payload: devDependency
+    type: PACKAGES_UPDATE_DEPENDENCIES,
+    payload: dependencies
   };
 }
 
-export function removeDevDependencyAction(devDependency) {
+export function updateDevDependenciesAction(devDependencies: IPackages['devDependencies']) {
   return {
-    type: PACKAGES_REMOVE_DEV_DEPENDENCY,
-    payload: devDependency
+    type: PACKAGES_UPDATE_DEV_DEPENDENCIES,
+    payload: devDependencies
   };
 }
 
-export function updateDevDependencyAction(devDependency) {
+export function readAllDependenciesAction() {
   return {
-    type: PACKAGES_UPDATE_DEV_DEPENDENCY,
-    payload: devDependency
+    type: PACKAGES_READ_ALL_DEPENDENCIES
   };
 }
 
