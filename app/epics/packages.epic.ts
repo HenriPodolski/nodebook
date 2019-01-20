@@ -11,10 +11,9 @@ import {from, of} from 'rxjs';
 import {
     addMessageAction,
     PACKAGES_CANCEL_CONFIGURE,
-    PACKAGES_READ_ALL_DEPENDENCIES,
+    PACKAGES_READ_ALL_DEPENDENCIES, PACKAGES_REMOVE_DEPENDENCY, PACKAGES_REMOVE_DEV_DEPENDENCY,
     PACKAGES_STAGE_DEPENDENCY,
-    PACKAGES_STAGE_DEV_DEPENDENCY,
-    stateAction,
+    PACKAGES_STAGE_DEV_DEPENDENCY, readAllDependenciesAction,
     updateDependenciesAction,
     updateDevDependenciesAction
 } from '../actions/packages/packages.actions';
@@ -22,6 +21,42 @@ import {action, actionWithPayload} from '../actions';
 import {startAction, stopAction} from '../actions/loading/loading.actions';
 import {LoadingEnums} from '../enums/loading.enums';
 import {PackageJsonService} from "../services/files/package-json.service";
+
+export const removeDependencyEpic = (action$, state$) => action$.pipe(
+    ofType(PACKAGES_REMOVE_DEPENDENCY, PACKAGES_REMOVE_DEV_DEPENDENCY),
+    withLatestFrom(state$),
+    switchMap(function ([action]) {
+        const isDev = action.type === PACKAGES_REMOVE_DEV_DEPENDENCY;
+        let actions: Array<actionWithPayload<any> | action> = [];
+
+        console.log(action);
+
+        return NpmService.uninstallNpmPackage(
+            action.payload, isDev
+        ).pipe(switchMap((out: { stderror?: string, stdout?: string }) => {
+            let messages: string[] = [];
+            if (out.stdout) {
+                messages = out.stdout.split('\n');
+            } else if (out.stderror) {
+                messages = out.stderror.split('\n');
+            }
+
+            if (messages.length) {
+                actions = messages.reduce((prev, next) => {
+                    if (next) {
+                        prev.push(addMessageAction(next));
+                    }
+
+                    return prev;
+                }, [] as Array<actionWithPayload<any> | action>);
+            }
+
+            actions.push(readAllDependenciesAction());
+
+            return actions;
+        }));
+    })
+);
 
 export const mirrorDependenciesToStoreEpic = (action$, state$) => action$.pipe(
     ofType(PACKAGES_READ_ALL_DEPENDENCIES),
@@ -61,9 +96,7 @@ export const performInstallEpic = (action$, state$) => action$.pipe(
                     messages = out.stderror.split('\n');
                 }
 
-                if (!messages.length) {
-                    actions.push(stateAction());
-                } else {
+                if (messages.length) {
                     actions = messages.reduce((prev, next) => {
                         if (next) {
                             prev.push(addMessageAction(next));

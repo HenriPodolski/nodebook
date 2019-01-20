@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { InstalledPackagesComponent } from '../../components/packages/installed-packages.component';
+import {removeDependencyAction, removeDevDependencyAction} from "../../actions/packages/packages.actions";
 
 
 const mapStateToProps = state => ({
@@ -9,7 +10,12 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => {
   return ({
-
+    removeDependency: (dependency) => {
+      return dispatch(removeDependencyAction(dependency));
+    },
+    removeDevDependency: (devDependency) => {
+      return dispatch(removeDevDependencyAction(devDependency));
+    }
   });
 };
 

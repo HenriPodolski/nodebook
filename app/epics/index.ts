@@ -7,7 +7,7 @@ import { updateTitleEpic } from './title.epic';
 import {
 	mirrorDependenciesToStoreEpic,
 	performInstallEpic,
-	performQueryEpic,
+	performQueryEpic, removeDependencyEpic,
 	resetQueryEpic,
 	startInstallLoaderEpic
 } from './packages.epic';
@@ -27,5 +27,6 @@ export const rootEpic = combineEpics(
 	resetQueryEpic,
 	startInstallLoaderEpic,
 	performInstallEpic,
-	mirrorDependenciesToStoreEpic
+	mirrorDependenciesToStoreEpic,
+	removeDependencyEpic
 );

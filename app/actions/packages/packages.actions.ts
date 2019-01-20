@@ -8,6 +8,8 @@ export const PACKAGES_STAGE_DEPENDENCY = 'PACKAGES_STAGE_DEPENDENCY';
 export const PACKAGES_STAGE_DEV_DEPENDENCY = 'PACKAGES_STAGE_DEV_DEPENDENCY';
 export const PACKAGES_UPDATE_DEPENDENCIES = 'PACKAGES_UPDATE_DEPENDENCIES';
 export const PACKAGES_UPDATE_DEV_DEPENDENCIES = 'PACKAGES_UPDATE_DEV_DEPENDENCIES';
+export const PACKAGES_REMOVE_DEPENDENCY = 'PACKAGES_REMOVE_DEPENDENCY';
+export const PACKAGES_REMOVE_DEV_DEPENDENCY = 'PACKAGES_REMOVE_DEV_DEPENDENCY';
 export const PACKAGES_READ_ALL_DEPENDENCIES = 'PACKAGES_READ_ALL_DEPENDENCIES';
 export const PACKAGES_ADD_MESSAGE = 'PACKAGES_ADD_MESSAGE';
 export const PACKAGES_REMOVE_MESSAGES = 'PACKAGES_REMOVE_MESSAGES';
@@ -44,6 +46,20 @@ export function updateDevDependenciesAction(devDependencies: IPackages['devDepen
   return {
     type: PACKAGES_UPDATE_DEV_DEPENDENCIES,
     payload: devDependencies
+  };
+}
+
+export function removeDependencyAction(dependency) {
+  return {
+    type: PACKAGES_REMOVE_DEPENDENCY,
+    payload: dependency
+  };
+}
+
+export function removeDevDependencyAction(devDependency) {
+  return {
+    type: PACKAGES_REMOVE_DEV_DEPENDENCY,
+    payload: devDependency
   };
 }
 

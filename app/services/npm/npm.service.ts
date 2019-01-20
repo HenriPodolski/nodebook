@@ -44,6 +44,27 @@ export class NpmService {
     return perform;
   }
 
+  static uninstallNpmPackage(npmPackage: string,
+                             isDev: boolean = false): ReplaySubject<{stderror?: string, stdout?: string}> {
+    const perform$: ReplaySubject<any> = new ReplaySubject<any>();
+    console.log('uninstallNpmPackage', npmPackage, 'isDev', isDev);
+
+    child_process
+        .exec(`npm uninstall --prefix ./nodebook ${npmPackage} ${isDev ? '-D' : '-S'}`,
+            (stderror, stdout) => {
+              if (stderror) {
+                perform$.next({stderror: stderror});
+              }
+
+              if (stdout) {
+                perform$.next({stdout: stdout});
+              }
+
+            });
+
+    return perform$;
+  }
+
   static installNpmPackage(
   	npmPackage: string,
 	isDev: boolean = false
@@ -51,7 +72,7 @@ export class NpmService {
     const perform$: ReplaySubject<any> = new ReplaySubject<any>();
 
     child_process
-		.exec(`npm i --prefix ./nodebook ${npmPackage} ${isDev ? '-D' : '-S'}`,
+		.exec(`npm install --prefix ./nodebook ${npmPackage} ${isDev ? '-D' : '-S'}`,
 		(stderror, stdout) => {
 		    if (stderror) {
 			  perform$.next({stderror: stderror});
