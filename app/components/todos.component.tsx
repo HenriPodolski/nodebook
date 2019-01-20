@@ -179,9 +179,9 @@ export const todos = () => {
         <li style={{textDecoration: 'line-through'}}>Implement nodebook package.json dependency config, with global-npm</li>
         <li style={{textDecoration: 'line-through'}}>Perform install on package add, using npm.commands.install in node</li>
         <li style={{textDecoration: 'line-through'}}>Integrate npm package autocomplete, using npm.commands.search in node</li>
-        <li>Display list of installed packages in the gui, using npm ls -json -depth 0 dev/prod in node</li>
+        <li style={{textDecoration: 'line-through'}}>Display list of installed packages in the gui, by reading dependencies in package.json</li>
+        <li style={{textDecoration: 'line-through'}}>Add button which allows to perform npm install on nodebook</li>
         <li>Send a message to recommend installation of npm, if nodebook is meant to be used with packages</li>
-        <li>Add button which allows to perform npm install on nodebook</li>
         <li></li>
         <li>Allow type=module for scripts in client output component (custom protocol?)</li>
         <li>Validate html for not using html, body, head</li>
@@ -231,6 +231,7 @@ export const todos = () => {
       </ol>
       <h3>Backlog</h3>
       <ol>
+        <li>Display list of installed packages vs dependencies in package.json in the gui, using npm ls -json -depth 0 dev/prod in node</li>
         <li>Make nodebook available in the browser and make file operation services optional</li>
         <li>Replace the file operations with a zip export, which includes the files and structure</li>
         <li>Clean up nodebook folder if code source folder becomes empty on removeFile</li>
