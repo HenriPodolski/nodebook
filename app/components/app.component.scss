@@ -10,13 +10,21 @@
   color: red;
 }
 
-.AppComponent__Todos {
-  margin: 20px 30px;
-}
-
 .AppComponent__Loading {
   display: flex;
   height: 100%;
   align-items: center;
   justify-content: center;
+}
+
+.AppComponent__UILoading {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.7);
 }

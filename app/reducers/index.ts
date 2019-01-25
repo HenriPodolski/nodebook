@@ -6,15 +6,18 @@ import { loadingReducer } from './loading';
 import { modalDialogReducer } from './controls';
 import { initReducer } from './init';
 import { titleReducer } from './title';
+import { packagesAutocompleteReducer, packagesReducer } from './packages';
 
 export const rootReducer = combineReducers({
-    title: titleReducer,
-    inputs: inputsReducer,
-    outputs: outputsReducer,
-    controls: combineReducers({
-        modalDialog: modalDialogReducer
-    }),
-    debug: (state = rootState.debug) => state,
-    loading: loadingReducer,
-    init: initReducer
+  packages: packagesReducer,
+  packagesAutocomplete: packagesAutocompleteReducer,
+  title: titleReducer,
+  inputs: inputsReducer,
+  outputs: outputsReducer,
+  controls: combineReducers({
+    modalDialog: modalDialogReducer
+  }),
+  debug: (state = rootState.debug) => state,
+  loading: loadingReducer,
+  init: initReducer
 });

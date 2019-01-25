@@ -16,7 +16,7 @@ export function loadingReducer(
 		}
 
 		case LOADING_START: {
-			if (state[action.payload as string]) {
+			if (typeof state[action.payload as string] === 'boolean') {
 				return Object.assign(
 					{},
 					state,
@@ -28,7 +28,7 @@ export function loadingReducer(
 		}
 
 		case LOADING_STOP: {
-			if (state[action.payload as string]) {
+			if (typeof state[action.payload as string] === 'boolean') {
 				return Object.assign(
 					{},
 					state,
