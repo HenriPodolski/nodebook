@@ -14,6 +14,7 @@ export const rootState: IRootState = {
     devDependencies: {},
     stagedDevDependencies: [],
     configure: false,
+    disabled: false,
     messages: []
   },
   title: {

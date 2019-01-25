@@ -1,4 +1,5 @@
 const { app, BrowserWindow, Menu, shell } = require('electron');
+const opn = require('opn');
 
 let menu;
 let template;
@@ -50,6 +51,13 @@ app.on('ready', () =>
   mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.show();
     mainWindow.focus();
+  });
+
+  mainWindow.webContents.on('new-window', function(event, url){
+    if (url.match(/^http(s?):\/\/.*/)) {
+      event.preventDefault();
+      opn(url);
+    }
   });
 
   mainWindow.on('closed', () => {

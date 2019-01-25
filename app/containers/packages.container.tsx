@@ -6,14 +6,20 @@ import {
   stageDependencyAction, stageDevDependencyAction
 } from '../actions/packages/packages.actions';
 import { queryAction } from '../actions/packages/packages-autocomplete.actions';
+import {initAction} from "../actions/init/init.actions";
 
 const mapStateToProps = state => ({
   configure: state.packages.configure,
-  packagesAutocomplete: state.packagesAutocomplete
+  disabled: state.packages.disabled,
+  packagesAutocomplete: state.packagesAutocomplete,
+  messages: state.packages.messages
 });
 
 const mapDispatchToProps = (dispatch) => {
   return ({
+    reinitialize: () => {
+      return dispatch(initAction());
+    },
     stageDependencyAction: (dependency: string) => {
       return dispatch(stageDependencyAction(dependency));
     },

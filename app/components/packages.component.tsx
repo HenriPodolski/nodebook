@@ -4,12 +4,15 @@ import { MessagesPackagesContainer } from '../containers/packages/messages-packa
 
 interface IComponentProps {
   configure: boolean;
+  disabled: boolean;
   packagesAutocomplete: {query: string, found: any[]};
   stageDependencyAction: (dependency: string) => { type: string, payload: string };
   stageDevDependencyAction: (dependency: string) => { type: string, payload: string };
+  messages: string[];
   config: () => { type: string };
   cancelConfig: () => { type: string };
-  query: (query: string) => { type: string, payload: string }
+  query: (query: string) => { type: string, payload: string };
+  reinitialize: () => { type: string };
 }
 
 export class PackagesComponent extends React.Component<IComponentProps> {
@@ -136,35 +139,60 @@ export class PackagesComponent extends React.Component<IComponentProps> {
     );
   }
 
+  packageEnabled() {
+    return (
+        <>
+          <InstalledPackagesContainer />
+          {!this.props.configure &&
+          <div>
+            Packages <button onClick={this.handlePackageConfiguration}>Configure</button>
+          </div>}
+          {this.props.configure &&
+          <div>
+            Config <button onClick={this.handleCancelPackageConfiguration}>Done</button>
+            <form ref={this.formRef} onSubmit={this.handleSubmit}>
+              <fieldset>
+                <label htmlFor="package">NPM package</label>
+                {this.autosuggest()}
+                {!!this.devInput && !!this.devInput.current &&
+                <button
+                    onClick={this.devInput.current.checked ?
+                        this.handleDevDependencyInstallClick :
+                        this.handleDependencyInstallClick}
+                >
+                  Install
+                </button>
+                }
+                <MessagesPackagesContainer />
+              </fieldset>
+            </form>
+          </div>}
+        </>
+    );
+  }
+
+  packageDisabled() {
+    return (
+        <>
+          {!!this.props.messages.length &&
+            <ul>
+              {this.props.messages.map((message, i) => {
+                return (
+                    <li key={i} dangerouslySetInnerHTML={{__html: message}}></li>
+                );
+              })}
+            </ul>
+          }
+        </>
+    );
+  }
+
   render() {
     return (
-      <>
-        <InstalledPackagesContainer />
-        {!this.props.configure &&
-        <div>
-          Packages <button onClick={this.handlePackageConfiguration}>Configure</button>
-        </div>}
-        {this.props.configure &&
-        <div>
-          Config <button onClick={this.handleCancelPackageConfiguration}>Done</button>
-          <form ref={this.formRef} onSubmit={this.handleSubmit}>
-            <fieldset>
-              <label htmlFor="package">NPM package</label>
-              {this.autosuggest()}
-              {!!this.devInput && !!this.devInput.current &&
-              <button
-                  onClick={this.devInput.current.checked ?
-                      this.handleDevDependencyInstallClick :
-                      this.handleDependencyInstallClick}
-              >
-                Install
-              </button>
-              }
-              <MessagesPackagesContainer />
-            </fieldset>
-          </form>
-        </div>}
-      </>
+        <>
+          {this.props.disabled && this.packageDisabled()}
+          {!this.props.disabled && this.packageEnabled()}
+        </>
     );
   }
 }

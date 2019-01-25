@@ -2,6 +2,7 @@ import { IPackages } from '../../shared/interfaces/packages.interface';
 
 export const PACKAGES_STATE = 'PACKAGES_STATE';
 export const PACKAGES_CONFIGURE = 'PACKAGES_CONFIGURE';
+export const PACKAGES_DISABLED = 'PACKAGES_DISABLED';
 export const PACKAGES_CANCEL_CONFIGURE = 'PACKAGES_CANCEL_CONFIGURE';
 export const PACKAGES_UPDATE = 'PACKAGES_UPDATE';
 export const PACKAGES_STAGE_DEPENDENCY = 'PACKAGES_STAGE_DEPENDENCY';
@@ -18,6 +19,13 @@ export function updateAction(packages: IPackages) {
   return {
     type: PACKAGES_UPDATE,
     payload: packages
+  };
+}
+
+export function disabledAction(disabled: boolean) {
+  return {
+    type: PACKAGES_DISABLED,
+    payload: disabled
   };
 }
 

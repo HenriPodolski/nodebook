@@ -181,7 +181,7 @@ export const todos = () => {
         <li style={{textDecoration: 'line-through'}}>Integrate npm package autocomplete, using npm.commands.search in node</li>
         <li style={{textDecoration: 'line-through'}}>Display list of installed packages in the gui, by reading dependencies in package.json</li>
         <li style={{textDecoration: 'line-through'}}>Add button which allows to perform npm install on nodebook</li>
-        <li>Send a message to recommend installation of npm, if nodebook is meant to be used with packages</li>
+        <li style={{textDecoration: 'line-through'}}>Send a message to recommend installation of npm, if nodebook is meant to be used with packages</li>
         <li></li>
         <li>Allow type=module for scripts in client output component (custom protocol?)</li>
         <li>Validate html for not using html, body, head</li>

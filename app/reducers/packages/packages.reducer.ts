@@ -3,7 +3,7 @@ import { IPackages } from '../../shared/interfaces/packages.interface';
 import {
 	PACKAGES_ADD_MESSAGE,
 	PACKAGES_CANCEL_CONFIGURE,
-	PACKAGES_CONFIGURE,
+	PACKAGES_CONFIGURE, PACKAGES_DISABLED,
 	PACKAGES_REMOVE_MESSAGES,
 	PACKAGES_STAGE_DEPENDENCY,
 	PACKAGES_STAGE_DEV_DEPENDENCY,
@@ -24,6 +24,12 @@ export function packagesReducer(
 	switch (action.type) {
 		case PACKAGES_UPDATE: {
 			return action.payload as IPackages;
+		}
+		case PACKAGES_DISABLED: {
+			return {
+				...state,
+				disabled: action.payload as boolean
+			};
 		}
 		case PACKAGES_UPDATE_DEPENDENCIES: {
 			return {

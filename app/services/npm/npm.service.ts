@@ -44,6 +44,22 @@ export class NpmService {
     return perform;
   }
 
+  static checkNpmInstallation(): ReplaySubject<{stderror?: string, stdout?: string}> {
+    const perform$: ReplaySubject<any> = new ReplaySubject<any>();
+
+    child_process.exec('npm help', (stderror, stdout) => {
+      if (stderror) {
+        perform$.next({stderror: stderror});
+      }
+
+      if (stdout) {
+        perform$.next({stdout: stdout});
+      }
+    });
+
+    return perform$;
+  }
+
   static uninstallNpmPackage(npmPackage: string,
                              isDev: boolean = false): ReplaySubject<{stderror?: string, stdout?: string}> {
     const perform$: ReplaySubject<any> = new ReplaySubject<any>();

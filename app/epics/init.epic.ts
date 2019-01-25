@@ -8,7 +8,8 @@ import { executeFlagChangeAction, newAction } from '../actions/input/inputs.acti
 import { InputEnums } from '../enums/input.enums';
 import { IInput } from '../shared/interfaces/input.interface';
 import { updateAction } from '../actions/title/title.actions';
-import {readAllDependenciesAction} from "../actions/packages/packages.actions";
+import {addMessageAction, disabledAction, readAllDependenciesAction} from "../actions/packages/packages.actions";
+import {NpmService} from "../services/npm/npm.service";
 
 export const initEpic = (action$, state$) => action$.pipe(
 	ofType(INIT),
@@ -34,6 +35,26 @@ export const initEpic = (action$, state$) => action$.pipe(
 		actions.push(readAllDependenciesAction());
 		actions.push(stopAction(LoadingEnums.components.application));
 		// actions.push(stateAction());
+
+		return actions;
+	})
+);
+
+export const checkNpmInstallationEpic = (action$, state$) => action$.pipe(
+	ofType(INIT),
+	withLatestFrom(state$),
+	switchMap(() => {
+		return NpmService.checkNpmInstallation();
+	}),
+	switchMap(({stderror, stdout}: {stderror?: string, stdout?: string}) => {
+		let actions: { type: string; payload?: any; }[] = [];
+		if (stderror) {
+			actions.push(disabledAction(true));
+			actions.push(addMessageAction(
+				`npm is not available. Please install <a href="https://nodejs.org/en/download" target="_blank">node and npm</a> 
+				 or add npm to your path.`
+			));
+		}
 
 		return actions;
 	})
