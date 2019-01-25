@@ -71,7 +71,7 @@ export class ClientOutputComponent extends React.Component<IComponentProps> {
           break;
         }
         case (output.mode === ModeEnums.js.value): {
-          scripts += `<script src=".${output.file}"></script>`;
+          scripts += `<script type="module" src="js://.${output.file}"></script>`;
           break;
         }
         case (output.mode === ModeEnums.ts.value): {

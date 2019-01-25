@@ -1,5 +1,7 @@
-const { app, BrowserWindow, Menu, shell } = require('electron');
+const { protocol, app, BrowserWindow, Menu, shell } = require('electron');
 const opn = require('opn');
+const path = require('path');
+const fs = require('fs');
 
 let menu;
 let template;
@@ -12,7 +14,6 @@ if (process.env.NODE_ENV === 'production') {
 
 if (process.env.NODE_ENV === 'development') {
   require('electron-debug')(); // eslint-disable-line global-require
-  const path = require('path'); // eslint-disable-line
   const p = path.join(__dirname, '..', 'app', 'node_modules'); // eslint-disable-line
   require('module').globalPaths.push(p); // eslint-disable-line
 }
@@ -37,9 +38,19 @@ const installExtensions = () => {
   return Promise.resolve([]);
 };
 
+protocol.registerStandardSchemes( [ 'js' ] );
+
 app.on('ready', () =>
   installExtensions()
   .then(() => {
+
+    protocol.registerBufferProtocol( 'js', ( request, callback ) => {
+      fs.readFile(
+          path.join( __dirname, request.url.replace( 'js://', '' ) ),
+          (e, b) => { callback( { mimeType: 'text/javascript', data: b } ) }
+      );
+    });
+
   mainWindow = new BrowserWindow({
     show: false,
     width: 1024,

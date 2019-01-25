@@ -183,7 +183,8 @@ export const todos = () => {
         <li style={{textDecoration: 'line-through'}}>Add button which allows to perform npm install on nodebook</li>
         <li style={{textDecoration: 'line-through'}}>Send a message to recommend installation of npm, if nodebook is meant to be used with packages</li>
         <li></li>
-        <li>Allow type=module for scripts in client output component (custom protocol?)</li>
+        <li style={{textDecoration: 'line-through'}}>Allow type=module for scripts in client output component (custom protocol?)</li>
+        <li>Implement workaround for node_modules</li>
         <li>Validate html for not using html, body, head</li>
         <li>Build html selector UI for selecting where to place HTML snippet</li>
         <li>Add selector for html placement in html input</li>
