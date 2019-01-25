@@ -4,7 +4,8 @@ import { LoadingEnums } from '../enums/loading.enums';
 export const environment = {
   config: {
     loading: {
-      [LoadingEnums.components.application]: true
+      [LoadingEnums.components.application]: true,
+      [LoadingEnums.components.userinterface]: false
     },
     package: {
       private: true,

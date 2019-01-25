@@ -1,0 +1,590 @@
+[
+  {
+    "name": "exp",
+    "description": "The command-line tool for creating and publishing Expo apps",
+    "maintainers": [
+      {
+        "username": "brentvatne",
+        "email": "brentvatne@gmail.com"
+      },
+      {
+        "username": "ccheever",
+        "email": "ccheever@gmail.com"
+      },
+      {
+        "username": "dikaiosune",
+        "email": "adam.n.perry@gmail.com"
+      },
+      {
+        "username": "expoadmin",
+        "email": "support@expo.io"
+      },
+      {
+        "username": "exponent",
+        "email": "exponent.team@gmail.com"
+      },
+      {
+        "username": "fson",
+        "email": "ville.immonen@iki.fi"
+      },
+      {
+        "username": "ide",
+        "email": "ide+npm@jameside.com"
+      },
+      {
+        "username": "jesseruder",
+        "email": "jesse@sixfivezero.net"
+      },
+      {
+        "username": "nikki93",
+        "email": "s.nikhilesh@gmail.com"
+      }
+    ],
+    "keywords": [
+      "expo",
+      "react-native"
+    ],
+    "version": "57.2.1",
+    "date": "2018-09-20T12:43:45.371Z"
+  },
+  {
+    "name": "express",
+    "description": "Fast, unopinionated, minimalist web framework",
+    "maintainers": [
+      {
+        "username": "dougwilson",
+        "email": "doug@somethingdoug.com"
+      },
+      {
+        "username": "hacksparrow",
+        "email": "captain@hacksparrow.com"
+      },
+      {
+        "username": "jasnell",
+        "email": "jasnell@gmail.com"
+      },
+      {
+        "username": "mikeal",
+        "email": "mikeal.rogers@gmail.com"
+      }
+    ],
+    "keywords": [
+      "express",
+      "framework",
+      "sinatra",
+      "web",
+      "rest",
+      "restful",
+      "router",
+      "app",
+      "api"
+    ],
+    "version": "4.16.4",
+    "date": "2018-10-11T03:59:14.308Z"
+  },
+  {
+    "name": "path-to-regexp",
+    "description": "Express style path to RegExp utility",
+    "maintainers": [
+      {
+        "username": "blakeembrey",
+        "email": "hello@blakeembrey.com"
+      },
+      {
+        "username": "defunctzombie",
+        "email": "shtylman@gmail.com"
+      },
+      {
+        "username": "dougwilson",
+        "email": "doug@somethingdoug.com"
+      },
+      {
+        "username": "jonathanong",
+        "email": "jonathanrichardong@gmail.com"
+      },
+      {
+        "username": "jongleberry",
+        "email": "jonathanrichardong@gmail.com"
+      }
+    ],
+    "keywords": [
+      "express",
+      "regexp",
+      "route",
+      "routing"
+    ],
+    "version": "2.4.0",
+    "date": "2018-08-26T23:57:15.931Z"
+  },
+  {
+    "name": "escape-string-regexp",
+    "description": "Escape RegExp special characters",
+    "maintainers": [
+      {
+        "username": "sindresorhus",
+        "email": "sindresorhus@gmail.com"
+      }
+    ],
+    "keywords": [
+      "escape",
+      "regex",
+      "regexp",
+      "re",
+      "regular",
+      "expression",
+      "string",
+      "str",
+      "special",
+      "characters"
+    ],
+    "version": "1.0.5",
+    "date": "2016-02-21T12:55:17.074Z"
+  },
+  {
+    "name": "@babel/helper-explode-assignable-expression",
+    "description": "Helper function to explode an assignable expression",
+    "maintainers": [
+      {
+        "username": "nicolo-ribaudo",
+        "email": "nicolo.ribaudo@gmail.com"
+      },
+      {
+        "username": "hzoo",
+        "email": "hi@henryzoo.com"
+      },
+      {
+        "username": "loganfsmyth",
+        "email": "loganfsmyth@gmail.com"
+      },
+      {
+        "username": "danez",
+        "email": "daniel@tschinder.de"
+      },
+      {
+        "username": "existentialism",
+        "email": "bng412@gmail.com"
+      }
+    ],
+    "version": "7.1.0",
+    "date": "2018-09-17T19:30:56.337Z"
+  },
+  {
+    "name": "cors",
+    "description": "Node.js CORS middleware",
+    "maintainers": [
+      {
+        "username": "dougwilson",
+        "email": "doug@somethingdoug.com"
+      },
+      {
+        "username": "troygoode",
+        "email": "troygoode@gmail.com"
+      }
+    ],
+    "keywords": [
+      "cors",
+      "express",
+      "connect",
+      "middleware"
+    ],
+    "version": "2.8.5",
+    "date": "2018-11-04T21:00:13.277Z"
+  },
+  {
+    "name": "morgan",
+    "description": "HTTP request logger middleware for node.js",
+    "maintainers": [
+      {
+        "username": "dougwilson",
+        "email": "doug@somethingdoug.com"
+      }
+    ],
+    "keywords": [
+      "express",
+      "http",
+      "logger",
+      "middleware"
+    ],
+    "version": "1.9.1",
+    "date": "2018-09-11T01:12:35.037Z"
+  },
+  {
+    "name": "clone-deep",
+    "description": "Recursively (deep) clone JavaScript native types, like Object, Array, RegExp, Date as well as primitives.",
+    "maintainers": [
+      {
+        "username": "doowb",
+        "email": "brian.woodward@gmail.com"
+      },
+      {
+        "username": "jonschlinkert",
+        "email": "github@sellside.com"
+      }
+    ],
+    "keywords": [
+      "array",
+      "assign",
+      "buffer",
+      "clamped",
+      "clone",
+      "clone-array",
+      "clone-array-deep",
+      "clone-buffer",
+      "clone-date",
+      "clone-deep",
+      "clone-map",
+      "clone-object",
+      "clone-object-deep",
+      "clone-reg-exp",
+      "clone-regex",
+      "clone-regexp",
+      "clone-set",
+      "date",
+      "deep",
+      "extend",
+      "mixin",
+      "mixin-object",
+      "object",
+      "regex",
+      "regexp",
+      "shallow",
+      "symbol"
+    ],
+    "version": "4.0.1",
+    "date": "2018-11-22T00:00:24.930Z"
+  },
+  {
+    "name": "@babel/helper-split-export-declaration",
+    "description": ">",
+    "maintainers": [
+      {
+        "username": "nicolo-ribaudo",
+        "email": "nicolo.ribaudo@gmail.com"
+      },
+      {
+        "username": "hzoo",
+        "email": "hi@henryzoo.com"
+      },
+      {
+        "username": "loganfsmyth",
+        "email": "loganfsmyth@gmail.com"
+      },
+      {
+        "username": "danez",
+        "email": "daniel@tschinder.de"
+      },
+      {
+        "username": "existentialism",
+        "email": "bng412@gmail.com"
+      }
+    ],
+    "version": "7.0.0",
+    "date": "2018-08-27T21:42:12.717Z"
+  },
+  {
+    "name": "brace-expansion",
+    "description": "Brace expansion as known from sh/bash",
+    "maintainers": [
+      {
+        "username": "isaacs",
+        "email": "isaacs@npmjs.com"
+      },
+      {
+        "username": "juliangruber",
+        "email": "julian@juliangruber.com"
+      }
+    ],
+    "version": "1.1.11",
+    "date": "2018-02-10T07:42:22.313Z"
+  },
+  {
+    "name": "core-util-is",
+    "description": "The `util.is*` functions introduced in Node v0.12.",
+    "maintainers": [
+      {
+        "username": "isaacs",
+        "email": "i@izs.me"
+      }
+    ],
+    "keywords": [
+      "util",
+      "isBuffer",
+      "isArray",
+      "isNumber",
+      "isString",
+      "isRegExp",
+      "isThis",
+      "isThat",
+      "polyfill"
+    ],
+    "version": "1.0.2",
+    "date": "2015-11-20T00:37:33.081Z"
+  },
+  {
+    "name": "jest",
+    "description": "Delightful JavaScript Testing.",
+    "maintainers": [
+      {
+        "username": "aaronabramov",
+        "email": "aaron@abramov.io"
+      },
+      {
+        "username": "cpojer",
+        "email": "christoph.pojer@gmail.com"
+      },
+      {
+        "username": "fb",
+        "email": "opensource+npm@fb.com"
+      },
+      {
+        "username": "jeanlauliac",
+        "email": "jean@lauliac.com"
+      },
+      {
+        "username": "mjesun",
+        "email": "mjesun@hotmail.com"
+      }
+    ],
+    "keywords": [
+      "ava",
+      "babel",
+      "coverage",
+      "easy",
+      "expect",
+      "facebook",
+      "immersive",
+      "instant",
+      "jasmine",
+      "jest",
+      "jsdom",
+      "mocha",
+      "mocking",
+      "painless",
+      "qunit",
+      "runner",
+      "sandboxed",
+      "snapshot",
+      "tap",
+      "tape",
+      "test",
+      "testing",
+      "typescript",
+      "watch"
+    ],
+    "version": "23.6.0",
+    "date": "2018-09-10T12:43:59.550Z"
+  },
+  {
+    "name": "through2",
+    "description": "A tiny wrapper around Node.js streams.Transform (Streams2/3) to avoid explicit subclassing noise",
+    "maintainers": [
+      {
+        "username": "bryce",
+        "email": "bryce@ravenwall.com"
+      },
+      {
+        "username": "rvagg",
+        "email": "rod@vagg.org"
+      }
+    ],
+    "keywords": [
+      "stream",
+      "streams2",
+      "through",
+      "transform"
+    ],
+    "version": "3.0.0",
+    "date": "2018-11-06T22:09:37.970Z"
+  },
+  {
+    "name": "@babel/helper-optimise-call-expression",
+    "description": "Helper function to optimise call expression",
+    "maintainers": [
+      {
+        "username": "nicolo-ribaudo",
+        "email": "nicolo.ribaudo@gmail.com"
+      },
+      {
+        "username": "hzoo",
+        "email": "hi@henryzoo.com"
+      },
+      {
+        "username": "loganfsmyth",
+        "email": "loganfsmyth@gmail.com"
+      },
+      {
+        "username": "danez",
+        "email": "daniel@tschinder.de"
+      },
+      {
+        "username": "existentialism",
+        "email": "bng412@gmail.com"
+      }
+    ],
+    "version": "7.0.0",
+    "date": "2018-08-27T21:42:08.785Z"
+  },
+  {
+    "name": "@babel/helper-member-expression-to-functions",
+    "description": "Helper function to replace certain member expressions with function calls",
+    "maintainers": [
+      {
+        "username": "nicolo-ribaudo",
+        "email": "nicolo.ribaudo@gmail.com"
+      },
+      {
+        "username": "hzoo",
+        "email": "hi@henryzoo.com"
+      },
+      {
+        "username": "loganfsmyth",
+        "email": "loganfsmyth@gmail.com"
+      },
+      {
+        "username": "danez",
+        "email": "daniel@tschinder.de"
+      },
+      {
+        "username": "existentialism",
+        "email": "bng412@gmail.com"
+      }
+    ],
+    "version": "7.0.0",
+    "date": "2018-08-27T21:42:08.745Z"
+  },
+  {
+    "name": "micromatch",
+    "description": "Glob matching for javascript/node.js. A drop-in replacement and faster alternative to minimatch and multimatch.",
+    "maintainers": [
+      {
+        "username": "doowb",
+        "email": "brian.woodward@gmail.com"
+      },
+      {
+        "username": "es128",
+        "email": "elan.shanker+npm@gmail.com"
+      },
+      {
+        "username": "jonschlinkert",
+        "email": "github@sellside.com"
+      }
+    ],
+    "keywords": [
+      "bash",
+      "expand",
+      "expansion",
+      "expression",
+      "file",
+      "files",
+      "filter",
+      "find",
+      "glob",
+      "globbing",
+      "globs",
+      "globstar",
+      "match",
+      "matcher",
+      "matches",
+      "matching",
+      "micromatch",
+      "minimatch",
+      "multimatch",
+      "path",
+      "pattern",
+      "patterns",
+      "regex",
+      "regexp",
+      "regular",
+      "shell",
+      "wildcard"
+    ],
+    "version": "3.1.10",
+    "date": "2018-03-22T19:44:49.213Z"
+  },
+  {
+    "name": "lodash.debounce",
+    "description": "The lodash method `_.debounce` exported as a module.",
+    "maintainers": [
+      {
+        "username": "jdalton",
+        "email": "john.david.dalton@gmail.com"
+      },
+      {
+        "username": "mathias",
+        "email": "mathias@qiwi.be"
+      }
+    ],
+    "keywords": [
+      "lodash-modularized",
+      "debounce"
+    ],
+    "version": "4.0.8",
+    "date": "2016-08-13T17:37:49.793Z"
+  },
+  {
+    "name": "lodash.clonedeep",
+    "description": "The lodash method `_.cloneDeep` exported as a module.",
+    "maintainers": [
+      {
+        "username": "jdalton",
+        "email": "john.david.dalton@gmail.com"
+      },
+      {
+        "username": "mathias",
+        "email": "mathias@qiwi.be"
+      }
+    ],
+    "keywords": [
+      "lodash-modularized",
+      "clonedeep"
+    ],
+    "version": "4.5.0",
+    "date": "2016-08-13T17:37:19.945Z"
+  },
+  {
+    "name": "spdx-expression-parse",
+    "description": "parse SPDX license expressions",
+    "maintainers": [
+      {
+        "username": "kemitchell",
+        "email": "kyle@kemitchell.com"
+      },
+      {
+        "username": "motet-a",
+        "email": "antoine.motet@gmail.com"
+      }
+    ],
+    "keywords": [
+      "SPDX",
+      "law",
+      "legal",
+      "license",
+      "metadata",
+      "package",
+      "package.json",
+      "standards"
+    ],
+    "version": "3.0.0",
+    "date": "2018-02-27T00:14:18.092Z"
+  },
+  {
+    "name": "lodash.merge",
+    "description": "The Lodash method `_.merge` exported as a module.",
+    "maintainers": [
+      {
+        "username": "jdalton",
+        "email": "john.david.dalton@gmail.com"
+      },
+      {
+        "username": "mathias",
+        "email": "mathias@qiwi.be"
+      }
+    ],
+    "keywords": [
+      "lodash-modularized",
+      "merge"
+    ],
+    "version": "4.6.1",
+    "date": "2018-02-04T04:07:36.999Z"
+  }
+]
