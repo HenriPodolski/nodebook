@@ -1,6 +1,6 @@
 {
   "name": "nodebook",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A rapid data science and prototyping tool",
   "scripts": {
     "test": "cross-env NODE_ENV=test node --trace-warnings ./test/runTests.js",
