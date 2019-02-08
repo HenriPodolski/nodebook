@@ -184,8 +184,8 @@ export const todos = () => {
         <li style={{textDecoration: 'line-through'}}>Send a message to recommend installation of npm, if nodebook is meant to be used with packages</li>
         <li></li>
         <li style={{textDecoration: 'line-through'}}>Allow type=module for scripts in client output component (custom protocol?)</li>
-        <li>Implement workaround for node_modules</li>
-        <li>Validate html for not using html, body, head</li>
+        <li></li>
+        <li style={{textDecoration: 'line-through'}}>Validate html for not using html, body, head</li>
         <li>Build html selector UI for selecting where to place HTML snippet</li>
         <li>Add selector for html placement in html input</li>
         <li></li>
@@ -194,6 +194,7 @@ export const todos = () => {
         <li></li>
         <li>Add scss to supported modes</li>
         <li>Process scss code values for output</li>
+        <li>Provide export functionality, which writes clients index.html file to nodebook</li>
         <li></li>
         <li>Get parse error from json and write it to output store</li>
         <li>Integrate console hooks for all modes and contexts (consider using _console and
@@ -217,6 +218,7 @@ export const todos = () => {
         </li>
         <li>Style output section, add tabs and add max-height and scrollbars for long output
         </li>
+        <li>Write info field on how to import node_modules</li>
         <li></li>
         <li>Add filter for previous inputs next stages inputs, example:
             Filter: test.ts, test.js
@@ -232,6 +234,7 @@ export const todos = () => {
       </ol>
       <h3>Backlog</h3>
       <ol>
+        <li>Add import code from file functionality</li>
         <li>Display list of installed packages vs dependencies in package.json in the gui, using npm ls -json -depth 0 dev/prod in node</li>
         <li>Make nodebook available in the browser and make file operation services optional</li>
         <li>Replace the file operations with a zip export, which includes the files and structure</li>

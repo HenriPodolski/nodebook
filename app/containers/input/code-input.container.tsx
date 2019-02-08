@@ -9,6 +9,7 @@ import {
 import { OutputEnums } from '../../enums/output.enums';
 
 const mapStateToProps = (state, ownProps) => ({
+    index: ownProps.index,
     mode: state.inputs[ownProps.index].mode,
     theme: state.inputs[ownProps.index].theme,
     height: state.inputs[ownProps.index].height,

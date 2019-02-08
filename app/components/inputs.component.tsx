@@ -8,6 +8,7 @@ import { OutputEnums } from '../enums/output.enums';
 import { ContextInputContainer } from '../containers/input/context-input.container';
 import { DeleteEntryContainer } from '../containers/controls/delete-entry.container';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { ModeEnums } from '../enums/mode.enums';
 
 interface IComponentProps {
   inputs: any[];
@@ -62,6 +63,12 @@ export class InputsComponent extends React.Component<IComponentProps> {
           <ModeInputContainer index={i}/>
           <ContextInputContainer index={i}/>
         </>
+        }
+        {(this.props.inputs[i].mode === ModeEnums.html.value &&
+          this.props.inputs.filter((input) => input.mode === ModeEnums.html.value).length > 1) &&
+            <>
+              <button>Map HTML</button> mapping: {this.props.inputs[i].context || 'body > *:nth-child(x)'}
+            </>
         }
         <CodeInputContainer index={i}/>
         {this.props.outputs[i] &&

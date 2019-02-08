@@ -45,9 +45,15 @@ app.on('ready', () =>
   .then(() => {
 
     protocol.registerBufferProtocol( 'js', ( request, callback ) => {
+      const originalPath = request.url.replace( 'js://', '' );
+
+      console.log(__dirname, originalPath, path.join(__dirname, originalPath));
+
       fs.readFile(
-          path.join( __dirname, request.url.replace( 'js://', '' ) ),
-          (e, b) => { callback( { mimeType: 'text/javascript', data: b } ) }
+          path.join(__dirname, originalPath),
+          (e, b) => {
+            callback( { mimeType: 'text/javascript', data: b } )
+          }
       );
     });
 

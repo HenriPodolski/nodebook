@@ -3,8 +3,10 @@ import * as React from 'react';
 
 import '../../shared/imports/brace';
 import { InputEnums } from '../../enums/input.enums';
+import { ValidationErrorsContainer } from '../../containers/shared/validation-errors.container';
 
 interface IComponentProps {
+    index: number;
     mode: string;
     theme: string;
     height: string;
@@ -68,19 +70,26 @@ export class CodeInputComponent extends React.Component<IComponentProps> {
 
     render() {
         return (
-            <div onDoubleClick={(evt) => this.handleDoubleClick(evt)}
-                 onKeyDown={(evt) => this.handleKeyDown(evt)}>
-            <AceEditor
-                ref="input"
-                value={this.props.value}
-                onChange={(newValue, evt) => this.handleChange(newValue, evt)}
-                theme={this.props.theme}
-                mode={this.props.mode}
-                height={this.props.height}
-                width={this.props.width}
-                editorProps={this.props.editor}
-                readOnly={this.props.readOnly}
-            />
+            <div>
+                <div onDoubleClick={(evt) => this.handleDoubleClick(evt)}
+                     onKeyDown={(evt) => this.handleKeyDown(evt)}>
+                    <AceEditor
+                        ref="input"
+                        value={this.props.value}
+                        onChange={(newValue, evt) => this.handleChange(newValue, evt)}
+                        theme={this.props.theme}
+                        mode={this.props.mode}
+                        height={this.props.height}
+                        width={this.props.width}
+                        editorProps={this.props.editor}
+                        readOnly={this.props.readOnly}
+                    />
+                </div>
+                <ValidationErrorsContainer
+                    index={this.props.index}
+                    validate="inputs"
+                    validateKey="code"
+                />
             </div>
         );
     }

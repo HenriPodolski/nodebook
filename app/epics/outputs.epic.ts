@@ -11,6 +11,7 @@ import { InputEnums } from '../enums/input.enums';
 import { OutputEnums } from '../enums/output.enums';
 import * as fs from 'fs';
 import { PackageJsonService } from '../services/files/package-json.service';
+import { inputValidators } from '../validators/input.validators';
 
 export const outputsUpdateEpic = (action$, state$) => action$.pipe(
   ofType(OUTPUTS_UPDATE),
@@ -67,45 +68,22 @@ export const newOutputEpic = (action$, state$) => action$.pipe(
     const input = state.inputs[index];
     const output = state.outputs[index];
 
-    let validationErrors: { message: string }[] = [];
+    const {
+        validationErrors,
+        isValid
+    } = inputValidators(input, state.inputs);
+
     const isProcessing = input.executeFlag === InputEnums.executeFlags.processing;
-    // tslint:disable
-    const isValidFilename = /^(?!\.)(?!com[0-9]$)(?!con$)(?!lpt[0-9]$)(?!nul$)(?!prn$)[^\|\*\?\\:<>/$"]*[^\.\|\*\?\\:<>/$"]+$/
-      .test(input.name);
-    // tslint:enable
-    const isUnique = !(state
-      .inputs
-      .filter(filteredInput => {
-        return filteredInput.id !== input.id &&
-          filteredInput.name === input.name &&
-          filteredInput.mode === input.mode &&
-          (!input.context || filteredInput.context === input.context)
-      })
-      .length);
-    const isValidName = isValidFilename && isUnique;
 
-    if (!isValidFilename && isProcessing) {
-      console.log('filename not valid');
-      validationErrors.push({message: 'filename not valid'});
-    }
-
-    if (isValidFilename && !isUnique && isProcessing) {
-      console.log('filename not unique');
-      validationErrors.push({message: 'filename not unique'});
-    }
-
-    if (validationErrors.length) {
-      actions.push(validationErrorsChangeAction({
-        filename: validationErrors
-      }, index));
-
+    if (!isValid) {
+      actions.push(validationErrorsChangeAction(validationErrors, index));
       actions.push(executeFlagChangeAction(InputEnums.executeFlags.idle, index));
     }
 
-    if (isProcessing && isValidName) {
+    if (isProcessing && isValid) {
 
       actions.push(validationErrorsChangeAction({
-        filename: []
+        filename: [], code: []
       }, index));
 
       const processResult = ProcessorService.process(input, state);
