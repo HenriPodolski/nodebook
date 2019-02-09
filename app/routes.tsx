@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { Switch, Route } from 'react-router';
-import { AppComponent } from './components/app.component';
 import { AppContainer } from './containers/app.container';
+import { HtmlMapContainer } from './containers/html-map.container';
+import { HashRouter } from 'react-router-dom';
 
 export default () => (
-  <AppContainer>
-    <Switch>
-      <Route path="/" component={AppComponent} />
-    </Switch>
-  </AppContainer>
+    <HashRouter>
+        <Switch>
+            <Route path="/" exact component={AppContainer} />
+            <Route path="/html" component={HtmlMapContainer} />
+        </Switch>
+    </HashRouter>
 );

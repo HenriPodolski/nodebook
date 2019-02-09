@@ -37,6 +37,11 @@ export class InputsComponent extends React.Component<IComponentProps> {
     this.handleDragEnd = this.handleDragEnd.bind(this);
   }
 
+  onMapHTML() {
+      let modal = window.open('', 'modal');
+      console.log(modal);
+  }
+
   handleDragEnd(result) {
     if (!result.destination) {
       return;
@@ -67,7 +72,7 @@ export class InputsComponent extends React.Component<IComponentProps> {
         {(this.props.inputs[i].mode === ModeEnums.html.value &&
           this.props.inputs.filter((input) => input.mode === ModeEnums.html.value).length > 1) &&
             <>
-              <button>Map HTML</button> mapping: {this.props.inputs[i].context || 'body > *:nth-child(x)'}
+              <button onClick={this.onMapHTML}>Map HTML</button> mapping: {this.props.inputs[i].context || 'body > *:nth-child(x)'}
             </>
         }
         <CodeInputContainer index={i}/>

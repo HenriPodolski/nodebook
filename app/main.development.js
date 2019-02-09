@@ -70,10 +70,21 @@ app.on('ready', () =>
     mainWindow.focus();
   });
 
-  mainWindow.webContents.on('new-window', function(event, url){
+  mainWindow.webContents.on('new-window', (event, url, frameName, disposition, options, additionalFeatures) => {
     if (url.match(/^http(s?):\/\/.*/)) {
       event.preventDefault();
       opn(url);
+    }
+
+    if (frameName === 'modal') {
+      // open window as modal
+      event.preventDefault();
+      Object.assign(options, {
+        modal: true,
+        parent: mainWindow
+      });
+      event.newGuest = new BrowserWindow(options);
+      event.newGuest.loadURL(`file://${__dirname}/app.html#/html`);
     }
   });
 
