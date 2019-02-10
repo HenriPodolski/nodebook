@@ -11,6 +11,7 @@ import {
 	resetQueryEpic,
 	startInstallLoaderEpic
 } from './packages.epic';
+import { startExternalMappingEpic } from './html-map.epic';
 
 export const rootEpic = combineEpics(
 	initEpic,
@@ -29,5 +30,6 @@ export const rootEpic = combineEpics(
 	startInstallLoaderEpic,
 	performInstallEpic,
 	mirrorDependenciesToStoreEpic,
-	removeDependencyEpic
+	removeDependencyEpic,
+	startExternalMappingEpic
 );

@@ -17,6 +17,9 @@ interface IComponentProps {
   reorder: (payload: {sourceId: number, targetId: number}) => {
     type: string, payload: {sourceId: number, targetId: number}
   };
+  mapHtml: (payload: {index: number, browserWindow: any}) => {
+    type: string, payload: {index: number, browserWindow: any}
+  };
 }
 
 const getItemStyle = (isDragging, draggableStyle) => ({
@@ -37,9 +40,13 @@ export class InputsComponent extends React.Component<IComponentProps> {
     this.handleDragEnd = this.handleDragEnd.bind(this);
   }
 
-  onMapHTML() {
+  onMapHTML(i) {
       let modal = window.open('', 'modal');
-      console.log(modal);
+      console.log(i, modal);
+      this.props.mapHtml({
+        index: i,
+        browserWindow: modal
+      });
   }
 
   handleDragEnd(result) {
@@ -72,7 +79,7 @@ export class InputsComponent extends React.Component<IComponentProps> {
         {(this.props.inputs[i].mode === ModeEnums.html.value &&
           this.props.inputs.filter((input) => input.mode === ModeEnums.html.value).length > 1) &&
             <>
-              <button onClick={this.onMapHTML}>Map HTML</button> mapping: {this.props.inputs[i].context || 'body > *:nth-child(x)'}
+              <button onClick={() => this.onMapHTML(i)}>Map HTML</button> mapping: {this.props.inputs[i].context || 'body > *:nth-child(x)'}
             </>
         }
         <CodeInputContainer index={i}/>

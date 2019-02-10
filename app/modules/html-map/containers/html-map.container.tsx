@@ -6,7 +6,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch) => {
+    return ({
 
+    });
 };
 
 export const HtmlMapContainer = connect(mapStateToProps, mapDispatchToProps)(HtmlMapComponent);
