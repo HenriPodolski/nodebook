@@ -22,7 +22,7 @@ export const environment = {
         name: '',
         mode: ModeEnums.md.value,
         context: '',
-        theme: 'github',
+        theme: 'textmate',
         height: '100%',
         width: '100%',
         value: '',

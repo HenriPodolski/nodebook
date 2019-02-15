@@ -6,4 +6,4 @@ import 'brace/mode/html';
 import 'brace/mode/markdown';
 
 import 'brace/theme/monokai';
-import 'brace/theme/github';
+import 'brace/theme/textmate';

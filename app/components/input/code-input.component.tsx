@@ -59,7 +59,6 @@ export class CodeInputComponent extends React.Component<IComponentProps> {
     }
 
     componentDidMount() {
-        this.props.changeTheme('github');
         this.props.changeHeight(this.getHeight());
         this.refs.input['editor'].resize();
     }
