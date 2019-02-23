@@ -2,6 +2,9 @@ import * as React from 'react';
 import AceEditor, { AceOptions, EditorProps } from 'react-ace';
 import { environment } from '../../../environments/environment';
 import '../../../shared/imports/brace';
+import * as ace from 'brace';
+
+const Range = ace.acequire('ace/range').Range;
 
 interface IComponentProps {
 
@@ -16,6 +19,8 @@ export class HtmlMapComponent extends React.Component<IComponentProps> {
   constructor(props) {
     super(props);
 
+    this.handleEditorClick = this.handleEditorClick.bind(this);
+
     this.state = {
       height: environment.config.input.editableConfig.height,
       type: '',
@@ -28,7 +33,10 @@ export class HtmlMapComponent extends React.Component<IComponentProps> {
 
     if (window.opener) {
       window.addEventListener('message', (evt) => {
-        if (window.location.origin !== evt.origin) {
+        const isSameOrigin = window.location.origin === evt.origin;
+        const isStringData = typeof evt.data === 'string';
+
+        if (!isSameOrigin || !isStringData) {
           return;
         }
 
@@ -39,6 +47,7 @@ export class HtmlMapComponent extends React.Component<IComponentProps> {
             this.setState(data);
           }
         } catch (e) {
+          console.log(evt.data);
           throw new Error(e);
         }
       });
@@ -47,7 +56,21 @@ export class HtmlMapComponent extends React.Component<IComponentProps> {
     }
   }
 
-  handleChange(newValue, evt) {
+  handleClearClick() {
+    console.log('handleClearClick');
+  }
+
+  handleCancelClick() {
+    console.log('handleCancelClick');
+    window.close();
+  }
+
+  handleSaveClick() {
+    console.log('handleSaveClick');
+    window.close();
+  }
+
+  handleEditorChange(newValue, evt) {
     this.setState((prevState: any, props) => ({
       ...prevState,
       height: this.getHeight(),
@@ -58,8 +81,22 @@ export class HtmlMapComponent extends React.Component<IComponentProps> {
     }));
   }
 
+  handleEditorClick() {
+    const editor = this.editorRef.current.editor;
+    const editSession = editor.getSession();
+    const cursorPosition = editor.getCursorPosition();
+
+    // docs: https://ace.c9.io/#nav=api&api=edit_session
+
+    console.log('click',
+      Range,
+      JSON.stringify(editSession.getTokens(cursorPosition.row), null, 4),
+      editor.getCursorPosition(),
+      editSession.getTokenAt(cursorPosition.row, cursorPosition.column));
+  }
+
   getHeight() {
-    const editor = this.refs.input && this.refs.input['editor'];
+    const editor = this.editorRef.current.editor;
     let height = this.state.height;
 
     if (editor) {
@@ -73,34 +110,72 @@ export class HtmlMapComponent extends React.Component<IComponentProps> {
   }
 
   componentDidUpdate() {
-    const editor = this.refs.input['editor'];
+    const editor = this.editorRef.current.editor;
     editor.container.style.lineHeight = 3;
+    editor.renderer.$cursorLayer.element.style.display = 'none';
+    editor.setShowFoldWidgets(false);
+    editor.setShowPrintMargin(false);
+    editor.renderer.setStyle('disabled', true);
     editor.renderer.updateFontSize();
     editor.container.style.height = this.getHeight();
+    editor.session.setOption('useWorker', false);
+    editor.renderer.setStyle('disabled', true);
     editor.resize();
   }
 
   render() {
-    const aceConfig = environment.config.input.editableConfig;
+    const aceConfig = Object.assign({},
+      environment.config.input.editableConfig, {
+        showLineNumbers: true,
+        displayIndentGuides: false,
+        highlightGutterLine: true,
+        highlightActiveLine: true,
+        autoScrollEditorIntoView: true,
+        wrap: false,
+      });
     const optionProps = Object.assign({},{
-      showPrintMargin: true
+      selectionStyle: 'line',
+      behavioursEnabled: false,
+      wrapBehavioursEnabled: false
     }) as AceOptions;
 
     return (
       <>
-        <AceEditor
-          ref="input"
-          value={this.state.payload.document}
-          onChange={(newValue, evt) => this.handleChange(newValue, evt)}
-          theme={aceConfig.theme}
-          mode="html"
-          height={aceConfig.height}
-          width={aceConfig.width}
-          editorProps={aceConfig.editor as EditorProps}
-          setOptions={optionProps}
-          readOnly={true}
-        />
-        <button>Save selection</button>
+        <form>
+          <fieldset>
+            <label>Placement mode</label>
+            <select defaultValue="after">
+              <option value="before">Insert before</option>
+              <option value="replace">Replace</option>
+              <option value="after">Insert after</option>
+            </select>
+            <button onClick={this.handleClearClick} type="button">Clear</button>
+            <button onClick={this.handleCancelClick} type="button">Cancel</button>
+            <button onClick={this.handleSaveClick} type="button">Save</button>
+          </fieldset>
+        </form>
+        <div onClick={this.handleEditorClick}>
+          <AceEditor
+            ref={this.editorRef}
+            className="app-html-map-editor"
+            enableBasicAutocompletion={false}
+            enableLiveAutocompletion={false}
+            highlightActiveLine={true}
+            wrapEnabled={false}
+            markers={[
+              { startRow: 0, startCol: 2, endRow: 1, endCol: 20, className: 'selection-marker', type: 'background' }
+              ]}
+            value={this.state.payload.document}
+            onChange={(newValue, evt) => this.handleEditorChange(newValue, evt)}
+            theme={aceConfig.theme}
+            mode="html"
+            height={aceConfig.height}
+            width={aceConfig.width}
+            editorProps={aceConfig.editor as EditorProps}
+            setOptions={optionProps}
+            readOnly={true}
+          />
+       </div>
       </>
     );
   }
