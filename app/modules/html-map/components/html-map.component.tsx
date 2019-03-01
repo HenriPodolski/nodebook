@@ -113,7 +113,7 @@ export class HtmlMapComponent extends React.Component<IComponentProps> {
     // const editSession = editor.getSession();
     const cursorPosition = editor.getCursorPosition();
     const xmlMarkerService = new XmlMarkerService();
-    
+
     const markers: IMarkerType[] = xmlMarkerService.mark(
       this.state.payload.document,
       cursorPosition,
@@ -130,16 +130,6 @@ export class HtmlMapComponent extends React.Component<IComponentProps> {
 
 
     // docs: https://ace.c9.io/#nav=api&api=edit_session
-
-    // get number of lines
-    // getToken for all lines and concat array
-    // get cursor position
-    // get token at cursor position row and col
-    // find out if start tag, end tag or somewhere
-    // if start or end tag find corresponding tag and replace mark everthing including the tags
-    // if start or end tag and insert
-    // if somewhere and replace mode find parent start tag and end tag and mark all space in between
-    // if somewhere and insert before or after add 3 spaces into the document before or after cursor and mark
 
     // console.log(
     //   Range,
