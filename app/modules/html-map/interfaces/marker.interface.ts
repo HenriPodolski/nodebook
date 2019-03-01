@@ -1,0 +1,1 @@
+export type IMarkerType = {startRow: number, startCol: number, endRow: number, endCol: number};
